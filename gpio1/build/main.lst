@@ -1,0 +1,328 @@
+ARM GAS  E:\msys32\tmp\ccScGY8U.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.init_pin,"ax",%progbits
+  18              		.align	1
+  19              		.global	init_pin
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	init_pin:
+  26              	.LFB0:
+  27              		.file 1 "Src/main.c"
+   1:Src/main.c    **** 
+   2:Src/main.c    **** #include "main.h"
+   3:Src/main.c    **** 
+   4:Src/main.c    **** void init_pin(){
+  28              		.loc 1 4 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+   5:Src/main.c    **** 	unsigned int temp_reg;
+   6:Src/main.c    **** 	temp_reg = read_reg(GPIOD_MODER , ~(0x03<<28));
+  33              		.loc 1 6 0
+  34 0000 034A     		ldr	r2, .L2
+  35 0002 1368     		ldr	r3, [r2]
+  36 0004 23F04053 		bic	r3, r3, #805306368
+  37              	.LVL0:
+   7:Src/main.c    **** 	temp_reg  = temp_reg | (GPIO_MODER_OUTPUT << 28 );
+  38              		.loc 1 7 0
+  39 0008 43F08053 		orr	r3, r3, #268435456
+  40              	.LVL1:
+   8:Src/main.c    **** 	//set mode  pd12
+   9:Src/main.c    **** 	write_reg(GPIOD_MODER , temp_reg );
+  41              		.loc 1 9 0
+  42 000c 1360     		str	r3, [r2]
+  10:Src/main.c    **** 	
+  11:Src/main.c    **** }
+  43              		.loc 1 11 0
+  44 000e 7047     		bx	lr
+  45              	.L3:
+  46              		.align	2
+  47              	.L2:
+ARM GAS  E:\msys32\tmp\ccScGY8U.s 			page 2
+
+
+  48 0010 000C0240 		.word	1073875968
+  49              		.cfi_endproc
+  50              	.LFE0:
+  52              		.section	.text.led_on,"ax",%progbits
+  53              		.align	1
+  54              		.global	led_on
+  55              		.syntax unified
+  56              		.thumb
+  57              		.thumb_func
+  58              		.fpu fpv4-sp-d16
+  60              	led_on:
+  61              	.LFB1:
+  12:Src/main.c    **** void led_on(unsigned char number_pin){
+  62              		.loc 1 12 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67              	.LVL2:
+  13:Src/main.c    **** 	write_reg(GPIOD_BSRR , 1 << number_pin);
+  68              		.loc 1 13 0
+  69 0000 0123     		movs	r3, #1
+  70 0002 03FA00F0 		lsl	r0, r3, r0
+  71              	.LVL3:
+  72 0006 014B     		ldr	r3, .L5
+  73 0008 1860     		str	r0, [r3]
+  14:Src/main.c    **** }
+  74              		.loc 1 14 0
+  75 000a 7047     		bx	lr
+  76              	.L6:
+  77              		.align	2
+  78              	.L5:
+  79 000c 180C0240 		.word	1073875992
+  80              		.cfi_endproc
+  81              	.LFE1:
+  83              		.section	.text.led_off,"ax",%progbits
+  84              		.align	1
+  85              		.global	led_off
+  86              		.syntax unified
+  87              		.thumb
+  88              		.thumb_func
+  89              		.fpu fpv4-sp-d16
+  91              	led_off:
+  92              	.LFB2:
+  15:Src/main.c    **** void led_off(unsigned char number_pin){
+  93              		.loc 1 15 0
+  94              		.cfi_startproc
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97              		@ link register save eliminated.
+  98              	.LVL4:
+  16:Src/main.c    **** 	write_reg(	GPIOD_BSRR ,   1 << (number_pin + 16));
+  99              		.loc 1 16 0
+ 100 0000 1030     		adds	r0, r0, #16
+ 101              	.LVL5:
+ 102 0002 0123     		movs	r3, #1
+ 103 0004 03FA00F0 		lsl	r0, r3, r0
+ARM GAS  E:\msys32\tmp\ccScGY8U.s 			page 3
+
+
+ 104 0008 014B     		ldr	r3, .L8
+ 105 000a 1860     		str	r0, [r3]
+  17:Src/main.c    **** 
+  18:Src/main.c    **** }
+ 106              		.loc 1 18 0
+ 107 000c 7047     		bx	lr
+ 108              	.L9:
+ 109 000e 00BF     		.align	2
+ 110              	.L8:
+ 111 0010 180C0240 		.word	1073875992
+ 112              		.cfi_endproc
+ 113              	.LFE2:
+ 115              		.section	.text.delay,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	delay
+ 118              		.syntax unified
+ 119              		.thumb
+ 120              		.thumb_func
+ 121              		.fpu fpv4-sp-d16
+ 123              	delay:
+ 124              	.LFB3:
+  19:Src/main.c    **** 
+  20:Src/main.c    **** void delay( unsigned int timeout){
+ 125              		.loc 1 20 0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129              		@ link register save eliminated.
+ 130              	.LVL6:
+  21:Src/main.c    **** 	
+  22:Src/main.c    **** 	unsigned int t1 , t2;
+  23:Src/main.c    **** 	for( t1 = 0 ; t1 < timeout ; t1 ++)
+ 131              		.loc 1 23 0
+ 132 0000 0021     		movs	r1, #0
+ 133 0002 06E0     		b	.L11
+ 134              	.LVL7:
+ 135              	.L12:
+  24:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+  25:Src/main.c    **** 			asm(" nop");
+ 136              		.loc 1 25 0 discriminator 3
+ 137              		.syntax unified
+ 138              	@ 25 "Src/main.c" 1
+ 139 0004 00BF     		 nop
+ 140              	@ 0 "" 2
+  24:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+ 141              		.loc 1 24 0 discriminator 3
+ 142              		.thumb
+ 143              		.syntax unified
+ 144 0006 0133     		adds	r3, r3, #1
+ 145              	.LVL8:
+ 146              	.L13:
+  24:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+ 147              		.loc 1 24 0 is_stmt 0 discriminator 1
+ 148 0008 40F6FE72 		movw	r2, #4094
+ 149 000c 9342     		cmp	r3, r2
+ 150 000e F9D9     		bls	.L12
+  23:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+ARM GAS  E:\msys32\tmp\ccScGY8U.s 			page 4
+
+
+ 151              		.loc 1 23 0 is_stmt 1 discriminator 2
+ 152 0010 0131     		adds	r1, r1, #1
+ 153              	.LVL9:
+ 154              	.L11:
+  23:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+ 155              		.loc 1 23 0 is_stmt 0 discriminator 1
+ 156 0012 8142     		cmp	r1, r0
+ 157 0014 01D2     		bcs	.L15
+  24:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+ 158              		.loc 1 24 0 is_stmt 1
+ 159 0016 0023     		movs	r3, #0
+ 160 0018 F6E7     		b	.L13
+ 161              	.L15:
+  26:Src/main.c    **** 
+  27:Src/main.c    **** }
+ 162              		.loc 1 27 0
+ 163 001a 7047     		bx	lr
+ 164              		.cfi_endproc
+ 165              	.LFE3:
+ 167              		.section	.text.rcc_enableclk,"ax",%progbits
+ 168              		.align	1
+ 169              		.global	rcc_enableclk
+ 170              		.syntax unified
+ 171              		.thumb
+ 172              		.thumb_func
+ 173              		.fpu fpv4-sp-d16
+ 175              	rcc_enableclk:
+ 176              	.LFB4:
+  28:Src/main.c    **** void rcc_enableclk(){
+ 177              		.loc 1 28 0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181              		@ link register save eliminated.
+  29:Src/main.c    **** 	unsigned int temp_reg;
+  30:Src/main.c    **** 	temp_reg = read_reg(RCC_AHB1ENR , ~(1 <<3));
+ 182              		.loc 1 30 0
+ 183 0000 024A     		ldr	r2, .L17
+ 184 0002 1368     		ldr	r3, [r2]
+ 185              	.LVL10:
+  31:Src/main.c    **** 	temp_reg  = temp_reg | (1 << 3 );
+ 186              		.loc 1 31 0
+ 187 0004 43F00803 		orr	r3, r3, #8
+ 188              	.LVL11:
+  32:Src/main.c    **** 	write_reg(RCC_AHB1ENR , temp_reg );
+ 189              		.loc 1 32 0
+ 190 0008 1360     		str	r3, [r2]
+  33:Src/main.c    **** 
+  34:Src/main.c    **** }
+ 191              		.loc 1 34 0
+ 192 000a 7047     		bx	lr
+ 193              	.L18:
+ 194              		.align	2
+ 195              	.L17:
+ 196 000c 30380240 		.word	1073887280
+ 197              		.cfi_endproc
+ 198              	.LFE4:
+ARM GAS  E:\msys32\tmp\ccScGY8U.s 			page 5
+
+
+ 200              		.section	.text.main,"ax",%progbits
+ 201              		.align	1
+ 202              		.global	main
+ 203              		.syntax unified
+ 204              		.thumb
+ 205              		.thumb_func
+ 206              		.fpu fpv4-sp-d16
+ 208              	main:
+ 209              	.LFB5:
+  35:Src/main.c    **** int main(void)
+  36:Src/main.c    **** {
+ 210              		.loc 1 36 0
+ 211              		.cfi_startproc
+ 212              		@ Volatile: function does not return.
+ 213              		@ args = 0, pretend = 0, frame = 0
+ 214              		@ frame_needed = 0, uses_anonymous_args = 0
+ 215 0000 08B5     		push	{r3, lr}
+ 216              	.LCFI0:
+ 217              		.cfi_def_cfa_offset 8
+ 218              		.cfi_offset 3, -8
+ 219              		.cfi_offset 14, -4
+  37:Src/main.c    **** 
+  38:Src/main.c    ****   rcc_enableclk();
+ 220              		.loc 1 38 0
+ 221 0002 FFF7FEFF 		bl	rcc_enableclk
+ 222              	.LVL12:
+  39:Src/main.c    ****   init_pin();
+ 223              		.loc 1 39 0
+ 224 0006 FFF7FEFF 		bl	init_pin
+ 225              	.LVL13:
+ 226              	.L20:
+  40:Src/main.c    **** 
+  41:Src/main.c    ****   while (1)
+  42:Src/main.c    ****   {
+  43:Src/main.c    **** 	  led_on(led);
+ 227              		.loc 1 43 0 discriminator 1
+ 228 000a 0E20     		movs	r0, #14
+ 229 000c FFF7FEFF 		bl	led_on
+ 230              	.LVL14:
+  44:Src/main.c    **** 	  delay(200);
+ 231              		.loc 1 44 0 discriminator 1
+ 232 0010 C820     		movs	r0, #200
+ 233 0012 FFF7FEFF 		bl	delay
+ 234              	.LVL15:
+  45:Src/main.c    **** 	  led_off(led);
+ 235              		.loc 1 45 0 discriminator 1
+ 236 0016 0E20     		movs	r0, #14
+ 237 0018 FFF7FEFF 		bl	led_off
+ 238              	.LVL16:
+  46:Src/main.c    **** 	  delay(200);
+ 239              		.loc 1 46 0 discriminator 1
+ 240 001c C820     		movs	r0, #200
+ 241 001e FFF7FEFF 		bl	delay
+ 242              	.LVL17:
+ 243 0022 F2E7     		b	.L20
+ 244              		.cfi_endproc
+ 245              	.LFE5:
+ARM GAS  E:\msys32\tmp\ccScGY8U.s 			page 6
+
+
+ 247              		.text
+ 248              	.Letext0:
+ARM GAS  E:\msys32\tmp\ccScGY8U.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+E:\msys32\tmp\ccScGY8U.s:18     .text.init_pin:00000000 $t
+E:\msys32\tmp\ccScGY8U.s:25     .text.init_pin:00000000 init_pin
+E:\msys32\tmp\ccScGY8U.s:48     .text.init_pin:00000010 $d
+E:\msys32\tmp\ccScGY8U.s:53     .text.led_on:00000000 $t
+E:\msys32\tmp\ccScGY8U.s:60     .text.led_on:00000000 led_on
+E:\msys32\tmp\ccScGY8U.s:79     .text.led_on:0000000c $d
+E:\msys32\tmp\ccScGY8U.s:84     .text.led_off:00000000 $t
+E:\msys32\tmp\ccScGY8U.s:91     .text.led_off:00000000 led_off
+E:\msys32\tmp\ccScGY8U.s:111    .text.led_off:00000010 $d
+E:\msys32\tmp\ccScGY8U.s:116    .text.delay:00000000 $t
+E:\msys32\tmp\ccScGY8U.s:123    .text.delay:00000000 delay
+E:\msys32\tmp\ccScGY8U.s:168    .text.rcc_enableclk:00000000 $t
+E:\msys32\tmp\ccScGY8U.s:175    .text.rcc_enableclk:00000000 rcc_enableclk
+E:\msys32\tmp\ccScGY8U.s:196    .text.rcc_enableclk:0000000c $d
+E:\msys32\tmp\ccScGY8U.s:201    .text.main:00000000 $t
+E:\msys32\tmp\ccScGY8U.s:208    .text.main:00000000 main
+
+NO UNDEFINED SYMBOLS
