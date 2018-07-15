@@ -1,0 +1,143 @@
+ARM GAS  E:\msys32\tmp\ccwgdZE1.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"gpio.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.init_pin,"ax",%progbits
+  18              		.align	1
+  19              		.global	init_pin
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	init_pin:
+  26              	.LFB0:
+  27              		.file 1 "Src/gpio.c"
+   1:Src/gpio.c    **** 
+   2:Src/gpio.c    **** #include "project.h"
+   3:Src/gpio.c    **** void init_pin( ){
+  28              		.loc 1 3 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+   4:Src/gpio.c    **** 
+   5:Src/gpio.c    **** 	unsigned int temp_reg;
+   6:Src/gpio.c    ****   /*Configure GPIO pin : PD12 */
+   7:Src/gpio.c    ****   	temp_reg = read_reg(GPIOD_MODER , ~(3u << 24 ));
+  33              		.loc 1 7 0
+  34 0000 034A     		ldr	r2, .L2
+  35 0002 1368     		ldr	r3, [r2]
+  36 0004 23F04073 		bic	r3, r3, #50331648
+  37              	.LVL0:
+   8:Src/gpio.c    **** 	temp_reg |= (GPIO_MODER_OUTPUT << 24);
+  38              		.loc 1 8 0
+  39 0008 43F08073 		orr	r3, r3, #16777216
+  40              	.LVL1:
+   9:Src/gpio.c    **** 	write_reg(GPIOD_MODER , temp_reg );
+  41              		.loc 1 9 0
+  42 000c 1360     		str	r3, [r2]
+  10:Src/gpio.c    **** 	
+  11:Src/gpio.c    **** }
+  43              		.loc 1 11 0
+  44 000e 7047     		bx	lr
+  45              	.L3:
+  46              		.align	2
+  47              	.L2:
+ARM GAS  E:\msys32\tmp\ccwgdZE1.s 			page 2
+
+
+  48 0010 000C0240 		.word	1073875968
+  49              		.cfi_endproc
+  50              	.LFE0:
+  52              		.section	.text.led_on,"ax",%progbits
+  53              		.align	1
+  54              		.global	led_on
+  55              		.syntax unified
+  56              		.thumb
+  57              		.thumb_func
+  58              		.fpu fpv4-sp-d16
+  60              	led_on:
+  61              	.LFB1:
+  12:Src/gpio.c    **** 
+  13:Src/gpio.c    **** void led_on(unsigned long addr_BSRR , int number_pin){
+  62              		.loc 1 13 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 0, uses_anonymous_args = 0
+  66              		@ link register save eliminated.
+  67              	.LVL2:
+  14:Src/gpio.c    **** 	write_reg(addr_BSRR , 1 << number_pin);
+  68              		.loc 1 14 0
+  69 0000 0123     		movs	r3, #1
+  70 0002 03FA01F1 		lsl	r1, r3, r1
+  71              	.LVL3:
+  72 0006 0160     		str	r1, [r0]
+  15:Src/gpio.c    **** }
+  73              		.loc 1 15 0
+  74 0008 7047     		bx	lr
+  75              		.cfi_endproc
+  76              	.LFE1:
+  78              		.section	.text.led_off,"ax",%progbits
+  79              		.align	1
+  80              		.global	led_off
+  81              		.syntax unified
+  82              		.thumb
+  83              		.thumb_func
+  84              		.fpu fpv4-sp-d16
+  86              	led_off:
+  87              	.LFB2:
+  16:Src/gpio.c    **** void led_off(unsigned long addr_BSRR  ,int  number_pin){
+  88              		.loc 1 16 0
+  89              		.cfi_startproc
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  93              	.LVL4:
+  17:Src/gpio.c    **** 	write_reg(	addr_BSRR ,   1 << (number_pin + 16));
+  94              		.loc 1 17 0
+  95 0000 1031     		adds	r1, r1, #16
+  96              	.LVL5:
+  97 0002 0123     		movs	r3, #1
+  98 0004 03FA01F1 		lsl	r1, r3, r1
+  99              	.LVL6:
+ 100 0008 0160     		str	r1, [r0]
+  18:Src/gpio.c    **** }
+ 101              		.loc 1 18 0
+ARM GAS  E:\msys32\tmp\ccwgdZE1.s 			page 3
+
+
+ 102 000a 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE2:
+ 106              		.text
+ 107              	.Letext0:
+ 108              		.file 2 "Inc/stm32f4xx_it.h"
+ARM GAS  E:\msys32\tmp\ccwgdZE1.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 gpio.c
+E:\msys32\tmp\ccwgdZE1.s:18     .text.init_pin:00000000 $t
+E:\msys32\tmp\ccwgdZE1.s:25     .text.init_pin:00000000 init_pin
+E:\msys32\tmp\ccwgdZE1.s:48     .text.init_pin:00000010 $d
+E:\msys32\tmp\ccwgdZE1.s:53     .text.led_on:00000000 $t
+E:\msys32\tmp\ccwgdZE1.s:60     .text.led_on:00000000 led_on
+E:\msys32\tmp\ccwgdZE1.s:79     .text.led_off:00000000 $t
+E:\msys32\tmp\ccwgdZE1.s:86     .text.led_off:00000000 led_off
+
+NO UNDEFINED SYMBOLS

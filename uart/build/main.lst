@@ -1,0 +1,241 @@
+ARM GAS  E:\msys32\tmp\ccRKJSUc.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"main.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.delay,"ax",%progbits
+  18              		.align	1
+  19              		.global	delay
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	delay:
+  26              	.LFB0:
+  27              		.file 1 "Src/main.c"
+   1:Src/main.c    **** #include "project.h"
+   2:Src/main.c    **** 
+   3:Src/main.c    **** char times = 0;
+   4:Src/main.c    **** 
+   5:Src/main.c    **** void delay( unsigned int timeout){
+  28              		.loc 1 5 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+   6:Src/main.c    **** 	
+   7:Src/main.c    **** 	unsigned int t1 , t2;
+   8:Src/main.c    **** 	for( t1 = 0 ; t1 < timeout ; t1 ++)
+  34              		.loc 1 8 0
+  35 0000 0021     		movs	r1, #0
+  36 0002 06E0     		b	.L2
+  37              	.LVL1:
+  38              	.L3:
+   9:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+  10:Src/main.c    **** 			asm(" nop");
+  39              		.loc 1 10 0 discriminator 3
+  40              		.syntax unified
+  41              	@ 10 "Src/main.c" 1
+  42 0004 00BF     		 nop
+  43              	@ 0 "" 2
+   9:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+  44              		.loc 1 9 0 discriminator 3
+  45              		.thumb
+  46              		.syntax unified
+  47 0006 0133     		adds	r3, r3, #1
+ARM GAS  E:\msys32\tmp\ccRKJSUc.s 			page 2
+
+
+  48              	.LVL2:
+  49              	.L4:
+   9:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+  50              		.loc 1 9 0 is_stmt 0 discriminator 1
+  51 0008 40F6FE72 		movw	r2, #4094
+  52 000c 9342     		cmp	r3, r2
+  53 000e F9D9     		bls	.L3
+   8:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+  54              		.loc 1 8 0 is_stmt 1 discriminator 2
+  55 0010 0131     		adds	r1, r1, #1
+  56              	.LVL3:
+  57              	.L2:
+   8:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+  58              		.loc 1 8 0 is_stmt 0 discriminator 1
+  59 0012 8142     		cmp	r1, r0
+  60 0014 01D2     		bcs	.L6
+   9:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
+  61              		.loc 1 9 0 is_stmt 1
+  62 0016 0023     		movs	r3, #0
+  63 0018 F6E7     		b	.L4
+  64              	.L6:
+  11:Src/main.c    **** 
+  12:Src/main.c    **** }
+  65              		.loc 1 12 0
+  66 001a 7047     		bx	lr
+  67              		.cfi_endproc
+  68              	.LFE0:
+  70              		.section	.text.main,"ax",%progbits
+  71              		.align	1
+  72              		.global	main
+  73              		.syntax unified
+  74              		.thumb
+  75              		.thumb_func
+  76              		.fpu fpv4-sp-d16
+  78              	main:
+  79              	.LFB1:
+  13:Src/main.c    **** int main(void)
+  14:Src/main.c    **** {
+  80              		.loc 1 14 0
+  81              		.cfi_startproc
+  82              		@ Volatile: function does not return.
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85 0000 08B5     		push	{r3, lr}
+  86              	.LCFI0:
+  87              		.cfi_def_cfa_offset 8
+  88              		.cfi_offset 3, -8
+  89              		.cfi_offset 14, -4
+  15:Src/main.c    **** 	system_init();
+  90              		.loc 1 15 0
+  91 0002 FFF7FEFF 		bl	system_init
+  92              	.LVL4:
+  16:Src/main.c    **** 	rcc_enableclk();
+  93              		.loc 1 16 0
+  94 0006 FFF7FEFF 		bl	rcc_enableclk
+  95              	.LVL5:
+  17:Src/main.c    **** 	init_pin();
+ARM GAS  E:\msys32\tmp\ccRKJSUc.s 			page 3
+
+
+  96              		.loc 1 17 0
+  97 000a FFF7FEFF 		bl	init_pin
+  98              	.LVL6:
+  18:Src/main.c    **** 	uart_init();	
+  99              		.loc 1 18 0
+ 100 000e FFF7FEFF 		bl	uart_init
+ 101              	.LVL7:
+  19:Src/main.c    **** 	init_interrupt();
+ 102              		.loc 1 19 0
+ 103 0012 FFF7FEFF 		bl	init_interrupt
+ 104              	.LVL8:
+  20:Src/main.c    **** 	  /* send "Hello world -MCU" to terminal app on PC */
+  21:Src/main.c    **** 	  usart_send_string("Hello world -VHL");
+ 105              		.loc 1 21 0
+ 106 0016 0E48     		ldr	r0, .L11
+ 107 0018 FFF7FEFF 		bl	usart_send_string
+ 108              	.LVL9:
+ 109              	.L8:
+  22:Src/main.c    ****     while(1)
+  23:Src/main.c    ****     {
+  24:Src/main.c    **** 
+  25:Src/main.c    **** 		#if 1
+  26:Src/main.c    ****         if (0 != rx_data)
+ 110              		.loc 1 26 0
+ 111 001c 0D4B     		ldr	r3, .L11+4
+ 112 001e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 113 0020 002B     		cmp	r3, #0
+ 114 0022 FBD0     		beq	.L8
+  27:Src/main.c    ****         {
+  28:Src/main.c    ****             usart_send_byte(rx_data);
+ 115              		.loc 1 28 0
+ 116 0024 0B4C     		ldr	r4, .L11+4
+ 117 0026 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 118 0028 FFF7FEFF 		bl	usart_send_byte
+ 119              	.LVL10:
+  29:Src/main.c    **** 			led_on(GPIOD_BSRR , 12);
+ 120              		.loc 1 29 0
+ 121 002c 0A4D     		ldr	r5, .L11+8
+ 122 002e 0C21     		movs	r1, #12
+ 123 0030 2846     		mov	r0, r5
+ 124 0032 FFF7FEFF 		bl	led_on
+ 125              	.LVL11:
+  30:Src/main.c    **** 			delay(0xf);
+ 126              		.loc 1 30 0
+ 127 0036 0F20     		movs	r0, #15
+ 128 0038 FFF7FEFF 		bl	delay
+ 129              	.LVL12:
+  31:Src/main.c    **** 			led_off(GPIOD_BSRR , 12);
+ 130              		.loc 1 31 0
+ 131 003c 0C21     		movs	r1, #12
+ 132 003e 2846     		mov	r0, r5
+ 133 0040 FFF7FEFF 		bl	led_off
+ 134              	.LVL13:
+  32:Src/main.c    **** 			delay(0xf);
+ 135              		.loc 1 32 0
+ 136 0044 0F20     		movs	r0, #15
+ 137 0046 FFF7FEFF 		bl	delay
+ARM GAS  E:\msys32\tmp\ccRKJSUc.s 			page 4
+
+
+ 138              	.LVL14:
+  33:Src/main.c    **** 		
+  34:Src/main.c    ****             rx_data = 0;
+ 139              		.loc 1 34 0
+ 140 004a 0023     		movs	r3, #0
+ 141 004c 2370     		strb	r3, [r4]
+ 142 004e E5E7     		b	.L8
+ 143              	.L12:
+ 144              		.align	2
+ 145              	.L11:
+ 146 0050 00000000 		.word	.LC0
+ 147 0054 00000000 		.word	rx_data
+ 148 0058 180C0240 		.word	1073875992
+ 149              		.cfi_endproc
+ 150              	.LFE1:
+ 152              		.global	times
+ 153              		.section	.bss.times,"aw",%nobits
+ 156              	times:
+ 157 0000 00       		.space	1
+ 158              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 159              		.align	2
+ 160              	.LC0:
+ 161 0000 48656C6C 		.ascii	"Hello world -VHL\000"
+ 161      6F20776F 
+ 161      726C6420 
+ 161      2D56484C 
+ 161      00
+ 162              		.text
+ 163              	.Letext0:
+ 164              		.file 2 "Inc/stm32f4xx_it.h"
+ 165              		.file 3 "Inc/clock.h"
+ 166              		.file 4 "Inc/gpio.h"
+ 167              		.file 5 "Inc/uart.h"
+ARM GAS  E:\msys32\tmp\ccRKJSUc.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+E:\msys32\tmp\ccRKJSUc.s:18     .text.delay:00000000 $t
+E:\msys32\tmp\ccRKJSUc.s:25     .text.delay:00000000 delay
+E:\msys32\tmp\ccRKJSUc.s:71     .text.main:00000000 $t
+E:\msys32\tmp\ccRKJSUc.s:78     .text.main:00000000 main
+E:\msys32\tmp\ccRKJSUc.s:146    .text.main:00000050 $d
+E:\msys32\tmp\ccRKJSUc.s:156    .bss.times:00000000 times
+E:\msys32\tmp\ccRKJSUc.s:157    .bss.times:00000000 $d
+E:\msys32\tmp\ccRKJSUc.s:159    .rodata.main.str1.4:00000000 $d
+
+UNDEFINED SYMBOLS
+system_init
+rcc_enableclk
+init_pin
+uart_init
+init_interrupt
+usart_send_string
+usart_send_byte
+led_on
+led_off
+rx_data

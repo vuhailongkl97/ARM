@@ -1,0 +1,488 @@
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"clock.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.system_init,"ax",%progbits
+  18              		.align	1
+  19              		.global	system_init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	system_init:
+  26              	.LFB0:
+  27              		.file 1 "Src/clock.c"
+   1:Src/clock.c   **** #include "project.h"
+   2:Src/clock.c   **** 
+   3:Src/clock.c   **** 
+   4:Src/clock.c   **** void system_init(){
+  28              		.loc 1 4 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 82B0     		sub	sp, sp, #8
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+   5:Src/clock.c   **** 	
+   6:Src/clock.c   ****   volatile unsigned int temp_reg;
+   7:Src/clock.c   ****   volatile unsigned int timeout;
+   8:Src/clock.c   ****   
+   9:Src/clock.c   ****  
+  10:Src/clock.c   ****   /* Disable all interrupts */
+  11:Src/clock.c   ****    write_reg(RCC_CIR, 0x00000000U);
+  36              		.loc 1 11 0
+  37 0002 624B     		ldr	r3, .L11
+  38 0004 0022     		movs	r2, #0
+  39 0006 1A60     		str	r2, [r3]
+  12:Src/clock.c   **** 	
+  13:Src/clock.c   ****     write_reg(RCC_APB1ENR , (1u <<28 ));
+  40              		.loc 1 13 0
+  41 0008 3433     		adds	r3, r3, #52
+  42 000a 4FF08052 		mov	r2, #268435456
+  43 000e 1A60     		str	r2, [r3]
+  14:Src/clock.c   ****    write_reg(RCC_APB2ENR , (1u <<14 ));
+  44              		.loc 1 14 0
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 2
+
+
+  45 0010 0433     		adds	r3, r3, #4
+  46 0012 4FF48042 		mov	r2, #16384
+  47 0016 1A60     		str	r2, [r3]
+  15:Src/clock.c   ****    
+  16:Src/clock.c   **** 	
+  17:Src/clock.c   **** 	//bat hse
+  18:Src/clock.c   **** 	temp_reg = read_reg(RCC_CR, ~(1u << 16 ));
+  48              		.loc 1 18 0
+  49 0018 5D4A     		ldr	r2, .L11+4
+  50 001a 1368     		ldr	r3, [r2]
+  51 001c 23F48033 		bic	r3, r3, #65536
+  52 0020 0193     		str	r3, [sp, #4]
+  19:Src/clock.c   **** 	temp_reg |= (1u << 16);
+  53              		.loc 1 19 0
+  54 0022 019B     		ldr	r3, [sp, #4]
+  55 0024 43F48033 		orr	r3, r3, #65536
+  56 0028 0193     		str	r3, [sp, #4]
+  20:Src/clock.c   ****     write_reg(RCC_CR, temp_reg);
+  57              		.loc 1 20 0
+  58 002a 019B     		ldr	r3, [sp, #4]
+  59 002c 1360     		str	r3, [r2]
+  21:Src/clock.c   **** 	
+  22:Src/clock.c   **** 	timeout = 0xFF;
+  60              		.loc 1 22 0
+  61 002e FF23     		movs	r3, #255
+  62 0030 0093     		str	r3, [sp]
+  63              	.L3:
+  23:Src/clock.c   ****     do {
+  24:Src/clock.c   ****         temp_reg = read_reg(RCC_CR, (1u << 17));
+  64              		.loc 1 24 0 discriminator 2
+  65 0032 574B     		ldr	r3, .L11+4
+  66 0034 1B68     		ldr	r3, [r3]
+  67 0036 03F40033 		and	r3, r3, #131072
+  68 003a 0193     		str	r3, [sp, #4]
+  25:Src/clock.c   ****         timeout--;
+  69              		.loc 1 25 0 discriminator 2
+  70 003c 009B     		ldr	r3, [sp]
+  71 003e 013B     		subs	r3, r3, #1
+  72 0040 0093     		str	r3, [sp]
+  26:Src/clock.c   ****     } while ((0 == temp_reg) && (timeout > 0));
+  73              		.loc 1 26 0 discriminator 2
+  74 0042 019B     		ldr	r3, [sp, #4]
+  75 0044 13B9     		cbnz	r3, .L2
+  76              		.loc 1 26 0 is_stmt 0 discriminator 1
+  77 0046 009B     		ldr	r3, [sp]
+  78 0048 002B     		cmp	r3, #0
+  79 004a F2D1     		bne	.L3
+  80              	.L2:
+  27:Src/clock.c   **** 	
+  28:Src/clock.c   **** 
+  29:Src/clock.c   **** 	/* Disable the main PLL. */
+  30:Src/clock.c   ****     temp_reg = read_reg(RCC_CR, ~(1 << 24));
+  81              		.loc 1 30 0 is_stmt 1
+  82 004c 504A     		ldr	r2, .L11+4
+  83 004e 1368     		ldr	r3, [r2]
+  84 0050 23F08073 		bic	r3, r3, #16777216
+  85 0054 0193     		str	r3, [sp, #4]
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 3
+
+
+  31:Src/clock.c   ****     write_reg(RCC_CR, temp_reg);
+  86              		.loc 1 31 0
+  87 0056 019B     		ldr	r3, [sp, #4]
+  88 0058 1360     		str	r3, [r2]
+  32:Src/clock.c   **** 	
+  33:Src/clock.c   **** 	/* Wait till PLL is disable */
+  34:Src/clock.c   ****     timeout = 0xFF;
+  89              		.loc 1 34 0
+  90 005a FF23     		movs	r3, #255
+  91 005c 0093     		str	r3, [sp]
+  92              	.L5:
+  35:Src/clock.c   ****     do {
+  36:Src/clock.c   ****         temp_reg = read_reg(RCC_CR, (1 << 25));
+  93              		.loc 1 36 0 discriminator 2
+  94 005e 4C4B     		ldr	r3, .L11+4
+  95 0060 1B68     		ldr	r3, [r3]
+  96 0062 03F00073 		and	r3, r3, #33554432
+  97 0066 0193     		str	r3, [sp, #4]
+  37:Src/clock.c   ****         timeout--;
+  98              		.loc 1 37 0 discriminator 2
+  99 0068 009B     		ldr	r3, [sp]
+ 100 006a 013B     		subs	r3, r3, #1
+ 101 006c 0093     		str	r3, [sp]
+  38:Src/clock.c   ****     } while ((0 != temp_reg) && (timeout > 0));
+ 102              		.loc 1 38 0 discriminator 2
+ 103 006e 019B     		ldr	r3, [sp, #4]
+ 104 0070 13B1     		cbz	r3, .L4
+ 105              		.loc 1 38 0 is_stmt 0 discriminator 1
+ 106 0072 009B     		ldr	r3, [sp]
+ 107 0074 002B     		cmp	r3, #0
+ 108 0076 F2D1     		bne	.L5
+ 109              	.L4:
+  39:Src/clock.c   **** 	
+  40:Src/clock.c   **** 	
+  41:Src/clock.c   **** 		// can thiet lap ko se doc sai dia chi lenh , du lieu 
+  42:Src/clock.c   **** 	write_reg(FLASH_ACR , 0x01u);
+ 110              		.loc 1 42 0 is_stmt 1
+ 111 0078 464B     		ldr	r3, .L11+8
+ 112 007a 0122     		movs	r2, #1
+ 113 007c 1A60     		str	r2, [r3]
+  43:Src/clock.c   **** 	
+  44:Src/clock.c   **** 
+  45:Src/clock.c   **** 	/* Configure the main PLL clock source, predivider and multiplication factor. */
+  46:Src/clock.c   **** 	// chia /M chia 4
+  47:Src/clock.c   ****     temp_reg = read_reg(RCC_PLLCFGR, ~0x3Fu);
+ 114              		.loc 1 47 0
+ 115 007e 464A     		ldr	r2, .L11+12
+ 116 0080 1368     		ldr	r3, [r2]
+ 117 0082 23F03F03 		bic	r3, r3, #63
+ 118 0086 0193     		str	r3, [sp, #4]
+  48:Src/clock.c   ****     temp_reg |= 0x08;
+ 119              		.loc 1 48 0
+ 120 0088 019B     		ldr	r3, [sp, #4]
+ 121 008a 43F00803 		orr	r3, r3, #8
+ 122 008e 0193     		str	r3, [sp, #4]
+  49:Src/clock.c   ****     write_reg(RCC_PLLCFGR, temp_reg);
+ 123              		.loc 1 49 0
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 4
+
+
+ 124 0090 019B     		ldr	r3, [sp, #4]
+ 125 0092 1360     		str	r3, [r2]
+  50:Src/clock.c   ****     
+  51:Src/clock.c   **** 	// nhan *N   *64
+  52:Src/clock.c   ****     temp_reg = read_reg(RCC_PLLCFGR, ~(0x1FFu << 6));
+ 126              		.loc 1 52 0
+ 127 0094 23F4FF43 		bic	r3, r3, #32640
+ 128 0098 23F04003 		bic	r3, r3, #64
+ 129 009c 0193     		str	r3, [sp, #4]
+  53:Src/clock.c   ****     temp_reg |= (64u << 6);
+ 130              		.loc 1 53 0
+ 131 009e 019B     		ldr	r3, [sp, #4]
+ 132 00a0 43F48053 		orr	r3, r3, #4096
+ 133 00a4 0193     		str	r3, [sp, #4]
+  54:Src/clock.c   ****     write_reg(RCC_PLLCFGR, temp_reg);
+ 134              		.loc 1 54 0
+ 135 00a6 019B     		ldr	r3, [sp, #4]
+ 136 00a8 1360     		str	r3, [r2]
+  55:Src/clock.c   **** 	
+  56:Src/clock.c   **** 	// chia /P  /4
+  57:Src/clock.c   ****     temp_reg = read_reg(RCC_PLLCFGR, ~(0x3u<< 16));
+ 137              		.loc 1 57 0
+ 138 00aa 23F44033 		bic	r3, r3, #196608
+ 139 00ae 0193     		str	r3, [sp, #4]
+  58:Src/clock.c   ****     temp_reg |= (1u<< 16);
+ 140              		.loc 1 58 0
+ 141 00b0 019B     		ldr	r3, [sp, #4]
+ 142 00b2 43F48033 		orr	r3, r3, #65536
+ 143 00b6 0193     		str	r3, [sp, #4]
+  59:Src/clock.c   ****     write_reg(RCC_PLLCFGR, temp_reg);
+ 144              		.loc 1 59 0
+ 145 00b8 019B     		ldr	r3, [sp, #4]
+ 146 00ba 1360     		str	r3, [r2]
+  60:Src/clock.c   **** 	
+  61:Src/clock.c   **** 	
+  62:Src/clock.c   **** 	/* Enable the main PLL. */
+  63:Src/clock.c   ****     temp_reg = read_reg(RCC_CR, ~(1 << 24));
+ 147              		.loc 1 63 0
+ 148 00bc 043A     		subs	r2, r2, #4
+ 149 00be 1368     		ldr	r3, [r2]
+ 150 00c0 23F08073 		bic	r3, r3, #16777216
+ 151 00c4 0193     		str	r3, [sp, #4]
+  64:Src/clock.c   ****     temp_reg |= (1 << 24);
+ 152              		.loc 1 64 0
+ 153 00c6 019B     		ldr	r3, [sp, #4]
+ 154 00c8 43F08073 		orr	r3, r3, #16777216
+ 155 00cc 0193     		str	r3, [sp, #4]
+  65:Src/clock.c   ****     write_reg(RCC_CR, temp_reg);
+ 156              		.loc 1 65 0
+ 157 00ce 019B     		ldr	r3, [sp, #4]
+ 158 00d0 1360     		str	r3, [r2]
+  66:Src/clock.c   **** 	
+  67:Src/clock.c   **** 	/* Wait till PLL is ready */
+  68:Src/clock.c   ****     timeout = 0xFFFF;
+ 159              		.loc 1 68 0
+ 160 00d2 4FF6FF73 		movw	r3, #65535
+ 161 00d6 0093     		str	r3, [sp]
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 5
+
+
+ 162              	.L7:
+  69:Src/clock.c   ****     do {
+  70:Src/clock.c   ****         temp_reg = read_reg(RCC_CR, (1 << 25));
+ 163              		.loc 1 70 0 discriminator 2
+ 164 00d8 2D4B     		ldr	r3, .L11+4
+ 165 00da 1B68     		ldr	r3, [r3]
+ 166 00dc 03F00073 		and	r3, r3, #33554432
+ 167 00e0 0193     		str	r3, [sp, #4]
+  71:Src/clock.c   ****         timeout--;
+ 168              		.loc 1 71 0 discriminator 2
+ 169 00e2 009B     		ldr	r3, [sp]
+ 170 00e4 013B     		subs	r3, r3, #1
+ 171 00e6 0093     		str	r3, [sp]
+  72:Src/clock.c   ****     } while ((0 == temp_reg) && (timeout > 0));
+ 172              		.loc 1 72 0 discriminator 2
+ 173 00e8 019B     		ldr	r3, [sp, #4]
+ 174 00ea 13B9     		cbnz	r3, .L6
+ 175              		.loc 1 72 0 is_stmt 0 discriminator 1
+ 176 00ec 009B     		ldr	r3, [sp]
+ 177 00ee 002B     		cmp	r3, #0
+ 178 00f0 F2D1     		bne	.L7
+ 179              	.L6:
+  73:Src/clock.c   **** 		
+  74:Src/clock.c   **** 
+  75:Src/clock.c   **** 	
+  76:Src/clock.c   **** 	/* Initializes the CPU, AHB and APB busses clocks */
+  77:Src/clock.c   ****     /* HCLK configration */
+  78:Src/clock.c   **** 	//device to 2 ahb
+  79:Src/clock.c   **** 
+  80:Src/clock.c   ****     temp_reg = read_reg(RCC_CFGR, ~(0xFu << 4));
+ 180              		.loc 1 80 0 is_stmt 1
+ 181 00f2 2A4B     		ldr	r3, .L11+16
+ 182 00f4 1A68     		ldr	r2, [r3]
+ 183 00f6 22F0F002 		bic	r2, r2, #240
+ 184 00fa 0192     		str	r2, [sp, #4]
+  81:Src/clock.c   **** 		temp_reg |= ( 8u << 4);
+ 185              		.loc 1 81 0
+ 186 00fc 019A     		ldr	r2, [sp, #4]
+ 187 00fe 42F08002 		orr	r2, r2, #128
+ 188 0102 0192     		str	r2, [sp, #4]
+  82:Src/clock.c   ****     write_reg(RCC_CFGR, temp_reg);	
+ 189              		.loc 1 82 0
+ 190 0104 019A     		ldr	r2, [sp, #4]
+ 191 0106 1A60     		str	r2, [r3]
+  83:Src/clock.c   **** 	
+  84:Src/clock.c   **** 	 /* APB1 prescaler */
+  85:Src/clock.c   **** 	// chia toi da
+  86:Src/clock.c   ****     temp_reg = read_reg(RCC_CFGR, ~(0x07u << 10));
+ 192              		.loc 1 86 0
+ 193 0108 22F4E052 		bic	r2, r2, #7168
+ 194 010c 0192     		str	r2, [sp, #4]
+  87:Src/clock.c   **** 	temp_reg |= (0x07u << 10);
+ 195              		.loc 1 87 0
+ 196 010e 019A     		ldr	r2, [sp, #4]
+ 197 0110 42F4E052 		orr	r2, r2, #7168
+ 198 0114 0192     		str	r2, [sp, #4]
+  88:Src/clock.c   ****     write_reg(RCC_CFGR, temp_reg);
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 6
+
+
+ 199              		.loc 1 88 0
+ 200 0116 019A     		ldr	r2, [sp, #4]
+ 201 0118 1A60     		str	r2, [r3]
+  89:Src/clock.c   **** 	// apb2
+  90:Src/clock.c   **** 	temp_reg = read_reg(RCC_CFGR, ~(0x07u << 13));
+ 202              		.loc 1 90 0
+ 203 011a 22F46042 		bic	r2, r2, #57344
+ 204 011e 0192     		str	r2, [sp, #4]
+  91:Src/clock.c   **** 	temp_reg |= (0x07u << 13);
+ 205              		.loc 1 91 0
+ 206 0120 019A     		ldr	r2, [sp, #4]
+ 207 0122 42F46042 		orr	r2, r2, #57344
+ 208 0126 0192     		str	r2, [sp, #4]
+  92:Src/clock.c   ****     write_reg(RCC_CFGR, temp_reg);
+ 209              		.loc 1 92 0
+ 210 0128 019A     		ldr	r2, [sp, #4]
+ 211 012a 1A60     		str	r2, [r3]
+  93:Src/clock.c   **** 	
+  94:Src/clock.c   **** 
+  95:Src/clock.c   **** 		//select pll
+  96:Src/clock.c   ****     temp_reg = read_reg(RCC_CFGR, ~(0x3u << 0));
+ 212              		.loc 1 96 0
+ 213 012c 22F00302 		bic	r2, r2, #3
+ 214 0130 0192     		str	r2, [sp, #4]
+  97:Src/clock.c   ****     temp_reg |= (2u << 0);
+ 215              		.loc 1 97 0
+ 216 0132 019A     		ldr	r2, [sp, #4]
+ 217 0134 42F00202 		orr	r2, r2, #2
+ 218 0138 0192     		str	r2, [sp, #4]
+  98:Src/clock.c   ****     write_reg(RCC_CFGR, temp_reg);
+ 219              		.loc 1 98 0
+ 220 013a 019A     		ldr	r2, [sp, #4]
+ 221 013c 1A60     		str	r2, [r3]
+  99:Src/clock.c   ****     
+ 100:Src/clock.c   ****     // /* Wait till System clock switch is ready */
+ 101:Src/clock.c   ****     timeout = 0xFFFFFF;
+ 222              		.loc 1 101 0
+ 223 013e 6FF07F43 		mvn	r3, #-16777216
+ 224 0142 0093     		str	r3, [sp]
+ 225              	.L9:
+ 102:Src/clock.c   ****     do {
+ 103:Src/clock.c   ****         temp_reg = read_reg(RCC_CFGR, (0x3 << 2));
+ 226              		.loc 1 103 0 discriminator 2
+ 227 0144 154B     		ldr	r3, .L11+16
+ 228 0146 1B68     		ldr	r3, [r3]
+ 229 0148 03F00C03 		and	r3, r3, #12
+ 230 014c 0193     		str	r3, [sp, #4]
+ 104:Src/clock.c   ****         timeout--;
+ 231              		.loc 1 104 0 discriminator 2
+ 232 014e 009B     		ldr	r3, [sp]
+ 233 0150 013B     		subs	r3, r3, #1
+ 234 0152 0093     		str	r3, [sp]
+ 105:Src/clock.c   ****     } while (((2u<<2) != temp_reg) && (timeout > 0));
+ 235              		.loc 1 105 0 discriminator 2
+ 236 0154 019B     		ldr	r3, [sp, #4]
+ 237 0156 082B     		cmp	r3, #8
+ 238 0158 02D0     		beq	.L8
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 7
+
+
+ 239              		.loc 1 105 0 is_stmt 0 discriminator 1
+ 240 015a 009B     		ldr	r3, [sp]
+ 241 015c 002B     		cmp	r3, #0
+ 242 015e F1D1     		bne	.L9
+ 243              	.L8:
+ 106:Src/clock.c   **** 	
+ 107:Src/clock.c   **** 
+ 108:Src/clock.c   **** 	
+ 109:Src/clock.c   **** 	temp_reg = read_reg(RCC_CFGR, ~(0xF << 4));
+ 244              		.loc 1 109 0 is_stmt 1
+ 245 0160 0E4B     		ldr	r3, .L11+16
+ 246 0162 1A68     		ldr	r2, [r3]
+ 247 0164 22F0F002 		bic	r2, r2, #240
+ 248 0168 0192     		str	r2, [sp, #4]
+ 110:Src/clock.c   ****     temp_reg |= (0u<< 4);
+ 249              		.loc 1 110 0
+ 250 016a 019A     		ldr	r2, [sp, #4]
+ 251 016c 0192     		str	r2, [sp, #4]
+ 111:Src/clock.c   ****     write_reg(RCC_CFGR, temp_reg);
+ 252              		.loc 1 111 0
+ 253 016e 019A     		ldr	r2, [sp, #4]
+ 254 0170 1A60     		str	r2, [r3]
+ 112:Src/clock.c   **** 	
+ 113:Src/clock.c   ****     /* APB1 prescaler */
+ 114:Src/clock.c   **** 	// khong chia
+ 115:Src/clock.c   ****     temp_reg = read_reg(RCC_CFGR, ~(7u << 10));
+ 255              		.loc 1 115 0
+ 256 0172 22F4E052 		bic	r2, r2, #7168
+ 257 0176 0192     		str	r2, [sp, #4]
+ 116:Src/clock.c   ****     write_reg(RCC_CFGR, temp_reg);
+ 258              		.loc 1 116 0
+ 259 0178 019A     		ldr	r2, [sp, #4]
+ 260 017a 1A60     		str	r2, [r3]
+ 117:Src/clock.c   **** 	
+ 118:Src/clock.c   **** 	  temp_reg = read_reg(RCC_CFGR, ~(7u << 13));
+ 261              		.loc 1 118 0
+ 262 017c 22F46042 		bic	r2, r2, #57344
+ 263 0180 0192     		str	r2, [sp, #4]
+ 119:Src/clock.c   ****     write_reg(RCC_CFGR, temp_reg);
+ 264              		.loc 1 119 0
+ 265 0182 019A     		ldr	r2, [sp, #4]
+ 266 0184 1A60     		str	r2, [r3]
+ 120:Src/clock.c   **** 
+ 121:Src/clock.c   **** }
+ 267              		.loc 1 121 0
+ 268 0186 02B0     		add	sp, sp, #8
+ 269              	.LCFI1:
+ 270              		.cfi_def_cfa_offset 0
+ 271              		@ sp needed
+ 272 0188 7047     		bx	lr
+ 273              	.L12:
+ 274 018a 00BF     		.align	2
+ 275              	.L11:
+ 276 018c 0C380240 		.word	1073887244
+ 277 0190 00380240 		.word	1073887232
+ 278 0194 003C0240 		.word	1073888256
+ 279 0198 04380240 		.word	1073887236
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 8
+
+
+ 280 019c 08380240 		.word	1073887240
+ 281              		.cfi_endproc
+ 282              	.LFE0:
+ 284              		.section	.text.rcc_enableclk,"ax",%progbits
+ 285              		.align	1
+ 286              		.global	rcc_enableclk
+ 287              		.syntax unified
+ 288              		.thumb
+ 289              		.thumb_func
+ 290              		.fpu fpv4-sp-d16
+ 292              	rcc_enableclk:
+ 293              	.LFB1:
+ 122:Src/clock.c   **** 
+ 123:Src/clock.c   **** void rcc_enableclk(){
+ 294              		.loc 1 123 0
+ 295              		.cfi_startproc
+ 296              		@ args = 0, pretend = 0, frame = 0
+ 297              		@ frame_needed = 0, uses_anonymous_args = 0
+ 298              		@ link register save eliminated.
+ 124:Src/clock.c   **** 	unsigned int temp_reg;
+ 125:Src/clock.c   **** 	
+ 126:Src/clock.c   **** 	//port d 
+ 127:Src/clock.c   **** 	temp_reg = read_reg(RCC_AHB1ENR , ~(1 <<3));
+ 299              		.loc 1 127 0
+ 300 0000 024A     		ldr	r2, .L14
+ 301 0002 1368     		ldr	r3, [r2]
+ 302              	.LVL0:
+ 128:Src/clock.c   **** 	temp_reg  = temp_reg | (1 << 3 );
+ 129:Src/clock.c   **** 	write_reg(RCC_AHB1ENR , temp_reg );
+ 130:Src/clock.c   **** 	
+ 131:Src/clock.c   **** 	//port b
+ 132:Src/clock.c   **** 	temp_reg = read_reg(RCC_AHB1ENR , ~(1 <<1));
+ 133:Src/clock.c   **** 	temp_reg  = temp_reg | (1 << 1 );
+ 303              		.loc 1 133 0
+ 304 0004 43F00A03 		orr	r3, r3, #10
+ 305              	.LVL1:
+ 134:Src/clock.c   **** 	write_reg(RCC_AHB1ENR , temp_reg );
+ 306              		.loc 1 134 0
+ 307 0008 1360     		str	r3, [r2]
+ 135:Src/clock.c   ****   
+ 136:Src/clock.c   **** }...
+ 308              		.loc 1 136 0
+ 309 000a 7047     		bx	lr
+ 310              	.L15:
+ 311              		.align	2
+ 312              	.L14:
+ 313 000c 30380240 		.word	1073887280
+ 314              		.cfi_endproc
+ 315              	.LFE1:
+ 317              		.text
+ 318              	.Letext0:
+ 319              		.file 2 "Inc/stm32f4xx_it.h"
+ARM GAS  E:\msys32\tmp\cc8ZZAyA.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 clock.c
+E:\msys32\tmp\cc8ZZAyA.s:18     .text.system_init:00000000 $t
+E:\msys32\tmp\cc8ZZAyA.s:25     .text.system_init:00000000 system_init
+E:\msys32\tmp\cc8ZZAyA.s:276    .text.system_init:0000018c $d
+E:\msys32\tmp\cc8ZZAyA.s:285    .text.rcc_enableclk:00000000 $t
+E:\msys32\tmp\cc8ZZAyA.s:292    .text.rcc_enableclk:00000000 rcc_enableclk
+E:\msys32\tmp\cc8ZZAyA.s:313    .text.rcc_enableclk:0000000c $d
+
+NO UNDEFINED SYMBOLS
