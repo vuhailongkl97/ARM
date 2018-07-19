@@ -1,0 +1,153 @@
+
+//////////////system clock_config
+  
+    __HAL_RCC_PWR_CLK_ENABLE();   RCC APB1
+	  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+	  
+>>  HAL_RCC_OscConfig
+		__HAL_RCC_PLL_DISABLE
+			wait ...
+			 if((RCC_OscInitStruct->PLL.PLLState) == RCC_PLL_ON)
+
+					/* Disable the main PLL. */
+					__HAL_RCC_PLL_DISABLE();
+					wait ..... pll disable 
+			
+		 /* Configure the main PLL clock source, multiplication and division factors. */
+        WRITE_REG(RCC->PLLCFGR, (RCC_OscInitStruct->PLL.PLLSource                                            | \
+                                 RCC_OscInitStruct->PLL.PLLM                                                 | \
+                                 (RCC_OscInitStruct->PLL.PLLN << RCC_PLLCFGR_PLLN_Pos)             | \
+                                 (((RCC_OscInitStruct->PLL.PLLP >> 1U) - 1U) << RCC_PLLCFGR_PLLP_Pos) | \
+                                 (RCC_OscInitStruct->PLL.PLLQ << RCC_PLLCFGR_PLLQ_Pos)));
+        /* Enable the main PLL. */
+        __HAL_RCC_PLL_ENABLE();
+			wait ...
+			
+    /**Initializes the CPU, AHB and APB busses clocks 
+    */
+	
+	HAL_RCC_ClockConfig
+	
+		   /* Program the new number of wait states to the LATENCY bits in the FLASH_ACR register */
+		__HAL_FLASH_SET_LATENCY(FLatency);
+		
+		 /*-------------------------- HCLK Configuration --------------------------*/
+		 
+		 MODIFY_REG(RCC->CFGR, RCC_CFGR_PPRE1, RCC_HCLK_DIV16);
+		 MODIFY_REG(RCC->CFGR, RCC_CFGR_PPRE2, (RCC_HCLK_DIV16 << 3));
+		 MODIFY_REG(RCC->CFGR, RCC_CFGR_HPRE, RCC_ClkInitStruct->AHBCLKDivider);
+		 
+		 
+		 /*------------------------- SYSCLK Configuration ---------------------------*/
+		 
+		 
+		 ///selected as System Clock Source
+		 __HAL_RCC_SYSCLK_CONFIG(RCC_ClkInitStruct->SYSCLKSource);
+		 
+		 
+			wait ....
+			
+			
+		/*-------------------------- PCLK1 Configuration ---------------------------*/
+		
+		
+		 /*-------------------------- PCLK2 Configuration ---------------------------*/
+		  if(((RCC_ClkInitStruct->ClockType) & RCC_CLOCKTYPE_PCLK2) == RCC_CLOCKTYPE_PCLK2)
+		  {
+			assert_param(IS_RCC_PCLK(RCC_ClkInitStruct->APB2CLKDivider));
+			MODIFY_REG(RCC->CFGR, RCC_CFGR_PPRE2, ((RCC_ClkInitStruct->APB2CLKDivider) << 3U));
+		  }
+		 
+MX_TIM2_Init
+
+ htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 50000;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 1999;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  
+	HAL_TIM_Base_Init
+	 /* Allocate lock resource and initialize it */
+    htim->Lock = HAL_UNLOCKED;
+    /* Init the low level hardware : GPIO, CLOCK, NVIC */
+    HAL_TIM_Base_MspInit(htim);
+		HAL_TIM_Base_MspInit
+
+				/* Peripheral clock enable */
+				__HAL_RCC_TIM2_CLK_ENABLE();
+				/* TIM2 interrupt Init */
+				HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
+				HAL_NVIC_EnableIRQ(TIM2_IRQn);
+
+			  
+	TIM_Base_SetConfig
+	
+		disable tim2
+			/* Set TIM Time Base Unit parameters ---------------------------------------*/
+			/* Select the Counter Mode */
+			/* Set the clock division */
+
+			/* Set the Auto-reload value */
+			/* Set the Prescaler value */
+			/* Generate an update event to reload the Prescaler 
+			and the repetition counter(only for TIM1 and TIM8) value immediately */
+			TIMx->EGR = TIM_EGR_UG;
+  
+  
+  
+	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+
+				/* Reset the SMS, TS, ECE, ETPS and ETRF bits */
+			tmpsmcr = htim->Instance->SMCR;
+			tmpsmcr &= ~(TIM_SMCR_SMS | TIM_SMCR_TS);
+			tmpsmcr &= ~(TIM_SMCR_ETF | TIM_SMCR_ETPS | TIM_SMCR_ECE | TIM_SMCR_ETP);
+			htim->Instance->SMCR = tmpsmcr;
+
+
+			  case TIM_CLOCKSOURCE_INTERNAL:
+	
+			  /* Disable slave mode to clock the prescaler directly with the internal clock */
+			  htim->Instance->SMCR &= ~TIM_SMCR_SMS;
+
+	
+	 sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  
+  HAL_TIMEx_MasterConfigSynchronization
+	__HAL_LOCK(htim);
+	
+	/* Reset the MMS Bits */
+	  htim->Instance->CR2 &= ~TIM_CR2_MMS;
+	  /* Select the TRGO source */
+	  htim->Instance->CR2 |= sMasterConfig->MasterOutputTrigger;
+
+	  /* Reset the MSM Bit */
+	  htim->Instance->SMCR &= ~TIM_SMCR_MSM;
+	  /* Set or Reset the MSM Bit */
+	  htim->Instance->SMCR |= sMasterConfig->MasterSlaveMode;
+	  
+	  htim->State = HAL_TIM_STATE_READY;
+	  
+	  __HAL_UNLOCK(htim);
+
+HAL_TIM_Base_Start_IT
+
+	/* Enable the TIM Update interrupt */
+  __HAL_TIM_ENABLE_IT(htim, TIM_IT_UPDATE);
+  
+    /* Enable the TIM Update interrupt */
+  __HAL_TIM_ENABLE_IT(htim, TIM_IT_UPDATE);
+      
+  /* Enable the Peripheral */
+  __HAL_TIM_ENABLE(htim);
+  
+  
+  
+  
+  
+			
+			
+			
+		
+	  
+	  

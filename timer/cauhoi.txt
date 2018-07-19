@@ -1,0 +1,32 @@
+
+
+hi mọi người.  anh/các bạn  hiểu các vấn đề này thì giải thích giúp em/mình với ạ
++ giai thich them ve clock . 
+	chọn hsi ở ngõ vào PLL có nghĩa là bỏ chọn hse hay sao ạ . vì ta có thể  enable cả  hsi , hse
+	
+	// chap Embedded Flash memory interface
+	//bảng "Number of wait states according to CPU clock (HCLK) frequency" trong rm của stm32f411 ạ 
+	bộ nhớ flash chịu ảnh hưởng của tần số clock (hclk ) và điện áp sử dụng 
+		+ điện áp sử dụng ở đây của kit thì xem ở đâu ạ 
+		+ truy cập bộ nhớ flash phải thay đổi Wait states (WS) (LATENCY) theo khoảng clock tương ứng . sao lại vậy ạ
+		
++ hàm này trong MDK5
+#define __HAL_UNLOCK(__HANDLE__)                                          \
+                                  do{                                       \
+                                      (__HANDLE__)->Lock = HAL_UNLOCKED;    \
+                                    }while (0U)
+ >> chỉ thực hiện có 1 lần tại sao lại phải do . while cho dài dòng
+
+
+
++ co hien tuong ghi de du lieu len thanh ghi 
+ví dụ trong main gọi function : 
+	function( 32 , 9600 , 16) ; >>debug 3 giá trị này được ghi vào R1 , R2 R3 
+	
+>> sau khi vào function(chạy được một số dòng code bình thường ) >> các giá trị trên R1 R2 R3 bị thay đổi >> không thể sử dụng giá trị đã truyền vào .
+lỗi như vậy là sao vậy ạ.
+
+
++ sytick cũng là 1 bộ timer tại sao không được đề cập trong rm stm32fx discovery  mà phải đặt riêng trong core không cùng  tim1 2 3 ..
+
+

@@ -1,0 +1,390 @@
+ARM GAS  E:\msys32\tmp\ccasId8u.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"uart.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.uart_init,"ax",%progbits
+  18              		.align	1
+  19              		.global	uart_init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	uart_init:
+  26              	.LFB0:
+  27              		.file 1 "Src/uart.c"
+   1:Src/uart.c    **** #include "project.h"
+   2:Src/uart.c    **** #define a 32 
+   3:Src/uart.c    **** #define b 9600 
+   4:Src/uart.c    **** #define c 16 
+   5:Src/uart.c    **** 
+   6:Src/uart.c    **** void uart_init(const  int fclk ,const  int oversampling ,const int baudrate ){
+  28              		.loc 1 6 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  34 0000 30B4     		push	{r4, r5}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 4, -8
+  38              		.cfi_offset 5, -4
+   7:Src/uart.c    **** 	
+   8:Src/uart.c    **** 	unsigned int temp_reg;
+   9:Src/uart.c    **** 	
+  10:Src/uart.c    **** 	//enable clock for uart
+  11:Src/uart.c    **** 	temp_reg = read_reg(RCC_APB2ENR, ~(1u << 4));
+  39              		.loc 1 11 0
+  40 0002 1E4A     		ldr	r2, .L3
+  41              	.LVL1:
+  42 0004 1368     		ldr	r3, [r2]
+  43              	.LVL2:
+  12:Src/uart.c    ****     temp_reg |= (1 << 4);
+  44              		.loc 1 12 0
+  45 0006 43F01003 		orr	r3, r3, #16
+  46              	.LVL3:
+ARM GAS  E:\msys32\tmp\ccasId8u.s 			page 2
+
+
+  13:Src/uart.c    ****     write_reg(RCC_APB2ENR, temp_reg);
+  47              		.loc 1 13 0
+  48 000a 1360     		str	r3, [r2]
+  14:Src/uart.c    **** 	
+  15:Src/uart.c    **** 	// Pb7 -RX
+  16:Src/uart.c    **** 	temp_reg = read_reg(GPIO_MODER(GPIOB) , ~(3u << 14 ));
+  49              		.loc 1 16 0
+  50 000c 1C4D     		ldr	r5, .L3+4
+  51 000e 2B68     		ldr	r3, [r5]
+  52              	.LVL4:
+  53 0010 23F44041 		bic	r1, r3, #49152
+  54              	.LVL5:
+  17:Src/uart.c    **** 	temp_reg  = temp_reg | (GPIO_MODER_ALT << 14);
+  55              		.loc 1 17 0
+  56 0014 41F40041 		orr	r1, r1, #32768
+  57              	.LVL6:
+  18:Src/uart.c    **** 	write_reg(GPIO_MODER(GPIOB) , temp_reg );
+  19:Src/uart.c    **** 	
+  20:Src/uart.c    **** 	temp_reg = read_reg(GPIO_PUPDR(GPIOB) , ~(3u << 14 ));
+  58              		.loc 1 20 0
+  59 0018 1A4C     		ldr	r4, .L3+8
+  60 001a 2368     		ldr	r3, [r4]
+  61 001c 23F44042 		bic	r2, r3, #49152
+  62              	.LVL7:
+  21:Src/uart.c    **** 	temp_reg  = temp_reg | (PULL_UP << 14);
+  63              		.loc 1 21 0
+  64 0020 42F48042 		orr	r2, r2, #16384
+  65              	.LVL8:
+  22:Src/uart.c    **** 	write_reg(GPIO_PUPDR(GPIOB) , temp_reg );
+  23:Src/uart.c    **** 	
+  24:Src/uart.c    **** 	
+  25:Src/uart.c    **** 	temp_reg = read_reg(GPIO_AFRL(GPIOB) , ~(0x0Fu << 28 ));
+  66              		.loc 1 25 0
+  67 0024 1848     		ldr	r0, .L3+12
+  68              	.LVL9:
+  69 0026 0368     		ldr	r3, [r0]
+  70 0028 23F07043 		bic	r3, r3, #-268435456
+  71              	.LVL10:
+  26:Src/uart.c    **** 	temp_reg  = temp_reg | (7u << 28);
+  72              		.loc 1 26 0
+  73 002c 43F0E043 		orr	r3, r3, #1879048192
+  74              	.LVL11:
+  27:Src/uart.c    **** 	write_reg(GPIO_AFRL(GPIOB) , temp_reg );
+  28:Src/uart.c    **** 
+  29:Src/uart.c    **** 	//Pb6 - TX
+  30:Src/uart.c    **** 	
+  31:Src/uart.c    **** 	temp_reg = read_reg(GPIO_MODER(GPIOB) , ~(3u << 12 ));
+  75              		.loc 1 31 0
+  76 0030 21F44051 		bic	r1, r1, #12288
+  77              	.LVL12:
+  32:Src/uart.c    **** 	temp_reg  = temp_reg | (GPIO_MODER_ALT << 12);
+  78              		.loc 1 32 0
+  79 0034 41F40051 		orr	r1, r1, #8192
+  80              	.LVL13:
+  33:Src/uart.c    **** 	write_reg(GPIO_MODER(GPIOB) , temp_reg );
+  81              		.loc 1 33 0
+  82 0038 2960     		str	r1, [r5]
+ARM GAS  E:\msys32\tmp\ccasId8u.s 			page 3
+
+
+  34:Src/uart.c    **** 	
+  35:Src/uart.c    **** 	temp_reg = read_reg(GPIO_PUPDR(GPIOB) , ~(3u << 12 ));
+  83              		.loc 1 35 0
+  84 003a 22F44052 		bic	r2, r2, #12288
+  85              	.LVL14:
+  36:Src/uart.c    **** 	temp_reg  = temp_reg | (PULL_UP << 12);
+  86              		.loc 1 36 0
+  87 003e 42F48052 		orr	r2, r2, #4096
+  88              	.LVL15:
+  37:Src/uart.c    **** 	write_reg(GPIO_PUPDR(GPIOB) , temp_reg );
+  89              		.loc 1 37 0
+  90 0042 2260     		str	r2, [r4]
+  38:Src/uart.c    **** 	
+  39:Src/uart.c    **** 	temp_reg = read_reg(GPIO_AFRL(GPIOB) , ~(0x0Fu << 24 ));
+  91              		.loc 1 39 0
+  92 0044 23F07063 		bic	r3, r3, #251658240
+  93              	.LVL16:
+  40:Src/uart.c    **** 	temp_reg  = temp_reg | (7u << 24);
+  94              		.loc 1 40 0
+  95 0048 43F0E063 		orr	r3, r3, #117440512
+  96              	.LVL17:
+  41:Src/uart.c    **** 	write_reg(GPIO_AFRL(GPIOB) , temp_reg );
+  97              		.loc 1 41 0
+  98 004c 0360     		str	r3, [r0]
+  42:Src/uart.c    **** 	
+  43:Src/uart.c    **** 	//DISABLE UART1
+  44:Src/uart.c    **** 	temp_reg = read_reg(USART_CR1, ~(1<<13));
+  99              		.loc 1 44 0
+ 100 004e 0F49     		ldr	r1, .L3+16
+ 101 0050 0B68     		ldr	r3, [r1]
+ 102              	.LVL18:
+  45:Src/uart.c    ****     write_reg(USART_CR1, temp_reg);
+  46:Src/uart.c    **** 
+  47:Src/uart.c    **** 	// 1 stop 
+  48:Src/uart.c    **** 	temp_reg = read_reg(USART_CR2 ,~(3 <<12));
+ 103              		.loc 1 48 0
+ 104 0052 A0F57440 		sub	r0, r0, #62464
+ 105 0056 1038     		subs	r0, r0, #16
+ 106 0058 0268     		ldr	r2, [r0]
+ 107 005a 22F44052 		bic	r2, r2, #12288
+ 108              	.LVL19:
+  49:Src/uart.c    **** 	temp_reg |= (0 << 12);
+  50:Src/uart.c    **** 	write_reg(USART_CR2 , temp_reg);		
+ 109              		.loc 1 50 0
+ 110 005e 0260     		str	r2, [r0]
+ 111              	.LVL20:
+  51:Src/uart.c    **** 
+  52:Src/uart.c    **** 	// data 8bit 	
+  53:Src/uart.c    **** 	temp_reg = read_reg(USART_CR1 ,~(1 <<12));
+  54:Src/uart.c    **** 	write_reg(USART_CR1 , temp_reg);
+  55:Src/uart.c    **** 	
+  56:Src/uart.c    **** 	//no  parity 
+  57:Src/uart.c    **** 	temp_reg = read_reg(USART_CR1 ,~(1 <<10));
+  58:Src/uart.c    **** 	write_reg(USART_CR1 , temp_reg);
+  59:Src/uart.c    **** 	
+  60:Src/uart.c    **** 	
+  61:Src/uart.c    **** 	/* Clear CTSE and RTSE bits */
+ARM GAS  E:\msys32\tmp\ccasId8u.s 			page 4
+
+
+  62:Src/uart.c    **** 	temp_reg = read_reg(USART_CR1 ,~(3 <<8));
+  63:Src/uart.c    **** 	write_reg(USART_CR1 , temp_reg);	
+  64:Src/uart.c    **** 	
+  65:Src/uart.c    **** 	//no  sampleing
+  66:Src/uart.c    **** 	temp_reg = read_reg(USART_CR1 ,~(1 <<15));
+ 112              		.loc 1 66 0
+ 113 0060 23F43743 		bic	r3, r3, #46848
+ 114              	.LVL21:
+  67:Src/uart.c    **** 	write_reg(USART_CR1 , temp_reg);
+  68:Src/uart.c    **** 		
+  69:Src/uart.c    **** 	//baudrate  
+  70:Src/uart.c    **** 	//115200   0x0000008Bu
+  71:Src/uart.c    **** 	//9600     0x00000683u  16mhz
+  72:Src/uart.c    **** 	//temp_reg = 0x00000045u;
+  73:Src/uart.c    **** 	float  ftemp  = (1000000.0* a) / (b * c);
+  74:Src/uart.c    **** 	unsigned int     DIV_Mantissa  = (unsigned int )ftemp;
+  75:Src/uart.c    ****     unsigned int    DIV_Fraction = (ftemp - DIV_Mantissa)*c;
+  76:Src/uart.c    **** 	temp_reg =  ( DIV_Mantissa <<4 ) | DIV_Fraction;
+  77:Src/uart.c    **** 
+  78:Src/uart.c    **** 	
+  79:Src/uart.c    **** 
+  80:Src/uart.c    **** 	
+  81:Src/uart.c    **** 	
+  82:Src/uart.c    **** 	//temp_reg = 0x00000D05u;	//32mhz
+  83:Src/uart.c    **** 
+  84:Src/uart.c    **** 	
+  85:Src/uart.c    **** 	write_reg(USART_BRR , temp_reg);
+ 115              		.loc 1 85 0
+ 116 0064 0A4A     		ldr	r2, .L3+20
+ 117 0066 40F60550 		movw	r0, #3333
+ 118 006a 1060     		str	r0, [r2]
+ 119              	.LVL22:
+  86:Src/uart.c    **** 	
+  87:Src/uart.c    **** 	//ENABLE UART1
+  88:Src/uart.c    **** 	temp_reg = read_reg(USART_CR1, ~(1<<13));
+  89:Src/uart.c    **** 	temp_reg |= (1<<13);
+  90:Src/uart.c    ****     write_reg(USART_CR1, temp_reg);	
+  91:Src/uart.c    **** 	
+  92:Src/uart.c    **** 	/* Tx Enable */
+  93:Src/uart.c    ****     temp_reg = read_reg(USART_CR1, ~(1<<3));
+  94:Src/uart.c    ****     temp_reg |= (1 << 3);
+  95:Src/uart.c    ****     write_reg(USART_CR1, temp_reg);
+  96:Src/uart.c    **** 
+  97:Src/uart.c    ****     /* Rx Enable */
+  98:Src/uart.c    ****     temp_reg = read_reg(USART_CR1, ~(1<<2));
+  99:Src/uart.c    ****     temp_reg |= (1<<2);
+ 120              		.loc 1 99 0
+ 121 006c 43F40053 		orr	r3, r3, #8192
+ 122              	.LVL23:
+ 123 0070 43F00C03 		orr	r3, r3, #12
+ 124              	.LVL24:
+ 100:Src/uart.c    ****     write_reg(USART_CR1, temp_reg);
+ 125              		.loc 1 100 0
+ 126 0074 0B60     		str	r3, [r1]
+ 101:Src/uart.c    **** 	
+ 102:Src/uart.c    **** 
+ 103:Src/uart.c    **** }
+ARM GAS  E:\msys32\tmp\ccasId8u.s 			page 5
+
+
+ 127              		.loc 1 103 0
+ 128 0076 30BC     		pop	{r4, r5}
+ 129              	.LCFI1:
+ 130              		.cfi_restore 5
+ 131              		.cfi_restore 4
+ 132              		.cfi_def_cfa_offset 0
+ 133 0078 7047     		bx	lr
+ 134              	.L4:
+ 135 007a 00BF     		.align	2
+ 136              	.L3:
+ 137 007c 44380240 		.word	1073887300
+ 138 0080 00040240 		.word	1073873920
+ 139 0084 0C040240 		.word	1073873932
+ 140 0088 20040240 		.word	1073873952
+ 141 008c 0C100140 		.word	1073811468
+ 142 0090 08100140 		.word	1073811464
+ 143              		.cfi_endproc
+ 144              	.LFE0:
+ 146              		.section	.text.usart_send_byte,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	usart_send_byte
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 152              		.fpu fpv4-sp-d16
+ 154              	usart_send_byte:
+ 155              	.LFB1:
+ 104:Src/uart.c    **** char usart_send_byte(unsigned char data){
+ 156              		.loc 1 104 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 0, uses_anonymous_args = 0
+ 160              		@ link register save eliminated.
+ 161              	.LVL25:
+ 105:Src/uart.c    **** 	
+ 106:Src/uart.c    **** 	unsigned int temp_reg ;
+ 107:Src/uart.c    **** 	// kiem tra TDR san sang nhan du lieu moi hay chua
+ 108:Src/uart.c    **** 	temp_reg = read_reg(USART_SR , (1 << 7));
+ 162              		.loc 1 108 0
+ 163 0000 054B     		ldr	r3, .L8
+ 164 0002 1B68     		ldr	r3, [r3]
+ 165              	.LVL26:
+ 109:Src/uart.c    **** 	if( temp_reg != 0){
+ 166              		.loc 1 109 0
+ 167 0004 13F0800F 		tst	r3, #128
+ 168 0008 03D0     		beq	.L7
+ 110:Src/uart.c    **** 		// bat dau truyen 
+ 111:Src/uart.c    **** 		write_reg(USART_DR , (unsigned int)data);
+ 169              		.loc 1 111 0
+ 170 000a 044B     		ldr	r3, .L8+4
+ 171              	.LVL27:
+ 172 000c 1860     		str	r0, [r3]
+ 112:Src/uart.c    **** 		
+ 113:Src/uart.c    **** 		return 1;
+ 173              		.loc 1 113 0
+ 174 000e 0120     		movs	r0, #1
+ 175              	.LVL28:
+ARM GAS  E:\msys32\tmp\ccasId8u.s 			page 6
+
+
+ 176 0010 7047     		bx	lr
+ 177              	.LVL29:
+ 178              	.L7:
+ 114:Src/uart.c    **** 	}
+ 115:Src/uart.c    **** 	return 0;
+ 179              		.loc 1 115 0
+ 180 0012 0020     		movs	r0, #0
+ 181              	.LVL30:
+ 116:Src/uart.c    **** 	
+ 117:Src/uart.c    **** }
+ 182              		.loc 1 117 0
+ 183 0014 7047     		bx	lr
+ 184              	.L9:
+ 185 0016 00BF     		.align	2
+ 186              	.L8:
+ 187 0018 00100140 		.word	1073811456
+ 188 001c 04100140 		.word	1073811460
+ 189              		.cfi_endproc
+ 190              	.LFE1:
+ 192              		.section	.text.usart_send_string,"ax",%progbits
+ 193              		.align	1
+ 194              		.global	usart_send_string
+ 195              		.syntax unified
+ 196              		.thumb
+ 197              		.thumb_func
+ 198              		.fpu fpv4-sp-d16
+ 200              	usart_send_string:
+ 201              	.LFB2:
+ 118:Src/uart.c    **** char usart_send_string( char *str){
+ 202              		.loc 1 118 0
+ 203              		.cfi_startproc
+ 204              		@ args = 0, pretend = 0, frame = 0
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 206              	.LVL31:
+ 207 0000 10B5     		push	{r4, lr}
+ 208              	.LCFI2:
+ 209              		.cfi_def_cfa_offset 8
+ 210              		.cfi_offset 4, -8
+ 211              		.cfi_offset 14, -4
+ 212 0002 0446     		mov	r4, r0
+ 213              	.LVL32:
+ 214              	.L11:
+ 119:Src/uart.c    **** 	
+ 120:Src/uart.c    **** 		while(*str){
+ 215              		.loc 1 120 0
+ 216 0004 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 217 0006 28B1     		cbz	r0, .L15
+ 121:Src/uart.c    **** 			if(usart_send_byte(*str))
+ 218              		.loc 1 121 0
+ 219 0008 FFF7FEFF 		bl	usart_send_byte
+ 220              	.LVL33:
+ 221 000c 0028     		cmp	r0, #0
+ 222 000e F9D0     		beq	.L11
+ 122:Src/uart.c    **** 				str++;
+ 223              		.loc 1 122 0
+ 224 0010 0134     		adds	r4, r4, #1
+ 225              	.LVL34:
+ARM GAS  E:\msys32\tmp\ccasId8u.s 			page 7
+
+
+ 226 0012 F7E7     		b	.L11
+ 227              	.L15:
+ 123:Src/uart.c    **** 		}
+ 124:Src/uart.c    **** 	return 0;
+ 125:Src/uart.c    **** }
+ 228              		.loc 1 125 0
+ 229 0014 10BD     		pop	{r4, pc}
+ 230              		.cfi_endproc
+ 231              	.LFE2:
+ 233              		.text
+ 234              	.Letext0:
+ 235              		.file 2 "Inc/stm32f4xx_it.h"
+ARM GAS  E:\msys32\tmp\ccasId8u.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 uart.c
+E:\msys32\tmp\ccasId8u.s:18     .text.uart_init:00000000 $t
+E:\msys32\tmp\ccasId8u.s:25     .text.uart_init:00000000 uart_init
+E:\msys32\tmp\ccasId8u.s:137    .text.uart_init:0000007c $d
+E:\msys32\tmp\ccasId8u.s:147    .text.usart_send_byte:00000000 $t
+E:\msys32\tmp\ccasId8u.s:154    .text.usart_send_byte:00000000 usart_send_byte
+E:\msys32\tmp\ccasId8u.s:187    .text.usart_send_byte:00000018 $d
+E:\msys32\tmp\ccasId8u.s:193    .text.usart_send_string:00000000 $t
+E:\msys32\tmp\ccasId8u.s:200    .text.usart_send_string:00000000 usart_send_string
+
+NO UNDEFINED SYMBOLS
