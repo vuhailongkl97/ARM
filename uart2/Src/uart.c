@@ -7,7 +7,8 @@ void uart_init(u32_t  fclk ,unsigned  int oversampling ,u32_t baudrate ){
 	u32_t temp_reg ,brr_baud;
 	float  ftemp  = (1000000.0* fclk) / (baudrate* oversampling);
 	u32_t     DIV_Mantissa  = (u32_t )ftemp;
-    u32_t    DIV_Fraction = (ftemp - DIV_Mantissa)*oversampling;
+    float    f_DIV_Fraction = (ftemp - DIV_Mantissa)*oversampling;
+	u32_t   DIV_Fraction = (u32_t) f_DIV_Fraction;
 	brr_baud =  ( DIV_Mantissa <<4 ) | DIV_Fraction;
 	
 	uart_pin_init();

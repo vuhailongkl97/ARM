@@ -11,33 +11,30 @@ void delay( u32_t timeout){
 			asm(" nop");
 
 }
-//clock setup 50mhz for processor
+//clock setup 100mhz for processor
+void config_pin(){
+	mGPIO_TypeDef GPIO_Init;
+	GPIO_Init.mpin  =  GPIO_PIN(12)| GPIO_PIN(13) | GPIO_PIN(14) | GPIO_PIN(15);
+	GPIO_Init.moder = GPIO_MODER_OUTPUT;
+	GPIO_Init.type = PUSH_PULL;
+	GPIO_Init.pull  = NO_PULL;
+	GPIO_Init.speed = FAST_SPEED;
+	
+	init_pin(GPIOD , &GPIO_Init); 
+}
+//clock setup 100mhz for processor
 int main(void)
-{
+{	//using hse
 	//void system_init( div_m, u32_t mul_n, u32_t div_p, u32_t system_source,u32_t div_ahb,u32_t div_apb1 , u32_t div_apb2);
-	system_init( 8, 100, PLLP_DIV2 , SRC_PLL, AHB_DIV1 ,APB_DIV8  , APB_DIV1);
+	system_init( 8, 200, PLLP_DIV4 , SRC_PLL, AHB_DIV1 ,APB_DIV2  , APB_DIV1);
 	rcc_enableclk();
-	init_pin();
 	
-	uart_init(100, 16 , 9600);
+	config_pin();	
 	init_interrupt();
-	usart_send_string("Hello world -VHL");
-	
 
     while(1)
     {
-	#if 1
-        if (0 != rx_data)
-        {
-            usart_send_byte(rx_data);
-			GPIO_TongglePin(GPIOD , (GPIO_PIN(12) | GPIO_PIN(13) | GPIO_PIN(14) | GPIO_PIN(15) ) ) ;
-		
-            rx_data = 0;
-        }
-	
-    #endif
 
-		
 
     }
 

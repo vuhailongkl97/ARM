@@ -6,6 +6,14 @@
 #define write_reg(addrs , value )    *((unsigned long  int * )(addrs))  = value
 #define read_reg(addrs , mask )		 *((unsigned long  int * )(addrs))  & mask
 typedef unsigned int u32_t;
+typedef struct{
+	u32_t  mpin;
+	u32_t  moder;
+	u32_t  type;
+	u32_t  pull;
+	u32_t  speed;
+	u32_t  alternate;
+}mGPIO_TypeDef;
 
 ///////////////   BASE_ADDR      ///////////////
 #define BASE_ADDR 0x40020000u
@@ -115,11 +123,11 @@ typedef unsigned int u32_t;
 
 
 /////////////////////NVIC  /////////////////
-#define NVIC_ISER(x) (0xE000E100u + 4*x)
+#define NVIC_ISER(x) (0xE000E100u + (4*x))
 #define NVIC_ICER 0XE000E180u
 #define NVIC_ISPR 0XE000E200u
 #define NVIC_ICPR 0XE000E280u
-#define NVIC_IPR(x) (0xE000E400 + 4*x)
+#define NVIC_IPR(x) (0xE000E400 + (4*x))
 
 
 

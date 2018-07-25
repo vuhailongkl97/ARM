@@ -1,41 +1,40 @@
 
 #include "project.h"
 
-void init_pin(){
+void init_pin(u32_t mgpio_port , mGPIO_TypeDef *gpio_init){
 
-	unsigned int temp_reg;
-  /*Configure GPIO pin : PD12 13 14 15  */
-  	temp_reg = read_reg(GPIO_MODER(GPIOD) , ~(0xFF << 24 ));
-	temp_reg |= ( (GPIO_MODER_OUTPUT << 24) |(GPIO_MODER_OUTPUT << 26) |(GPIO_MODER_OUTPUT << 28) \
-	 | (GPIO_MODER_OUTPUT << 30)) ;
-	write_reg(GPIO_MODER(GPIOD) , temp_reg );
+	u32_t temp_reg, gpio_pin = 0;
+	unsigned int i = 0 ;
 	
-	
-	
-	// output push-pull , open-drain
-  	temp_reg = read_reg(GPIO_OTYPER(GPIOD) , ~(0xF << 12 ));
-	temp_reg |= ( (PUSH_PULL << 12) |(PUSH_PULL << 13) |(PUSH_PULL << 14) \
-	 | (PUSH_PULL << 15)) ;
-	write_reg(GPIO_OTYPER(GPIOD) , temp_reg );	
-	
-	
-	// output no pull-up pull-down 
-	
-	temp_reg = read_reg(GPIO_PUPDR(GPIOD) , ~(0xFF<< 24));
-	temp_reg |= ( (NO_PULL << 24) |(NO_PULL << 26) |(NO_PULL << 28) \
-	 | (NO_PULL << 30)) ;
-	write_reg(GPIO_PUPDR(GPIOD) , temp_reg );
-	
-	// high speed
-	
-	temp_reg = read_reg(GPIO_OSPEEDR(GPIOD) , ~(0xFF<< 24));
-	temp_reg |= ( (HIGH_SPEED << 24) |(HIGH_SPEED << 26) |(HIGH_SPEED << 28) \
-	 | (HIGH_SPEED << 30)) ;
-	write_reg(GPIO_OSPEEDR(GPIOD) , temp_reg );
-	
-	
-	
-	
+	for ( i = 0 ; i < 16 ; i ++){
+		
+		gpio_pin = (gpio_init->mpin) & (1u << i );
+	//*Configure GPIO MODER pin
+		if( gpio_pin != 0){
+			//moder
+			temp_reg = read_reg(GPIO_MODER(mgpio_port) ,~(3u << (i *2)));
+			temp_reg |= (( gpio_init->moder) << (2 * i)); 
+			write_reg(GPIO_MODER(mgpio_port) , temp_reg);
+
+			//opendrain or opensource
+			temp_reg = read_reg(GPIO_OTYPER(mgpio_port) , ~(1u << i ));
+			temp_reg |= ((gpio_init->type) << i);
+			write_reg(GPIO_OTYPER(mgpio_port) , temp_reg);
+
+			//pull type
+			temp_reg = read_reg(GPIO_PUPDR(mgpio_port) ,~(3u << (i *2)));
+			temp_reg |= (( gpio_init->pull) << (2 * i)); 
+			write_reg(GPIO_PUPDR(mgpio_port) , temp_reg );
+
+			//speed
+			temp_reg = read_reg(GPIO_OSPEEDR(mgpio_port) ,~(3u << (i *2)));
+			temp_reg |= (( gpio_init->speed) << (2 * i)); 
+			write_reg(GPIO_OSPEEDR(mgpio_port) , temp_reg );
+			
+			// alternate
+		     
+		}		
+	}
 }
 
 void led_on(unsigned long mPORT , unsigned int pin){

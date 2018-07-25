@@ -45,6 +45,26 @@ Discarded input sections
  .text          0x00000000        0x0 build/uart.o
  .data          0x00000000        0x0 build/uart.o
  .bss           0x00000000        0x0 build/uart.o
+ .text.usart_send_byte
+                0x00000000       0x20 build/uart.o
+ .text.usart_send_string
+                0x00000000       0x16 build/uart.o
+ .text.uart_pin_init
+                0x00000000       0x64 build/uart.o
+ .text.uart_init
+                0x00000000       0x9c build/uart.o
+ .debug_info    0x00000000      0x1b3 build/uart.o
+ .debug_abbrev  0x00000000       0xef build/uart.o
+ .debug_loc     0x00000000      0x2ed build/uart.o
+ .debug_aranges
+                0x00000000       0x38 build/uart.o
+ .debug_ranges  0x00000000       0x28 build/uart.o
+ .debug_line    0x00000000       0xb6 build/uart.o
+ .debug_str     0x00000000      0x1c6 build/uart.o
+ .comment       0x00000000       0x7f build/uart.o
+ .debug_frame   0x00000000       0x84 build/uart.o
+ .ARM.attributes
+                0x00000000       0x39 build/uart.o
  .text          0x00000000        0x0 build/gpio.o
  .data          0x00000000        0x0 build/gpio.o
  .bss           0x00000000        0x0 build/gpio.o
@@ -57,14 +77,14 @@ Discarded input sections
                 0x00000000       0x8c build/systick.o
  .text.timer2_start
                 0x00000000       0x1c build/systick.o
- .debug_info    0x00000000       0xa4 build/systick.o
+ .debug_info    0x00000000       0xab build/systick.o
  .debug_abbrev  0x00000000       0x87 build/systick.o
  .debug_loc     0x00000000      0x139 build/systick.o
  .debug_aranges
                 0x00000000       0x28 build/systick.o
  .debug_ranges  0x00000000       0x18 build/systick.o
  .debug_line    0x00000000       0x86 build/systick.o
- .debug_str     0x00000000      0x139 build/systick.o
+ .debug_str     0x00000000      0x145 build/systick.o
  .comment       0x00000000       0x7f build/systick.o
  .debug_frame   0x00000000       0x30 build/systick.o
  .ARM.attributes
@@ -107,12 +127,24 @@ Discarded input sections
  .debug_frame   0x00000000       0x20 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libnosys.a(_exit.o)
  .ARM.attributes
                 0x00000000       0x34 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libnosys.a(_exit.o)
+ .text          0x00000000      0x378 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_addsubdf3.o)
  .data          0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_addsubdf3.o)
  .bss           0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x00000000       0xac c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x00000000       0x22 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_addsubdf3.o)
+ .text          0x00000000      0x424 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_muldivdf3.o)
  .data          0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_muldivdf3.o)
  .bss           0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x00000000       0x50 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x00000000       0x22 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_muldivdf3.o)
+ .text          0x00000000       0xa0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_truncdfsf2.o)
  .data          0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_truncdfsf2.o)
  .bss           0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_truncdfsf2.o)
+ .debug_frame   0x00000000       0x24 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_truncdfsf2.o)
+ .ARM.attributes
+                0x00000000       0x22 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_truncdfsf2.o)
  .text          0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtend.o
  .data          0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtend.o
  .bss           0x00000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtend.o
@@ -166,238 +198,205 @@ LOAD c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/
                 0x08000000                g_pfnVectors
                 0x08000198                . = ALIGN (0x4)
 
-.text           0x08000198      0xdf4
+.text           0x08000198      0x52c
                 0x08000198                . = ALIGN (0x4)
  *(.text)
  .text          0x08000198       0x40 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
- .text          0x080001d8      0x378 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_addsubdf3.o)
-                0x080001d8                __aeabi_drsub
-                0x080001e0                __aeabi_dsub
-                0x080001e0                __subdf3
-                0x080001e4                __aeabi_dadd
-                0x080001e4                __adddf3
-                0x0800045c                __floatunsidf
-                0x0800045c                __aeabi_ui2d
-                0x0800047c                __floatsidf
-                0x0800047c                __aeabi_i2d
-                0x080004a0                __aeabi_f2d
-                0x080004a0                __extendsfdf2
-                0x080004e4                __floatundidf
-                0x080004e4                __aeabi_ul2d
-                0x080004f4                __floatdidf
-                0x080004f4                __aeabi_l2d
- .text          0x08000550      0x424 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_muldivdf3.o)
-                0x08000550                __aeabi_dmul
-                0x08000550                __muldf3
-                0x080007a4                __divdf3
-                0x080007a4                __aeabi_ddiv
- .text          0x08000974       0xa0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_truncdfsf2.o)
-                0x08000974                __truncdfsf2
-                0x08000974                __aeabi_d2f
  *(.text*)
- .text.delay    0x08000a14       0x1c build/main.o
-                0x08000a14                delay
- .text.main     0x08000a30       0x64 build/main.o
-                0x08000a30                main
+ .text.delay    0x080001d8       0x1c build/main.o
+                0x080001d8                delay
+ .text.config_pin
+                0x080001f4       0x2c build/main.o
+                0x080001f4                config_pin
+ .text.main     0x08000220       0x28 build/main.o
+                0x08000220                main
  .text.TIM2_IRQHandler
-                0x08000a94       0x2c build/stm32f4xx_it.o
-                0x08000a94                TIM2_IRQHandler
+                0x08000248       0x2c build/stm32f4xx_it.o
+                0x08000248                TIM2_IRQHandler
  .text.EXTI1_IRQHandler
-                0x08000ac0       0x20 build/stm32f4xx_it.o
-                0x08000ac0                EXTI1_IRQHandler
+                0x08000274       0x20 build/stm32f4xx_it.o
+                0x08000274                EXTI1_IRQHandler
  .text.EXTI0_IRQHandler
-                0x08000ae0       0x28 build/stm32f4xx_it.o
-                0x08000ae0                EXTI0_IRQHandler
- .text.init_interrupt
-                0x08000b08       0x7c build/stm32f4xx_it.o
-                0x08000b08                init_interrupt
+                0x08000294       0x28 build/stm32f4xx_it.o
+                0x08000294                EXTI0_IRQHandler
  .text.USART1_IRQHandler
-                0x08000b84       0x40 build/stm32f4xx_it.o
-                0x08000b84                USART1_IRQHandler
+                0x080002bc       0x40 build/stm32f4xx_it.o
+                0x080002bc                USART1_IRQHandler
  .text.NMI_Handler
-                0x08000bc4        0x2 build/stm32f4xx_it.o
-                0x08000bc4                NMI_Handler
+                0x080002fc        0x2 build/stm32f4xx_it.o
+                0x080002fc                NMI_Handler
  .text.HardFault_Handler
-                0x08000bc6        0x2 build/stm32f4xx_it.o
-                0x08000bc6                HardFault_Handler
+                0x080002fe        0x2 build/stm32f4xx_it.o
+                0x080002fe                HardFault_Handler
  .text.MemManage_Handler
-                0x08000bc8        0x2 build/stm32f4xx_it.o
-                0x08000bc8                MemManage_Handler
+                0x08000300        0x2 build/stm32f4xx_it.o
+                0x08000300                MemManage_Handler
  .text.BusFault_Handler
-                0x08000bca        0x2 build/stm32f4xx_it.o
-                0x08000bca                BusFault_Handler
+                0x08000302        0x2 build/stm32f4xx_it.o
+                0x08000302                BusFault_Handler
  .text.UsageFault_Handler
-                0x08000bcc        0x2 build/stm32f4xx_it.o
-                0x08000bcc                UsageFault_Handler
+                0x08000304        0x2 build/stm32f4xx_it.o
+                0x08000304                UsageFault_Handler
  .text.SVC_Handler
-                0x08000bce        0x2 build/stm32f4xx_it.o
-                0x08000bce                SVC_Handler
+                0x08000306        0x2 build/stm32f4xx_it.o
+                0x08000306                SVC_Handler
  .text.DebugMon_Handler
-                0x08000bd0        0x2 build/stm32f4xx_it.o
-                0x08000bd0                DebugMon_Handler
+                0x08000308        0x2 build/stm32f4xx_it.o
+                0x08000308                DebugMon_Handler
  .text.PendSV_Handler
-                0x08000bd2        0x2 build/stm32f4xx_it.o
-                0x08000bd2                PendSV_Handler
+                0x0800030a        0x2 build/stm32f4xx_it.o
+                0x0800030a                PendSV_Handler
  .text.SysTick_Handler
-                0x08000bd4        0x2 build/stm32f4xx_it.o
-                0x08000bd4                SysTick_Handler
- *fill*         0x08000bd6        0x2 
+                0x0800030c        0x2 build/stm32f4xx_it.o
+                0x0800030c                SysTick_Handler
+ .text.mNVIC_SetPriority
+                0x0800030e       0x1a build/stm32f4xx_it.o
+                0x0800030e                mNVIC_SetPriority
+ .text.mNVIC_EnableIRQ
+                0x08000328       0x1c build/stm32f4xx_it.o
+                0x08000328                mNVIC_EnableIRQ
+ .text.init_interrupt
+                0x08000344       0x64 build/stm32f4xx_it.o
+                0x08000344                init_interrupt
  .text.system_init
-                0x08000bd8      0x170 build/clock.o
-                0x08000bd8                system_init
+                0x080003a8      0x1e8 build/clock.o
+                0x080003a8                system_init
  .text.rcc_enableclk
-                0x08000d48       0x10 build/clock.o
-                0x08000d48                rcc_enableclk
- .text.usart_send_byte
-                0x08000d58       0x20 build/uart.o
-                0x08000d58                usart_send_byte
- .text.usart_send_string
-                0x08000d78       0x16 build/uart.o
-                0x08000d78                usart_send_string
- *fill*         0x08000d8e        0x2 
- .text.uart_pin_init
-                0x08000d90       0x64 build/uart.o
-                0x08000d90                uart_pin_init
- *fill*         0x08000df4        0x4 
- .text.uart_init
-                0x08000df8       0x9c build/uart.o
-                0x08000df8                uart_init
+                0x08000590       0x10 build/clock.o
+                0x08000590                rcc_enableclk
  .text.init_pin
-                0x08000e94       0x34 build/gpio.o
-                0x08000e94                init_pin
+                0x080005a0       0x60 build/gpio.o
+                0x080005a0                init_pin
  .text.GPIO_TongglePin
-                0x08000ec8       0x14 build/gpio.o
-                0x08000ec8                GPIO_TongglePin
+                0x08000600       0x14 build/gpio.o
+                0x08000600                GPIO_TongglePin
  .text.Reset_Handler
-                0x08000edc       0x4c build/startup_stm32f411xe.o
-                0x08000edc                Reset_Handler
+                0x08000614       0x4c build/startup_stm32f411xe.o
+                0x08000614                Reset_Handler
  .text.Default_Handler
-                0x08000f28        0x2 build/startup_stm32f411xe.o
-                0x08000f28                RTC_Alarm_IRQHandler
-                0x08000f28                EXTI2_IRQHandler
-                0x08000f28                SPI4_IRQHandler
-                0x08000f28                TIM1_CC_IRQHandler
-                0x08000f28                DMA2_Stream5_IRQHandler
-                0x08000f28                DMA1_Stream5_IRQHandler
-                0x08000f28                PVD_IRQHandler
-                0x08000f28                SDIO_IRQHandler
-                0x08000f28                TAMP_STAMP_IRQHandler
-                0x08000f28                EXTI3_IRQHandler
-                0x08000f28                TIM1_UP_TIM10_IRQHandler
-                0x08000f28                I2C3_ER_IRQHandler
-                0x08000f28                I2C2_EV_IRQHandler
-                0x08000f28                DMA1_Stream2_IRQHandler
-                0x08000f28                FPU_IRQHandler
-                0x08000f28                DMA2_Stream2_IRQHandler
-                0x08000f28                SPI1_IRQHandler
-                0x08000f28                TIM1_BRK_TIM9_IRQHandler
-                0x08000f28                DMA2_Stream3_IRQHandler
-                0x08000f28                USART6_IRQHandler
-                0x08000f28                DMA2_Stream0_IRQHandler
-                0x08000f28                TIM4_IRQHandler
-                0x08000f28                I2C1_EV_IRQHandler
-                0x08000f28                DMA1_Stream6_IRQHandler
-                0x08000f28                DMA1_Stream1_IRQHandler
-                0x08000f28                TIM3_IRQHandler
-                0x08000f28                RCC_IRQHandler
-                0x08000f28                Default_Handler
-                0x08000f28                EXTI15_10_IRQHandler
-                0x08000f28                ADC_IRQHandler
-                0x08000f28                DMA1_Stream7_IRQHandler
-                0x08000f28                SPI5_IRQHandler
-                0x08000f28                TIM5_IRQHandler
-                0x08000f28                DMA2_Stream7_IRQHandler
-                0x08000f28                I2C3_EV_IRQHandler
-                0x08000f28                EXTI9_5_IRQHandler
-                0x08000f28                RTC_WKUP_IRQHandler
-                0x08000f28                SPI2_IRQHandler
-                0x08000f28                DMA1_Stream0_IRQHandler
-                0x08000f28                EXTI4_IRQHandler
-                0x08000f28                WWDG_IRQHandler
-                0x08000f28                OTG_FS_WKUP_IRQHandler
-                0x08000f28                TIM1_TRG_COM_TIM11_IRQHandler
-                0x08000f28                USART2_IRQHandler
-                0x08000f28                I2C2_ER_IRQHandler
-                0x08000f28                DMA2_Stream1_IRQHandler
-                0x08000f28                FLASH_IRQHandler
-                0x08000f28                DMA2_Stream4_IRQHandler
-                0x08000f28                OTG_FS_IRQHandler
-                0x08000f28                SPI3_IRQHandler
-                0x08000f28                DMA1_Stream4_IRQHandler
-                0x08000f28                I2C1_ER_IRQHandler
-                0x08000f28                DMA2_Stream6_IRQHandler
-                0x08000f28                DMA1_Stream3_IRQHandler
- *fill*         0x08000f2a        0x2 
+                0x08000660        0x2 build/startup_stm32f411xe.o
+                0x08000660                RTC_Alarm_IRQHandler
+                0x08000660                EXTI2_IRQHandler
+                0x08000660                SPI4_IRQHandler
+                0x08000660                TIM1_CC_IRQHandler
+                0x08000660                DMA2_Stream5_IRQHandler
+                0x08000660                DMA1_Stream5_IRQHandler
+                0x08000660                PVD_IRQHandler
+                0x08000660                SDIO_IRQHandler
+                0x08000660                TAMP_STAMP_IRQHandler
+                0x08000660                EXTI3_IRQHandler
+                0x08000660                TIM1_UP_TIM10_IRQHandler
+                0x08000660                I2C3_ER_IRQHandler
+                0x08000660                I2C2_EV_IRQHandler
+                0x08000660                DMA1_Stream2_IRQHandler
+                0x08000660                FPU_IRQHandler
+                0x08000660                DMA2_Stream2_IRQHandler
+                0x08000660                SPI1_IRQHandler
+                0x08000660                TIM1_BRK_TIM9_IRQHandler
+                0x08000660                DMA2_Stream3_IRQHandler
+                0x08000660                USART6_IRQHandler
+                0x08000660                DMA2_Stream0_IRQHandler
+                0x08000660                TIM4_IRQHandler
+                0x08000660                I2C1_EV_IRQHandler
+                0x08000660                DMA1_Stream6_IRQHandler
+                0x08000660                DMA1_Stream1_IRQHandler
+                0x08000660                TIM3_IRQHandler
+                0x08000660                RCC_IRQHandler
+                0x08000660                Default_Handler
+                0x08000660                EXTI15_10_IRQHandler
+                0x08000660                ADC_IRQHandler
+                0x08000660                DMA1_Stream7_IRQHandler
+                0x08000660                SPI5_IRQHandler
+                0x08000660                TIM5_IRQHandler
+                0x08000660                DMA2_Stream7_IRQHandler
+                0x08000660                I2C3_EV_IRQHandler
+                0x08000660                EXTI9_5_IRQHandler
+                0x08000660                RTC_WKUP_IRQHandler
+                0x08000660                SPI2_IRQHandler
+                0x08000660                DMA1_Stream0_IRQHandler
+                0x08000660                EXTI4_IRQHandler
+                0x08000660                WWDG_IRQHandler
+                0x08000660                OTG_FS_WKUP_IRQHandler
+                0x08000660                TIM1_TRG_COM_TIM11_IRQHandler
+                0x08000660                USART2_IRQHandler
+                0x08000660                I2C2_ER_IRQHandler
+                0x08000660                DMA2_Stream1_IRQHandler
+                0x08000660                FLASH_IRQHandler
+                0x08000660                DMA2_Stream4_IRQHandler
+                0x08000660                OTG_FS_IRQHandler
+                0x08000660                SPI3_IRQHandler
+                0x08000660                DMA1_Stream4_IRQHandler
+                0x08000660                I2C1_ER_IRQHandler
+                0x08000660                DMA2_Stream6_IRQHandler
+                0x08000660                DMA1_Stream3_IRQHandler
+ *fill*         0x08000662        0x2 
  .text.__libc_init_array
-                0x08000f2c       0x48 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
-                0x08000f2c                __libc_init_array
+                0x08000664       0x48 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
+                0x08000664                __libc_init_array
  *(.glue_7)
- .glue_7        0x08000f74        0x0 linker stubs
+ .glue_7        0x080006ac        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08000f74        0x0 linker stubs
+ .glue_7t       0x080006ac        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x08000f74        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .eh_frame      0x080006ac        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
  *(.init)
- .init          0x08000f74        0x4 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x08000f74                _init
- .init          0x08000f78        0x8 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+ .init          0x080006ac        0x4 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x080006ac                _init
+ .init          0x080006b0        0x8 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
  *(.fini)
- .fini          0x08000f80        0x4 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crti.o
-                0x08000f80                _fini
- .fini          0x08000f84        0x8 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
-                0x08000f8c                . = ALIGN (0x4)
-                0x08000f8c                _etext = .
+ .fini          0x080006b8        0x4 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crti.o
+                0x080006b8                _fini
+ .fini          0x080006bc        0x8 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+                0x080006c4                . = ALIGN (0x4)
+                0x080006c4                _etext = .
 
-.vfp11_veneer   0x08000f8c        0x0
- .vfp11_veneer  0x08000f8c        0x0 linker stubs
+.vfp11_veneer   0x080006c4        0x0
+ .vfp11_veneer  0x080006c4        0x0 linker stubs
 
-.v4_bx          0x08000f8c        0x0
- .v4_bx         0x08000f8c        0x0 linker stubs
+.v4_bx          0x080006c4        0x0
+ .v4_bx         0x080006c4        0x0 linker stubs
 
-.iplt           0x08000f8c        0x0
- .iplt          0x08000f8c        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+.iplt           0x080006c4        0x0
+ .iplt          0x080006c4        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
 
-.rodata         0x08000f8c       0x14
-                0x08000f8c                . = ALIGN (0x4)
+.rel.dyn        0x080006c4        0x0
+ .rel.iplt      0x080006c4        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+
+.rodata         0x080006c4        0x0
+                0x080006c4                . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
- .rodata.main.str1.4
-                0x08000f8c       0x14 build/main.o
-                                 0x11 (size before relaxing)
-                0x08000fa0                . = ALIGN (0x4)
-
-.rel.dyn        0x08000fa0        0x0
- .rel.iplt      0x08000fa0        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x080006c4                . = ALIGN (0x4)
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08000fa0        0x0
-                0x08000fa0                __exidx_start = .
+.ARM            0x080006c4        0x0
+                0x080006c4                __exidx_start = .
  *(.ARM.exidx*)
-                0x08000fa0                __exidx_end = .
+                0x080006c4                __exidx_end = .
 
-.preinit_array  0x08000fa0        0x0
-                0x08000fa0                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x080006c4        0x0
+                0x080006c4                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x08000fa0                PROVIDE (__preinit_array_end, .)
+                0x080006c4                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x08000fa0        0x4
-                0x08000fa0                PROVIDE (__init_array_start, .)
+.init_array     0x080006c4        0x4
+                0x080006c4                PROVIDE (__init_array_start, .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08000fa0        0x4 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
-                0x08000fa4                PROVIDE (__init_array_end, .)
+ .init_array    0x080006c4        0x4 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+                0x080006c8                PROVIDE (__init_array_end, .)
 
-.fini_array     0x08000fa4        0x4
+.fini_array     0x080006c8        0x4
                 [!provide]                PROVIDE (__fini_array_start, .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08000fa4        0x4 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
+ .fini_array    0x080006c8        0x4 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 [!provide]                PROVIDE (__fini_array_end, .)
-                0x08000fa8                _sidata = LOADADDR (.data)
+                0x080006cc                _sidata = LOADADDR (.data)
 
-.data           0x20000000        0x0 load address 0x08000fa8
+.data           0x20000000        0x0 load address 0x080006cc
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -405,11 +404,11 @@ LOAD c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _edata = .
 
-.igot.plt       0x20000000        0x0 load address 0x08000fa8
+.igot.plt       0x20000000        0x0 load address 0x080006cc
  .igot.plt      0x20000000        0x0 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o
                 0x20000000                . = ALIGN (0x4)
 
-.bss            0x20000000       0x20 load address 0x08000fa8
+.bss            0x20000000       0x20 load address 0x080006cc
                 0x20000000                _sbss = .
                 0x20000000                __bss_start__ = _sbss
  *(.bss)
@@ -424,7 +423,7 @@ LOAD c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/
                 0x20000020                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20000020      0x600 load address 0x08000fa8
+                0x20000020      0x600 load address 0x080006cc
                 0x20000020                . = ALIGN (0x8)
                 [!provide]                PROVIDE (end, .)
                 [!provide]                PROVIDE (_end, .)
@@ -453,88 +452,71 @@ LOAD c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/
  .ARM.attributes
                 0x000000c8       0x39 build/clock.o
  .ARM.attributes
-                0x00000101       0x39 build/uart.o
+                0x00000101       0x39 build/gpio.o
  .ARM.attributes
-                0x0000013a       0x39 build/gpio.o
+                0x0000013a       0x21 build/startup_stm32f411xe.o
  .ARM.attributes
-                0x00000173       0x21 build/startup_stm32f411xe.o
+                0x0000015b       0x34 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
  .ARM.attributes
-                0x00000194       0x34 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
- .ARM.attributes
-                0x000001c8       0x22 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_addsubdf3.o)
- .ARM.attributes
-                0x000001ea       0x22 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_muldivdf3.o)
- .ARM.attributes
-                0x0000020c       0x22 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_truncdfsf2.o)
- .ARM.attributes
-                0x0000022e       0x22 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
-OUTPUT(build/timer411.elf elf32-littlearm)
+                0x0000018f       0x22 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard/crtn.o
+OUTPUT(build/uart2_411.elf elf32-littlearm)
 
-.debug_info     0x00000000      0x85a
- .debug_info    0x00000000      0x1e9 build/main.o
- .debug_info    0x000001e9      0x25f build/stm32f4xx_it.o
- .debug_info    0x00000448      0x11e build/clock.o
- .debug_info    0x00000566      0x1a1 build/uart.o
- .debug_info    0x00000707      0x131 build/gpio.o
- .debug_info    0x00000838       0x22 build/startup_stm32f411xe.o
+.debug_info     0x00000000      0xa68
+ .debug_info    0x00000000      0x20b build/main.o
+ .debug_info    0x0000020b      0x529 build/stm32f4xx_it.o
+ .debug_info    0x00000734      0x125 build/clock.o
+ .debug_info    0x00000859      0x1ed build/gpio.o
+ .debug_info    0x00000a46       0x22 build/startup_stm32f411xe.o
 
-.debug_abbrev   0x00000000      0x451
- .debug_abbrev  0x00000000       0xf7 build/main.o
- .debug_abbrev  0x000000f7      0x10f build/stm32f4xx_it.o
- .debug_abbrev  0x00000206       0xa3 build/clock.o
- .debug_abbrev  0x000002a9       0xf1 build/uart.o
- .debug_abbrev  0x0000039a       0xa5 build/gpio.o
- .debug_abbrev  0x0000043f       0x12 build/startup_stm32f411xe.o
+.debug_abbrev   0x00000000      0x436
+ .debug_abbrev  0x00000000      0x13a build/main.o
+ .debug_abbrev  0x0000013a      0x15d build/stm32f4xx_it.o
+ .debug_abbrev  0x00000297       0xa3 build/clock.o
+ .debug_abbrev  0x0000033a       0xea build/gpio.o
+ .debug_abbrev  0x00000424       0x12 build/startup_stm32f411xe.o
 
-.debug_loc      0x00000000      0x6d5
- .debug_loc     0x00000000       0x5e build/main.o
- .debug_loc     0x0000005e      0x1b4 build/stm32f4xx_it.o
- .debug_loc     0x00000212      0x12b build/clock.o
- .debug_loc     0x0000033d      0x2ca build/uart.o
- .debug_loc     0x00000607       0xce build/gpio.o
+.debug_loc      0x00000000      0x52b
+ .debug_loc     0x00000000       0x96 build/main.o
+ .debug_loc     0x00000096      0x205 build/stm32f4xx_it.o
+ .debug_loc     0x0000029b      0x12b build/clock.o
+ .debug_loc     0x000003c6      0x165 build/gpio.o
 
-.debug_aranges  0x00000000      0x170
+.debug_aranges  0x00000000      0x150
  .debug_aranges
-                0x00000000       0x28 build/main.o
+                0x00000000       0x30 build/main.o
  .debug_aranges
-                0x00000028       0x88 build/stm32f4xx_it.o
+                0x00000030       0x98 build/stm32f4xx_it.o
  .debug_aranges
-                0x000000b0       0x28 build/clock.o
+                0x000000c8       0x28 build/clock.o
  .debug_aranges
-                0x000000d8       0x38 build/uart.o
+                0x000000f0       0x38 build/gpio.o
  .debug_aranges
-                0x00000110       0x38 build/gpio.o
- .debug_aranges
-                0x00000148       0x28 build/startup_stm32f411xe.o
+                0x00000128       0x28 build/startup_stm32f411xe.o
 
-.debug_ranges   0x00000000      0x118
- .debug_ranges  0x00000000       0x18 build/main.o
- .debug_ranges  0x00000018       0x78 build/stm32f4xx_it.o
- .debug_ranges  0x00000090       0x18 build/clock.o
- .debug_ranges  0x000000a8       0x28 build/uart.o
- .debug_ranges  0x000000d0       0x28 build/gpio.o
- .debug_ranges  0x000000f8       0x20 build/startup_stm32f411xe.o
+.debug_ranges   0x00000000      0x108
+ .debug_ranges  0x00000000       0x20 build/main.o
+ .debug_ranges  0x00000020       0x88 build/stm32f4xx_it.o
+ .debug_ranges  0x000000a8       0x18 build/clock.o
+ .debug_ranges  0x000000c0       0x28 build/gpio.o
+ .debug_ranges  0x000000e8       0x20 build/startup_stm32f411xe.o
 
-.debug_line     0x00000000      0x46d
- .debug_line    0x00000000       0xb0 build/main.o
- .debug_line    0x000000b0      0x163 build/stm32f4xx_it.o
- .debug_line    0x00000213       0xa3 build/clock.o
- .debug_line    0x000002b6       0xb5 build/uart.o
- .debug_line    0x0000036b       0x8f build/gpio.o
- .debug_line    0x000003fa       0x73 build/startup_stm32f411xe.o
+.debug_line     0x00000000      0x446
+ .debug_line    0x00000000       0xb6 build/main.o
+ .debug_line    0x000000b6      0x18e build/stm32f4xx_it.o
+ .debug_line    0x00000244       0xeb build/clock.o
+ .debug_line    0x0000032f       0xa4 build/gpio.o
+ .debug_line    0x000003d3       0x73 build/startup_stm32f411xe.o
 
-.debug_str      0x00000000      0x39c
- .debug_str     0x00000000      0x18e build/main.o
-                                0x1a0 (size before relaxing)
- .debug_str     0x0000018e       0xfa build/stm32f4xx_it.o
-                                0x227 (size before relaxing)
- .debug_str     0x00000288       0x46 build/clock.o
-                                0x17a (size before relaxing)
- .debug_str     0x000002ce       0x63 build/uart.o
-                                0x1ab (size before relaxing)
- .debug_str     0x00000331       0x46 build/gpio.o
-                                0x16b (size before relaxing)
- .debug_str     0x00000377       0x25 build/startup_stm32f411xe.o
+.debug_str      0x00000000      0x74c
+ .debug_str     0x00000000      0x19a build/main.o
+                                0x1b8 (size before relaxing)
+ .debug_str     0x0000019a      0x4e3 build/stm32f4xx_it.o
+                                0x60d (size before relaxing)
+ .debug_str     0x0000067d       0x46 build/clock.o
+                                0x186 (size before relaxing)
+ .debug_str     0x000006c3       0x64 build/gpio.o
+                                0x1ce (size before relaxing)
+ .debug_str     0x00000727       0x25 build/startup_stm32f411xe.o
                                  0x4c (size before relaxing)
 
 .comment        0x00000000       0x7e
@@ -542,19 +524,14 @@ OUTPUT(build/timer411.elf elf32-littlearm)
                                  0x7f (size before relaxing)
  .comment       0x0000007e       0x7f build/stm32f4xx_it.o
  .comment       0x0000007e       0x7f build/clock.o
- .comment       0x0000007e       0x7f build/uart.o
  .comment       0x0000007e       0x7f build/gpio.o
 
-.debug_frame    0x00000000      0x3c4
- .debug_frame   0x00000000       0x3c build/main.o
- .debug_frame   0x0000003c      0x11c build/stm32f4xx_it.o
- .debug_frame   0x00000158       0x4c build/clock.o
- .debug_frame   0x000001a4       0x84 build/uart.o
- .debug_frame   0x00000228       0x50 build/gpio.o
- .debug_frame   0x00000278       0x2c c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
- .debug_frame   0x000002a4       0xac c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_addsubdf3.o)
- .debug_frame   0x00000350       0x50 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_muldivdf3.o)
- .debug_frame   0x000003a0       0x24 c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/thumb/v7e-m/fpv4-sp/hard\libgcc.a(_arm_truncdfsf2.o)
+.debug_frame    0x00000000      0x280
+ .debug_frame   0x00000000       0x58 build/main.o
+ .debug_frame   0x00000058      0x148 build/stm32f4xx_it.o
+ .debug_frame   0x000001a0       0x48 build/clock.o
+ .debug_frame   0x000001e8       0x6c build/gpio.o
+ .debug_frame   0x00000254       0x2c c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-init.o)
 
 Cross Reference Table
 
@@ -590,7 +567,6 @@ FLASH_IRQHandler                                  build/startup_stm32f411xe.o
 FPU_IRQHandler                                    build/startup_stm32f411xe.o
 GPIO_TongglePin                                   build/gpio.o
                                                   build/stm32f4xx_it.o
-                                                  build/main.o
 HardFault_Handler                                 build/stm32f4xx_it.o
 I2C1_ER_IRQHandler                                build/startup_stm32f411xe.o
 I2C1_EV_IRQHandler                                build/startup_stm32f411xe.o
@@ -690,6 +666,7 @@ _sdata                                            build/startup_stm32f411xe.o
 _sidata                                           build/startup_stm32f411xe.o
 _start                                            c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
 atexit                                            c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
+config_pin                                        build/main.o
 delay                                             build/main.o
                                                   build/stm32f4xx_it.o
 exit                                              c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-exit.o)
@@ -703,6 +680,8 @@ init_pin                                          build/gpio.o
 led_off                                           build/gpio.o
 led_on                                            build/gpio.o
 led_state                                         build/stm32f4xx_it.o
+mNVIC_EnableIRQ                                   build/stm32f4xx_it.o
+mNVIC_SetPriority                                 build/stm32f4xx_it.o
 main                                              build/main.o
                                                   build/startup_stm32f411xe.o
                                                   c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
@@ -711,7 +690,6 @@ memset                                            c:/tools/gcc7_2017-q4-major/bi
 rcc_enableclk                                     build/clock.o
                                                   build/main.o
 rx_data                                           build/stm32f4xx_it.o
-                                                  build/main.o
 software_init_hook                                c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
 system_init                                       build/clock.o
                                                   build/main.o
@@ -719,9 +697,6 @@ timer2_init                                       build/systick.o
 timer2_start                                      build/systick.o
 times                                             build/main.o
 uart_init                                         build/uart.o
-                                                  build/main.o
 uart_pin_init                                     build/uart.o
 usart_send_byte                                   build/uart.o
-                                                  build/main.o
 usart_send_string                                 build/uart.o
-                                                  build/main.o

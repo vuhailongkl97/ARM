@@ -4,6 +4,8 @@
 volatile unsigned int led_state = 0;
 volatile unsigned char rx_data = 0;
 
+
+
 void TIM2_IRQHandler(){
  	unsigned temp_reg;
 
@@ -35,99 +37,6 @@ void EXTI0_IRQHandler(){
 	write_reg(NVIC_ICPR , (1 << 6) );
 	
 }
-
-void init_interrupt( ){
-	unsigned int temp_reg;
-//EXTI_IMR enable 2 interrupt EXTI0 , EXTI1
-	temp_reg = read_reg(EXTI_IMR , ~(0x03<< 0));
-	temp_reg  = temp_reg | (0x03<< 0 );
-	write_reg(EXTI_IMR , temp_reg );
-	
-	
-	/////////////////////////////
-	//raising for button1 
-	temp_reg = read_reg(EXTI_RTSR , ~(1<< 0));
-	temp_reg  = temp_reg | (1<< 0 );
-	write_reg(EXTI_RTSR , temp_reg );
-	
-	// raising for button1
-	temp_reg = read_reg(EXTI_RTSR , ~(1u<< 1));
-	temp_reg  = temp_reg | (1u << 1 );
-	write_reg(EXTI_RTSR , temp_reg );
-	
-	/////////////////////////////
-// syscfg
-	
-	//FOR EXTI0
-	temp_reg = read_reg(SYSCFG_EXTICR1 , ~(0x0F<< 0));
-	temp_reg  = temp_reg | (0 << 0 );
-	write_reg(SYSCFG_EXTICR1 , temp_reg );
-	
-	//FOR EXTI1
-	temp_reg = read_reg(SYSCFG_EXTICR1 , ~(0x0F<< 4));
-	temp_reg  = temp_reg | (0 << 4 );
-	write_reg(SYSCFG_EXTICR1 , temp_reg );
-	
-	//////////////////////////////
-	
-//NVIC	
-	//FOR EXTI0
-	temp_reg = read_reg(NVIC_IPR(0) , ~(0xFF << 16));
-	temp_reg  = temp_reg | (1u << 22 );
-	write_reg(NVIC_IPR(0), temp_reg );
-	
-	//FOR EXTI0	
-	temp_reg = read_reg(NVIC_IPR(0) , ~(0xFF << 24));
-	temp_reg  = temp_reg | (0x01 << 30 );
-	write_reg(NVIC_IPR(0) , temp_reg );
-	
-	
-	//////////////////////////////
-	// enable nvic
-	
-	//EXTI0
-	temp_reg = read_reg(NVIC_ISER(0) , ~(0x01<< 6));
-	temp_reg  = temp_reg | (1 << 6 );
-	write_reg(NVIC_ISER(0)  , temp_reg );
-	
-	//EXTI1
-	temp_reg = read_reg(NVIC_ISER(0) , ~(0x01<< 7));
-	temp_reg  = temp_reg | (1 << 7 );
-	write_reg(NVIC_ISER(0)  , temp_reg );
-	
-	//////////////////////////////
-	/* usart1 */
-
-	
-    /* Tx interrupt */
-    temp_reg = read_reg(USART_CR1, ~(1 << 6));
-    temp_reg |= (1 << 6);
-    write_reg(USART_CR1, temp_reg);
-
-    /* Rx interrupt - RXNEIE */
-    temp_reg = read_reg(USART_CR1, ~(1 << 5));
-    temp_reg |= (1 << 5);
-    write_reg(USART_CR1, temp_reg);
-    
-	
-	//UART1 
-    // 37  = 9*4 + 1
-	temp_reg = read_reg(NVIC_IPR(9), ~(0xFF << 8));
-    temp_reg |= 0x01 << 6;
-    write_reg(NVIC_IPR(9), temp_reg);
-	
-	// 37  = 32 + 5
-    temp_reg = read_reg(NVIC_ISER(1), ~(1 << 5));
-    temp_reg |= 1 << 5;
-    write_reg(NVIC_ISER(1), temp_reg);
-	////
-
-
-    asm("cpsie i") ;	
-	
-}
-
-
 void USART1_IRQHandler(void)
 {
     volatile unsigned int temp;
@@ -195,7 +104,84 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
 }
+void mNVIC_SetPriority(IRQn_Type ipr , u32_t pri){
+	// chia 4 .. stm32f4 chi dung 4 bit priority	 
+	u32_t addr_ipr = (NVIC_IPR( (u32_t)ipr >> 2u )) ;
+	u32_t temp_reg = read_reg(addr_ipr, ~0u);
+	temp_reg |=  ( ((u32_t)pri  & 0xFFu ) << 4u ) ;
+	write_reg(addr_ipr, temp_reg);
+	 
+}
+void mNVIC_EnableIRQ(IRQn_Type irq){
+	// iser /32 ,%32
+	u32_t addr_irq = NVIC_ISER( (u32_t)irq >> 5u )  ;
+	
+	u32_t temp_reg = read_reg(addr_irq , ~0u);
+	temp_reg |=  (u32_t)(1UL << ((u32_t)irq & 0x1Fu )) ;
+	write_reg(addr_irq, temp_reg);
+	
+}
+void init_interrupt( ){
+	
+	unsigned int temp_reg;
+//EXTI_IMR enable 2 interrupt EXTI0 , EXTI1
+	temp_reg = read_reg(EXTI_IMR , ~(0x03<< 0));
+	temp_reg  = temp_reg | (0x03<< 0 );
+	write_reg(EXTI_IMR , temp_reg );
+	
+	
+	/////////////////////////////
+	//raising for button1 
+	temp_reg = read_reg(EXTI_RTSR , ~(1<< 0));
+	temp_reg  = temp_reg | (1<< 0 );
+	write_reg(EXTI_RTSR , temp_reg );
+	
+	// raising for button1
+	temp_reg = read_reg(EXTI_RTSR , ~(1u<< 1));
+	temp_reg  = temp_reg | (1u << 1 );
+	write_reg(EXTI_RTSR , temp_reg );
+	
+	/////////////////////////////
+// syscfg
+	
+	//FOR EXTI0
+	temp_reg = read_reg(SYSCFG_EXTICR1 , ~(0x0F<< 0));
+	temp_reg  = temp_reg | (0 << 0 );
+	write_reg(SYSCFG_EXTICR1 , temp_reg );
+	
+	//FOR EXTI1
+	temp_reg = read_reg(SYSCFG_EXTICR1 , ~(0x0F<< 4));
+	temp_reg  = temp_reg | (0 << 4 );
+	write_reg(SYSCFG_EXTICR1 , temp_reg );
+	
+	//////////////////////////////
+	
+//NVIC	
+	mNVIC_SetPriority(EXTI0_IRQn , 15);
+	mNVIC_SetPriority(EXTI1_IRQn , 15);
+	
+	mNVIC_EnableIRQ(EXTI0_IRQn);
+	mNVIC_EnableIRQ(EXTI1_IRQn);
+	
+	//////////////////////////////
+	/* usart1 */
 
+    /* Tx interrupt */
+    temp_reg = read_reg(USART_CR1, ~(1 << 6));
+    temp_reg |= (1 << 6);
+    write_reg(USART_CR1, temp_reg);
+
+    /* Rx interrupt - RXNEIE */
+    temp_reg = read_reg(USART_CR1, ~(1 << 5));
+    temp_reg |= (1 << 5);
+    write_reg(USART_CR1, temp_reg);
+    
+	mNVIC_SetPriority(USART1_IRQn , 10);
+	mNVIC_EnableIRQ(USART1_IRQn);
+
+    asm("cpsie i") ;	
+	
+}
 
 
 

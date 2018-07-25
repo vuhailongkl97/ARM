@@ -1,6 +1,5 @@
 TARGET = uart2_411
 
-
 DEBUG = 1
 # optimization
 OPT = -Og

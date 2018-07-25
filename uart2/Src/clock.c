@@ -33,6 +33,20 @@ void system_init(u32_t div_m, u32_t mul_n, u32_t div_p, u32_t system_source,u32_
    	temp_reg = read_reg(RCC_CR, ~(1u << 18 ));
 	temp_reg |= (0u << 18);
     write_reg(RCC_CR, temp_reg);
+	
+	
+	//bat hse
+	temp_reg = read_reg(RCC_CR, ~(1u << 16 ));
+	temp_reg |= (1u << 16);
+    write_reg(RCC_CR, temp_reg);
+	
+	timeout = 0xFF;
+    do {
+       
+        timeout--;
+    } while ((0 == (read_reg(RCC_CR, (1u << 17)))) && (timeout > 0));
+	
+	
     
 	/* Disable the main PLL. */
     temp_reg = read_reg(RCC_CR, ~(1 << 24));
@@ -42,10 +56,19 @@ void system_init(u32_t div_m, u32_t mul_n, u32_t div_p, u32_t system_source,u32_
     timeout = 0xFFF;
     do {
         timeout--;
-    } while ((0 != read_reg(RCC_CR, (1 << 25))) && (timeout > 0));
+    } while ((0 != (read_reg(RCC_CR, (1 << 25)))) && (timeout > 0));
 	
 	// can thiet lap ko se doc sai dia chi lenh , du lieu FLASH_LATENCY_2
 	write_reg(FLASH_ACR , 0x03u);
+	
+
+	
+    temp_reg = read_reg(RCC_PLLCFGR, ~(0x01 << 22));
+    temp_reg |= (1u <<22);
+    write_reg(RCC_PLLCFGR, temp_reg);
+	
+
+    	
 	
 	
     temp_reg = read_reg(RCC_PLLCFGR, ~0x3Fu);
@@ -73,7 +96,7 @@ void system_init(u32_t div_m, u32_t mul_n, u32_t div_p, u32_t system_source,u32_
     timeout = 0xFFFF;
     do {
         timeout--;
-    } while ((0 == read_reg(RCC_CR, (1 << 25))) && (timeout > 0));
+    } while ((0 == (read_reg(RCC_CR, (1 << 25)))) && (timeout > 0));
 	
 
 	//  chia 1 
@@ -101,7 +124,7 @@ void system_init(u32_t div_m, u32_t mul_n, u32_t div_p, u32_t system_source,u32_
     timeout = 0xFFFFFF;
     do {
         timeout--;
-    } while (((system_source << 2) != read_reg(RCC_CFGR, (0x3 << 2))) && (timeout > 0));
+    } while (((system_source << 2) != ( read_reg(RCC_CFGR, (0x3 << 2)))) && (timeout > 0));
 	
 	
     /* APB1 prescaler */
