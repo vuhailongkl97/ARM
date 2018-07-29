@@ -1,0 +1,274 @@
+ARM GAS  E:\msys32\tmp\ccor7YOe.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"test.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.config_ext_clk1,"ax",%progbits
+  18              		.align	1
+  19              		.global	config_ext_clk1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv4-sp-d16
+  25              	config_ext_clk1:
+  26              	.LFB0:
+  27              		.file 1 "Src/test.c"
+   1:Src/test.c    **** #include "project.h"
+   2:Src/test.c    **** 
+   3:Src/test.c    **** // 1. Configure the timers to use the TIx pin as input:
+   4:Src/test.c    **** // a) Select the pin to be used by writing CCxS bits in the TIMx_CCMR1 register.
+   5:Src/test.c    **** // b) Select the polarity of the input:
+   6:Src/test.c    **** // For the STM32F100/101/102/103/105/107 lines: by writing CCxP in the
+   7:Src/test.c    **** // TIMx_CCER register to select the rising or the falling edge;
+   8:Src/test.c    **** // For the other series & lines: by writing CCxP and CCxNP in the TIMx_CCER
+   9:Src/test.c    **** // register to select the rising/falling edge, or both edges (a) .
+  10:Src/test.c    **** // c) Enable corresponding channel by setting the CCEx bit in the TIMx_CCER register.
+  11:Src/test.c    **** // 2. Select the timer TIx as the trigger input source by writing TS bits in the TIMx_SMCR
+  12:Src/test.c    **** // register.
+  13:Src/test.c    **** // 3. Select the external clock mode1 by writing SMS=111 in the TIMx_SMCR register.
+  14:Src/test.c    **** void config_ext_clk1(){
+  28              		.loc 1 14 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  15:Src/test.c    **** 	u32_t temp_reg;
+  16:Src/test.c    **** 	// 1. Configure the timers to use the TIx pin as input:
+  17:Src/test.c    **** 	//Select the pin to be used by writing CCxS bits in the TIMx_CCMR1 register.
+  18:Src/test.c    **** 	temp_reg = read_reg(TIM_CCMR1(mTIM2) , ~2u);
+  33              		.loc 1 18 0
+  34 0000 0D4A     		ldr	r2, .L2
+  35 0002 1368     		ldr	r3, [r2]
+  36 0004 23F00203 		bic	r3, r3, #2
+  37              	.LVL0:
+  19:Src/test.c    **** 	// use as output
+  20:Src/test.c    **** 	write_reg(TIM_CCMR1(mTIM2) , temp_reg);
+  38              		.loc 1 20 0
+ARM GAS  E:\msys32\tmp\ccor7YOe.s 			page 2
+
+
+  39 0008 1360     		str	r3, [r2]
+  21:Src/test.c    **** 	
+  22:Src/test.c    **** 	// b) Select the polarity of the input:
+  23:Src/test.c    **** 	// TIMx_CCER register to select the rising or the falling edge;
+  24:Src/test.c    **** 	// For the other series & lines: by writing CCxP and CCxNP in the TIMx_CCER
+  25:Src/test.c    **** 	// register to select the rising/falling edge, or both edges (a) .
+  26:Src/test.c    **** 	//TI1FP1 rising edge
+  27:Src/test.c    **** 	temp_reg = read_reg(TIMx_CCER(mTIM2) , ~0xFU);
+  40              		.loc 1 27 0
+  41 000a 0832     		adds	r2, r2, #8
+  42 000c 1368     		ldr	r3, [r2]
+  43              	.LVL1:
+  44 000e 23F00F03 		bic	r3, r3, #15
+  45              	.LVL2:
+  28:Src/test.c    **** 	write_reg(TIMx_CCER(mTIM2) , temp_reg);
+  46              		.loc 1 28 0
+  47 0012 1360     		str	r3, [r2]
+  29:Src/test.c    **** 	
+  30:Src/test.c    **** 	
+  31:Src/test.c    **** 	
+  32:Src/test.c    **** 	// c) Enable corresponding channel by setting the CCEx bit in the TIMx_CCER register.
+  33:Src/test.c    **** 	temp_reg = read_reg(TIM_CCR1(mTIM2) , ~1U);
+  48              		.loc 1 33 0
+  49 0014 1432     		adds	r2, r2, #20
+  50 0016 1368     		ldr	r3, [r2]
+  51              	.LVL3:
+  34:Src/test.c    **** 	temp_reg |= 1U;
+  52              		.loc 1 34 0
+  53 0018 43F00103 		orr	r3, r3, #1
+  54              	.LVL4:
+  35:Src/test.c    **** 	write_reg(TIM_CCR1(mTIM2) , temp_reg);
+  55              		.loc 1 35 0
+  56 001c 1360     		str	r3, [r2]
+  36:Src/test.c    **** 	
+  37:Src/test.c    **** 	
+  38:Src/test.c    **** 	
+  39:Src/test.c    **** 	
+  40:Src/test.c    **** 	// 2. Select the timer TIx as the trigger input source by writing TS bits in the TIMx_SMCR
+  41:Src/test.c    **** 	// register.  Filtered Timer Input 1
+  42:Src/test.c    **** 	temp_reg = read_reg(TIM_SMCR(mTIM2) , ~(7u << 4));
+  57              		.loc 1 42 0
+  58 001e 2C3A     		subs	r2, r2, #44
+  59 0020 1368     		ldr	r3, [r2]
+  60              	.LVL5:
+  61 0022 23F07003 		bic	r3, r3, #112
+  62              	.LVL6:
+  43:Src/test.c    **** 	temp_reg |= (5U<<4);
+  44:Src/test.c    **** 	write_reg(TIM_SMCR(mTIM2) , temp_reg);
+  45:Src/test.c    **** 	
+  46:Src/test.c    **** 	
+  47:Src/test.c    **** 	// 3. Select the external clock mode1 by writing SMS=111 in the TIMx_SMCR register.
+  48:Src/test.c    **** 	
+  49:Src/test.c    **** 	temp_reg = read_reg(TIM_SMCR(mTIM2) , ~(7u << 0));
+  50:Src/test.c    **** 	temp_reg |= 7U;
+  63              		.loc 1 50 0
+  64 0026 43F05703 		orr	r3, r3, #87
+  65              	.LVL7:
+ARM GAS  E:\msys32\tmp\ccor7YOe.s 			page 3
+
+
+  51:Src/test.c    **** 	write_reg(TIM_SMCR(mTIM2) , temp_reg);
+  66              		.loc 1 51 0
+  67 002a 1360     		str	r3, [r2]
+  52:Src/test.c    **** 	
+  53:Src/test.c    **** 	temp_reg = read_reg(TIM_EGR(mTIM2) , ~1u);
+  68              		.loc 1 53 0
+  69 002c 0C32     		adds	r2, r2, #12
+  70 002e 1368     		ldr	r3, [r2]
+  71              	.LVL8:
+  54:Src/test.c    **** 	temp_reg |= 1u;
+  72              		.loc 1 54 0
+  73 0030 43F00103 		orr	r3, r3, #1
+  74              	.LVL9:
+  55:Src/test.c    **** 	write_reg(TIM_EGR(mTIM2) , temp_reg);
+  75              		.loc 1 55 0
+  76 0034 1360     		str	r3, [r2]
+  56:Src/test.c    **** }
+  77              		.loc 1 56 0
+  78 0036 7047     		bx	lr
+  79              	.L3:
+  80              		.align	2
+  81              	.L2:
+  82 0038 18000040 		.word	1073741848
+  83              		.cfi_endproc
+  84              	.LFE0:
+  86              		.section	.text.input_capture_config,"ax",%progbits
+  87              		.align	1
+  88              		.global	input_capture_config
+  89              		.syntax unified
+  90              		.thumb
+  91              		.thumb_func
+  92              		.fpu fpv4-sp-d16
+  94              	input_capture_config:
+  95              	.LFB1:
+  57:Src/test.c    **** void input_capture_config(){
+  96              		.loc 1 57 0
+  97              		.cfi_startproc
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100              		@ link register save eliminated.
+  58:Src/test.c    **** 	u32_t temp_reg;
+  59:Src/test.c    **** 	// Select the active input:01: CC1 channel is configured as input, IC1 is mapped on TI1.
+  60:Src/test.c    **** 	temp_reg = read_reg(TIM_CCMR1(mTIM2), ~3u);
+ 101              		.loc 1 60 0
+ 102 0000 0A48     		ldr	r0, .L5
+ 103 0002 0368     		ldr	r3, [r0]
+ 104 0004 23F00303 		bic	r3, r3, #3
+ 105              	.LVL10:
+  61:Src/test.c    **** 	//01: CC1 channel is configured as input, IC1 is mapped on TI1.
+  62:Src/test.c    **** 	temp_reg |= 1u;
+  63:Src/test.c    **** 	
+  64:Src/test.c    **** 	// IC1F Input capture 1 filter
+  65:Src/test.c    **** 	
+  66:Src/test.c    **** 	temp_reg |= (15u << 4);
+ 106              		.loc 1 66 0
+ 107 0008 43F0F103 		orr	r3, r3, #241
+ 108              	.LVL11:
+ARM GAS  E:\msys32\tmp\ccor7YOe.s 			page 4
+
+
+  67:Src/test.c    **** 	write_reg(TIM_CCMR1(mTIM2) , temp_reg);
+  68:Src/test.c    **** 	
+  69:Src/test.c    **** 	
+  70:Src/test.c    **** 	// Select the edge of the active transition on the TI1 channel by writing the CC1P and
+  71:Src/test.c    **** 	// CC1NP bits to 00 in the TIMx_CCER register (rising edge in this case).
+  72:Src/test.c    **** 	
+  73:Src/test.c    **** 	temp_reg = read_reg(TIMx_CCER(mTIM2) , ~0xFU);
+ 109              		.loc 1 73 0
+ 110 000c 0849     		ldr	r1, .L5+4
+ 111 000e 0A68     		ldr	r2, [r1]
+ 112 0010 22F00F02 		bic	r2, r2, #15
+ 113              	.LVL12:
+  74:Src/test.c    **** 	write_reg(TIMx_CCER(mTIM2) , temp_reg);
+  75:Src/test.c    **** 	
+  76:Src/test.c    **** 	// Program the input prescaler. In our example, we wish the capture to be performed at
+  77:Src/test.c    **** 	// each valid transition, so the prescaler is disabled (write IC1PS bits to 00 in the
+  78:Src/test.c    **** 	// TIMx_CCMR1 register).
+  79:Src/test.c    **** 	
+  80:Src/test.c    **** 	
+  81:Src/test.c    **** 	temp_reg = read_reg(TIM_CCMR1(mTIM2) , ~(3u << 2));
+ 114              		.loc 1 81 0
+ 115 0014 23F00C03 		bic	r3, r3, #12
+ 116              	.LVL13:
+  82:Src/test.c    **** 	write_reg(TIM_CCMR1(mTIM2) , temp_reg);
+ 117              		.loc 1 82 0
+ 118 0018 0360     		str	r3, [r0]
+ 119              	.LVL14:
+  83:Src/test.c    **** 	
+  84:Src/test.c    **** 	// Enable capture from the counter into the capture register by setting the CC1E bit in the
+  85:Src/test.c    **** 	// TIMx_CCER register.
+  86:Src/test.c    **** 	
+  87:Src/test.c    **** 	temp_reg = read_reg(TIMx_CCER(mTIM2) , ~(3u << 2));
+  88:Src/test.c    **** 	temp_reg |=1U;
+ 120              		.loc 1 88 0
+ 121 001a 42F00102 		orr	r2, r2, #1
+ 122              	.LVL15:
+  89:Src/test.c    **** 	write_reg(TIMx_CCER(mTIM2) , temp_reg);
+ 123              		.loc 1 89 0
+ 124 001e 0A60     		str	r2, [r1]
+  90:Src/test.c    **** 	
+  91:Src/test.c    **** 	
+  92:Src/test.c    **** 	// If needed, enable the related interrupt request by setting the CC1IE bit in the
+  93:Src/test.c    **** 	// TIMx_DIER register, and/or the DMA request by setting the CC1DE bit in the
+  94:Src/test.c    **** 	// TIMx_DIER register
+  95:Src/test.c    **** 	
+  96:Src/test.c    **** 	// An interrupt is generated depending on the CC1IE bit.
+  97:Src/test.c    **** 	temp_reg = read_reg(TIM_DIER(mTIM2) , ~(1u << 1));
+ 125              		.loc 1 97 0
+ 126 0020 044A     		ldr	r2, .L5+8
+ 127              	.LVL16:
+ 128 0022 1368     		ldr	r3, [r2]
+ 129              	.LVL17:
+  98:Src/test.c    **** 	temp_reg |=(1U<<1);
+ 130              		.loc 1 98 0
+ 131 0024 43F00203 		orr	r3, r3, #2
+ 132              	.LVL18:
+  99:Src/test.c    **** 	write_reg(TIM_DIER(mTIM2) , temp_reg);
+ARM GAS  E:\msys32\tmp\ccor7YOe.s 			page 5
+
+
+ 133              		.loc 1 99 0
+ 134 0028 1360     		str	r3, [r2]
+ 100:Src/test.c    **** 
+ 101:Src/test.c    **** }
+ 135              		.loc 1 101 0
+ 136 002a 7047     		bx	lr
+ 137              	.L6:
+ 138              		.align	2
+ 139              	.L5:
+ 140 002c 18000040 		.word	1073741848
+ 141 0030 20000040 		.word	1073741856
+ 142 0034 0C000040 		.word	1073741836
+ 143              		.cfi_endproc
+ 144              	.LFE1:
+ 146              		.text
+ 147              	.Letext0:
+ 148              		.file 2 "Inc/main.h"
+ 149              		.file 3 "Inc/stm32f4xx_it.h"
+ARM GAS  E:\msys32\tmp\ccor7YOe.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 test.c
+E:\msys32\tmp\ccor7YOe.s:18     .text.config_ext_clk1:00000000 $t
+E:\msys32\tmp\ccor7YOe.s:25     .text.config_ext_clk1:00000000 config_ext_clk1
+E:\msys32\tmp\ccor7YOe.s:82     .text.config_ext_clk1:00000038 $d
+E:\msys32\tmp\ccor7YOe.s:87     .text.input_capture_config:00000000 $t
+E:\msys32\tmp\ccor7YOe.s:94     .text.input_capture_config:00000000 input_capture_config
+E:\msys32\tmp\ccor7YOe.s:140    .text.input_capture_config:0000002c $d
+
+NO UNDEFINED SYMBOLS
