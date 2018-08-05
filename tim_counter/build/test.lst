@@ -1,4 +1,4 @@
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
   38              		.loc 1 18 0
   39 0008 43F00103 		orr	r3, r3, #1
   40              	.LVL1:
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 2
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 2
 
 
   19:Src/test.c    **** 	write_reg(mTIM_CCMR1(mTIM2) , temp_reg);
@@ -118,7 +118,7 @@ ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
   42:Src/test.c    **** 	temp_reg = read_reg(mTIM_EGR(mTIM2) , ~1u);
   72              		.loc 1 42 0
   73 0032 0C32     		adds	r2, r2, #12
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 3
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 3
 
 
   74 0034 1368     		ldr	r3, [r2]
@@ -178,7 +178,7 @@ ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
  117 0004 23F00303 		bic	r3, r3, #3
  118              	.LVL14:
   56:Src/test.c    **** 	//01: CC1 channel is configured as input, IC1 is mapped on TI1.
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 4
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 4
 
 
   57:Src/test.c    **** 	temp_reg |= 1u;
@@ -238,7 +238,7 @@ ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
   87:Src/test.c    **** 	
   88:Src/test.c    **** 	// An interrupt is generated depending on the CC1IE bit.
   89:Src/test.c    **** 	temp_reg = read_reg(mTIM_DIER(mTIM2) , ~(1u << 1));
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 5
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 5
 
 
  143              		.loc 1 89 0
@@ -298,7 +298,7 @@ ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
  103:Src/test.c    **** 	u32_t temp_reg;
  104:Src/test.c    **** 	// 1.Configure channel 4 to detect rising edges on the TI2 input
  105:Src/test.c    **** 	temp_reg = read_reg(mTIM_CCMR2(mTIM4) , ~( 3u << 8));
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 6
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 6
 
 
  186              		.loc 1 105 0
@@ -358,7 +358,7 @@ ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
  132:Src/test.c    **** 	temp_reg = read_reg(mTIM_CCMR2(mTIM4) , ~(1u << 11));
  133:Src/test.c    **** 	temp_reg |= (1u << 11);
  134:Src/test.c    **** 	write_reg(mTIM_CCMR2(mTIM4) , temp_reg);
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 7
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 7
 
 
  135:Src/test.c    **** 	
@@ -418,7 +418,7 @@ ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
  163:Src/test.c    **** 	temp_reg = read_reg(mTIM_CCER(mTIM4) , ~(1u <<12));
  164:Src/test.c    **** 	temp_reg |= (1u <<12);
  165:Src/test.c    **** 	write_reg(mTIM_CCER(mTIM4) , temp_reg);
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 8
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 8
 
 
  166:Src/test.c    **** 	
@@ -452,19 +452,19 @@ ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 1
  262              	.Letext0:
  263              		.file 2 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h"
  264              		.file 3 "Inc/stm32f4xx_it.h"
-ARM GAS  E:\msys32\tmp\ccBS7fy0.s 			page 9
+ARM GAS  E:\msys32\tmp\ccvBiZxd.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 test.c
-E:\msys32\tmp\ccBS7fy0.s:18     .text.config_ext_clk1:00000000 $t
-E:\msys32\tmp\ccBS7fy0.s:25     .text.config_ext_clk1:00000000 config_ext_clk1
-E:\msys32\tmp\ccBS7fy0.s:95     .text.config_ext_clk1:0000004c $d
-E:\msys32\tmp\ccBS7fy0.s:100    .text.input_capture_config:00000000 $t
-E:\msys32\tmp\ccBS7fy0.s:107    .text.input_capture_config:00000000 input_capture_config
-E:\msys32\tmp\ccBS7fy0.s:159    .text.input_capture_config:00000034 $d
-E:\msys32\tmp\ccBS7fy0.s:167    .text.tim4_pwm_config:00000000 $t
-E:\msys32\tmp\ccBS7fy0.s:174    .text.tim4_pwm_config:00000000 tim4_pwm_config
-E:\msys32\tmp\ccBS7fy0.s:255    .text.tim4_pwm_config:00000050 $d
+E:\msys32\tmp\ccvBiZxd.s:18     .text.config_ext_clk1:00000000 $t
+E:\msys32\tmp\ccvBiZxd.s:25     .text.config_ext_clk1:00000000 config_ext_clk1
+E:\msys32\tmp\ccvBiZxd.s:95     .text.config_ext_clk1:0000004c $d
+E:\msys32\tmp\ccvBiZxd.s:100    .text.input_capture_config:00000000 $t
+E:\msys32\tmp\ccvBiZxd.s:107    .text.input_capture_config:00000000 input_capture_config
+E:\msys32\tmp\ccvBiZxd.s:159    .text.input_capture_config:00000034 $d
+E:\msys32\tmp\ccvBiZxd.s:167    .text.tim4_pwm_config:00000000 $t
+E:\msys32\tmp\ccvBiZxd.s:174    .text.tim4_pwm_config:00000000 tim4_pwm_config
+E:\msys32\tmp\ccvBiZxd.s:255    .text.tim4_pwm_config:00000050 $d
 
 NO UNDEFINED SYMBOLS

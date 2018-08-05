@@ -1,4 +1,4 @@
-build/uart.o: Src/uart.c Inc/project.h Inc/main.h \
+build/uart.o: E:/Users/VuHaiLong/Documents/stm/mylib/mSrc/uart.c \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/systick.h \
@@ -8,11 +8,8 @@ build/uart.o: Src/uart.c Inc/project.h Inc/main.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/pwm.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/gpio.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/function.h \
- Inc/stm32f4xx_it.h Inc/project.h Inc/uart.h Inc/tim2.h Inc/test.h
-
-Inc/project.h:
-
-Inc/main.h:
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/uart.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/dma.h
 
 E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h:
 
@@ -32,12 +29,6 @@ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/gpio.h:
 
 E:/Users/VuHaiLong/Documents/stm/mylib/mInc/function.h:
 
-Inc/stm32f4xx_it.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/uart.h:
 
-Inc/project.h:
-
-Inc/uart.h:
-
-Inc/tim2.h:
-
-Inc/test.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/dma.h:

@@ -1,4 +1,4 @@
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
   29:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 
   30:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 	//no  parity 
   31:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 	temp_reg = read_reg(mUSART_CR1(mUSART1) ,~(1 <<10));
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 2
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 2
 
 
   32:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 	write_reg(mUSART_CR1(mUSART1) , temp_reg);
@@ -118,7 +118,7 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
   45              		.loc 1 68 0
   46 000e 0120     		movs	r0, #1
   47              	.LVL3:
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 3
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 3
 
 
   48 0010 7047     		bx	lr
@@ -178,7 +178,7 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
   95              		.loc 1 77 0
   96 0010 0134     		adds	r4, r4, #1
   97              	.LVL9:
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 4
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 4
 
 
   98 0012 F7E7     		b	.L7
@@ -238,7 +238,7 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
   92:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 	temp_reg  = temp_reg | (mGPIO_MODER_ALT << 14);
  140              		.loc 1 92 0
  141 0014 41F40041 		orr	r1, r1, #32768
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 5
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 5
 
 
  142              	.LVL14:
@@ -298,7 +298,7 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
  114:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 	temp_reg = read_reg(mGPIO_AFRL(mGPIOB) , ~(0x0Fu << 24 ));
  175              		.loc 1 114 0
  176 0044 23F07063 		bic	r3, r3, #251658240
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 6
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 6
 
 
  177              	.LVL23:
@@ -358,7 +358,7 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
  228 0002 0C46     		mov	r4, r1
  229 0004 1546     		mov	r5, r2
    8:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 	u32_t     DIV_Mantissa  = (u32_t )ftemp;
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 7
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 7
 
 
  230              		.loc 1 8 0
@@ -418,7 +418,7 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
  277              		.loc 1 18 0
  278 0064 43F40053 		orr	r3, r3, #8192
  279              	.LVL38:
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 8
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 8
 
 
   26:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 	temp_reg |= (0 << 12);
@@ -478,7 +478,7 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
  328              		@ frame_needed = 0, uses_anonymous_args = 0
  329              		@ link register save eliminated.
  120:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\uart.c **** 	u32_t temp_reg = read_reg(mUSART_CR3(mUSART1) ,~(1 <<6));
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 9
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 9
 
 
  330              		.loc 1 120 0
@@ -504,25 +504,25 @@ ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 1
  348              		.text
  349              	.Letext0:
  350              		.file 2 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h"
-ARM GAS  E:\msys32\tmp\ccOu7KUJ.s 			page 10
+ARM GAS  E:\msys32\tmp\cclrI7b9.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 uart.c
-E:\msys32\tmp\ccOu7KUJ.s:18     .text.usart_send_byte:00000000 $t
-E:\msys32\tmp\ccOu7KUJ.s:25     .text.usart_send_byte:00000000 usart_send_byte
-E:\msys32\tmp\ccOu7KUJ.s:59     .text.usart_send_byte:00000018 $d
-E:\msys32\tmp\ccOu7KUJ.s:65     .text.usart_send_string:00000000 $t
-E:\msys32\tmp\ccOu7KUJ.s:72     .text.usart_send_string:00000000 usart_send_string
-E:\msys32\tmp\ccOu7KUJ.s:106    .text.uart_pin_init:00000000 $t
-E:\msys32\tmp\ccOu7KUJ.s:113    .text.uart_pin_init:00000000 uart_pin_init
-E:\msys32\tmp\ccOu7KUJ.s:193    .text.uart_pin_init:00000054 $d
-E:\msys32\tmp\ccOu7KUJ.s:205    .text.uart_init:00000000 $t
-E:\msys32\tmp\ccOu7KUJ.s:212    .text.uart_init:00000000 uart_init
-E:\msys32\tmp\ccOu7KUJ.s:307    .text.uart_init:00000088 $d
-E:\msys32\tmp\ccOu7KUJ.s:316    .text.usart_dma_en:00000000 $t
-E:\msys32\tmp\ccOu7KUJ.s:323    .text.usart_dma_en:00000000 usart_dma_en
-E:\msys32\tmp\ccOu7KUJ.s:344    .text.usart_dma_en:0000000c $d
+E:\msys32\tmp\cclrI7b9.s:18     .text.usart_send_byte:00000000 $t
+E:\msys32\tmp\cclrI7b9.s:25     .text.usart_send_byte:00000000 usart_send_byte
+E:\msys32\tmp\cclrI7b9.s:59     .text.usart_send_byte:00000018 $d
+E:\msys32\tmp\cclrI7b9.s:65     .text.usart_send_string:00000000 $t
+E:\msys32\tmp\cclrI7b9.s:72     .text.usart_send_string:00000000 usart_send_string
+E:\msys32\tmp\cclrI7b9.s:106    .text.uart_pin_init:00000000 $t
+E:\msys32\tmp\cclrI7b9.s:113    .text.uart_pin_init:00000000 uart_pin_init
+E:\msys32\tmp\cclrI7b9.s:193    .text.uart_pin_init:00000054 $d
+E:\msys32\tmp\cclrI7b9.s:205    .text.uart_init:00000000 $t
+E:\msys32\tmp\cclrI7b9.s:212    .text.uart_init:00000000 uart_init
+E:\msys32\tmp\cclrI7b9.s:307    .text.uart_init:00000088 $d
+E:\msys32\tmp\cclrI7b9.s:316    .text.usart_dma_en:00000000 $t
+E:\msys32\tmp\cclrI7b9.s:323    .text.usart_dma_en:00000000 usart_dma_en
+E:\msys32\tmp\cclrI7b9.s:344    .text.usart_dma_en:0000000c $d
 
 UNDEFINED SYMBOLS
 __aeabi_ui2d

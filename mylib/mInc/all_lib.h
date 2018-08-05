@@ -2,6 +2,9 @@
 #define  __mLIB_H__
 
 #include "mtype.h"
+#include "const.h"
+#include "register.h"
+#include "state.h"
 #include "systick.h"
 #include "clock.h"
 #include "tim.h"
@@ -10,7 +13,5 @@
 #include "function.h"
 #include "uart.h"
 #include "dma.h"
-
-
 
 #endif
