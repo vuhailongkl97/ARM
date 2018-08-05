@@ -1,4 +1,4 @@
-ARM GAS  E:\msys32\tmp\ccG8GNOy.s 			page 1
+ARM GAS  E:\msys32\tmp\ccMVFiPB.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -17,14 +17,14 @@ ARM GAS  E:\msys32\tmp\ccG8GNOy.s 			page 1
   14              		.text
   15              	.Ltext0:
   16              		.cfi_sections	.debug_frame
-  17              		.section	.text.delay,"ax",%progbits
+  17              		.section	.text.rcc_enableclk,"ax",%progbits
   18              		.align	1
-  19              		.global	delay
+  19              		.global	rcc_enableclk
   20              		.syntax unified
   21              		.thumb
   22              		.thumb_func
   23              		.fpu fpv4-sp-d16
-  25              	delay:
+  25              	rcc_enableclk:
   26              	.LFB0:
   27              		.file 1 "Src/main.c"
    1:Src/main.c    **** #include "project.h"
@@ -35,233 +35,290 @@ ARM GAS  E:\msys32\tmp\ccG8GNOy.s 			page 1
    6:Src/main.c    **** 
    7:Src/main.c    **** char times = 0;
    8:Src/main.c    **** 
-   9:Src/main.c    **** void delay( u32_t timeout){
+   9:Src/main.c    **** void rcc_enableclk(){
   28              		.loc 1 9 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
   32              		@ link register save eliminated.
-  33              	.LVL0:
-  10:Src/main.c    **** 	
-  11:Src/main.c    **** 	u32_t t1 , t2;
-  12:Src/main.c    **** 	for( t1 = 0 ; t1 < timeout ; t1 ++)
-  34              		.loc 1 12 0
-  35 0000 0021     		movs	r1, #0
-  36 0002 06E0     		b	.L2
-  37              	.LVL1:
-  38              	.L3:
-  13:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
-  14:Src/main.c    **** 			asm(" nop");
-  39              		.loc 1 14 0 discriminator 3
-  40              		.syntax unified
-  41              	@ 14 "Src/main.c" 1
-  42 0004 00BF     		 nop
-  43              	@ 0 "" 2
-  13:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
-ARM GAS  E:\msys32\tmp\ccG8GNOy.s 			page 2
+  10:Src/main.c    **** 	// enable port h
+  11:Src/main.c    **** 	enable_rcc_gpioh();
+  33              		.loc 1 11 0
+  34 0000 054A     		ldr	r2, .L2
+  35 0002 1368     		ldr	r3, [r2]
+  12:Src/main.c    **** 	//PORT D . for 4 led	
+  13:Src/main.c    **** 	enable_rcc_gpiod();
+  36              		.loc 1 13 0
+  37 0004 43F08803 		orr	r3, r3, #136
+  38 0008 1360     		str	r3, [r2]
+  14:Src/main.c    **** 	// timer4
+  15:Src/main.c    **** 	enable_rcc_tim4();
+  39              		.loc 1 15 0
+  40 000a 1032     		adds	r2, r2, #16
+  41 000c 1368     		ldr	r3, [r2]
+  42 000e 43F00403 		orr	r3, r3, #4
+  43 0012 1360     		str	r3, [r2]
+ARM GAS  E:\msys32\tmp\ccMVFiPB.s 			page 2
 
 
-  44              		.loc 1 13 0 discriminator 3
-  45              		.thumb
-  46              		.syntax unified
-  47 0006 0133     		adds	r3, r3, #1
-  48              	.LVL2:
-  49              	.L4:
-  13:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
-  50              		.loc 1 13 0 is_stmt 0 discriminator 1
-  51 0008 40F6FE72 		movw	r2, #4094
-  52 000c 9342     		cmp	r3, r2
-  53 000e F9D9     		bls	.L3
-  12:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
-  54              		.loc 1 12 0 is_stmt 1 discriminator 2
-  55 0010 0131     		adds	r1, r1, #1
-  56              	.LVL3:
-  57              	.L2:
-  12:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
-  58              		.loc 1 12 0 is_stmt 0 discriminator 1
-  59 0012 8142     		cmp	r1, r0
-  60 0014 01D2     		bcs	.L6
-  13:Src/main.c    **** 		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
-  61              		.loc 1 13 0 is_stmt 1
-  62 0016 0023     		movs	r3, #0
-  63 0018 F6E7     		b	.L4
-  64              	.L6:
-  15:Src/main.c    **** 
   16:Src/main.c    **** }
-  65              		.loc 1 16 0
-  66 001a 7047     		bx	lr
-  67              		.cfi_endproc
-  68              	.LFE0:
-  70              		.section	.text.config_pin,"ax",%progbits
-  71              		.align	1
-  72              		.global	config_pin
-  73              		.syntax unified
-  74              		.thumb
-  75              		.thumb_func
-  76              		.fpu fpv4-sp-d16
-  78              	config_pin:
-  79              	.LFB1:
-  17:Src/main.c    **** void config_pin(){
-  80              		.loc 1 17 0
-  81              		.cfi_startproc
-  82              		@ args = 0, pretend = 0, frame = 24
-  83              		@ frame_needed = 0, uses_anonymous_args = 0
-  84 0000 00B5     		push	{lr}
-  85              	.LCFI0:
-  86              		.cfi_def_cfa_offset 4
-  87              		.cfi_offset 14, -4
-  88 0002 87B0     		sub	sp, sp, #28
-  89              	.LCFI1:
-  90              		.cfi_def_cfa_offset 32
-  18:Src/main.c    **** 	mGPIO_TypeDef GPIO_Init;
-  19:Src/main.c    **** 	GPIO_Init.mpin  =  GPIO_PIN(12)| GPIO_PIN(13) | GPIO_PIN(14) | GPIO_PIN(15);
-  91              		.loc 1 19 0
-  92 0004 4FF47043 		mov	r3, #61440
-  93 0008 0093     		str	r3, [sp]
-ARM GAS  E:\msys32\tmp\ccG8GNOy.s 			page 3
+  44              		.loc 1 16 0
+  45 0014 7047     		bx	lr
+  46              	.L3:
+  47 0016 00BF     		.align	2
+  48              	.L2:
+  49 0018 30380240 		.word	1073887280
+  50              		.cfi_endproc
+  51              	.LFE0:
+  53              		.section	.text.config_pin,"ax",%progbits
+  54              		.align	1
+  55              		.global	config_pin
+  56              		.syntax unified
+  57              		.thumb
+  58              		.thumb_func
+  59              		.fpu fpv4-sp-d16
+  61              	config_pin:
+  62              	.LFB1:
+  17:Src/main.c    **** void config_pin()
+  18:Src/main.c    **** {
+  63              		.loc 1 18 0
+  64              		.cfi_startproc
+  65              		@ args = 0, pretend = 0, frame = 24
+  66              		@ frame_needed = 0, uses_anonymous_args = 0
+  67 0000 00B5     		push	{lr}
+  68              	.LCFI0:
+  69              		.cfi_def_cfa_offset 4
+  70              		.cfi_offset 14, -4
+  71 0002 87B0     		sub	sp, sp, #28
+  72              	.LCFI1:
+  73              		.cfi_def_cfa_offset 32
+  19:Src/main.c    **** 	mGPIO_TypeDef GPIO_Init;
+  20:Src/main.c    **** 	GPIO_Init.mpin  =  mGPIO_PIN(15) | mGPIO_PIN(14);
+  74              		.loc 1 20 0
+  75 0004 4FF44043 		mov	r3, #49152
+  76 0008 0093     		str	r3, [sp]
+  21:Src/main.c    **** 	GPIO_Init.moder = mGPIO_MODER_ALT;
+  77              		.loc 1 21 0
+  78 000a 0223     		movs	r3, #2
+  79 000c 0193     		str	r3, [sp, #4]
+  22:Src/main.c    **** 	GPIO_Init.type = mPUSH_PULL;
+  80              		.loc 1 22 0
+  81 000e 0022     		movs	r2, #0
+  82 0010 0292     		str	r2, [sp, #8]
+  23:Src/main.c    **** 	GPIO_Init.pull  = mNO_PULL;
+  83              		.loc 1 23 0
+  84 0012 0392     		str	r2, [sp, #12]
+  24:Src/main.c    **** 	GPIO_Init.speed = mFAST_SPEED;
+  85              		.loc 1 24 0
+  86 0014 0493     		str	r3, [sp, #16]
+  25:Src/main.c    **** 	GPIO_Init.alternate = 2; 
+  87              		.loc 1 25 0
+  88 0016 0593     		str	r3, [sp, #20]
+  26:Src/main.c    **** 	init_pin(mGPIOD , &GPIO_Init);
+  89              		.loc 1 26 0
+  90 0018 6946     		mov	r1, sp
+  91 001a 0348     		ldr	r0, .L6
+ARM GAS  E:\msys32\tmp\ccMVFiPB.s 			page 3
 
 
-  20:Src/main.c    **** 	GPIO_Init.moder = GPIO_MODER_OUTPUT;
-  94              		.loc 1 20 0
-  95 000a 0123     		movs	r3, #1
-  96 000c 0193     		str	r3, [sp, #4]
-  21:Src/main.c    **** 	GPIO_Init.type = PUSH_PULL;
-  97              		.loc 1 21 0
-  98 000e 0023     		movs	r3, #0
-  99 0010 0293     		str	r3, [sp, #8]
-  22:Src/main.c    **** 	GPIO_Init.pull  = NO_PULL;
- 100              		.loc 1 22 0
- 101 0012 0393     		str	r3, [sp, #12]
-  23:Src/main.c    **** 	GPIO_Init.speed = FAST_SPEED;
- 102              		.loc 1 23 0
- 103 0014 0223     		movs	r3, #2
- 104 0016 0493     		str	r3, [sp, #16]
-  24:Src/main.c    **** 	
-  25:Src/main.c    **** 	init_pin(GPIOD , &GPIO_Init); 
- 105              		.loc 1 25 0
- 106 0018 6946     		mov	r1, sp
- 107 001a 0348     		ldr	r0, .L9
- 108 001c FFF7FEFF 		bl	init_pin
- 109              	.LVL4:
-  26:Src/main.c    **** }
- 110              		.loc 1 26 0
- 111 0020 07B0     		add	sp, sp, #28
- 112              	.LCFI2:
- 113              		.cfi_def_cfa_offset 4
- 114              		@ sp needed
- 115 0022 5DF804FB 		ldr	pc, [sp], #4
- 116              	.L10:
- 117 0026 00BF     		.align	2
- 118              	.L9:
- 119 0028 000C0240 		.word	1073875968
- 120              		.cfi_endproc
- 121              	.LFE1:
- 123              		.section	.text.main,"ax",%progbits
- 124              		.align	1
- 125              		.global	main
- 126              		.syntax unified
- 127              		.thumb
- 128              		.thumb_func
- 129              		.fpu fpv4-sp-d16
- 131              	main:
- 132              	.LFB2:
-  27:Src/main.c    **** //clock config 100mhz 
-  28:Src/main.c    **** int main(void)
-  29:Src/main.c    **** {	
- 133              		.loc 1 29 0
- 134              		.cfi_startproc
- 135              		@ Volatile: function does not return.
- 136              		@ args = 0, pretend = 0, frame = 0
- 137              		@ frame_needed = 0, uses_anonymous_args = 0
- 138 0000 00B5     		push	{lr}
- 139              	.LCFI3:
- 140              		.cfi_def_cfa_offset 4
- 141              		.cfi_offset 14, -4
- 142 0002 85B0     		sub	sp, sp, #20
-ARM GAS  E:\msys32\tmp\ccG8GNOy.s 			page 4
+  92 001c FFF7FEFF 		bl	init_pin
+  93              	.LVL0:
+  27:Src/main.c    **** }
+  94              		.loc 1 27 0
+  95 0020 07B0     		add	sp, sp, #28
+  96              	.LCFI2:
+  97              		.cfi_def_cfa_offset 4
+  98              		@ sp needed
+  99 0022 5DF804FB 		ldr	pc, [sp], #4
+ 100              	.L7:
+ 101 0026 00BF     		.align	2
+ 102              	.L6:
+ 103 0028 000C0240 		.word	1073875968
+ 104              		.cfi_endproc
+ 105              	.LFE1:
+ 107              		.section	.text.main,"ax",%progbits
+ 108              		.align	1
+ 109              		.global	main
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.fpu fpv4-sp-d16
+ 115              	main:
+ 116              	.LFB2:
+  28:Src/main.c    **** 
+  29:Src/main.c    **** //clock config 100mhz 
+  30:Src/main.c    **** int main(void)
+  31:Src/main.c    **** {	
+ 117              		.loc 1 31 0
+ 118              		.cfi_startproc
+ 119              		@ args = 0, pretend = 0, frame = 0
+ 120              		@ frame_needed = 0, uses_anonymous_args = 0
+ 121 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 122              	.LCFI3:
+ 123              		.cfi_def_cfa_offset 20
+ 124              		.cfi_offset 4, -20
+ 125              		.cfi_offset 5, -16
+ 126              		.cfi_offset 6, -12
+ 127              		.cfi_offset 7, -8
+ 128              		.cfi_offset 14, -4
+ 129 0002 85B0     		sub	sp, sp, #20
+ 130              	.LCFI4:
+ 131              		.cfi_def_cfa_offset 40
+ 132              	.LVL1:
+  32:Src/main.c    **** 	unsigned int duty4 = 200 ,duty3 = 0, fade = 4;
+  33:Src/main.c    **** 	// use hse
+  34:Src/main.c    **** 	//void system_init( div_m, u32_t mul_n, u32_t div_p, u32_t system_source,u32_t div_ahb,u32_t div_a
+  35:Src/main.c    **** 	system_init( 8, 200, mPLLP_DIV4 , mSRC_PLL, mAHB_DIV1 ,mAPB_DIV2  , mAPB_DIV1);
+ 133              		.loc 1 35 0
+ 134 0004 0027     		movs	r7, #0
+ 135 0006 0297     		str	r7, [sp, #8]
+ 136 0008 0426     		movs	r6, #4
+ 137 000a 0196     		str	r6, [sp, #4]
+ 138 000c 0097     		str	r7, [sp]
+ 139 000e 0223     		movs	r3, #2
+ 140 0010 0122     		movs	r2, #1
+ 141 0012 C821     		movs	r1, #200
+ARM GAS  E:\msys32\tmp\ccMVFiPB.s 			page 4
 
 
- 143              	.LCFI4:
- 144              		.cfi_def_cfa_offset 24
-  30:Src/main.c    **** 	// use hse
-  31:Src/main.c    **** 	//void system_init( div_m, u32_t mul_n, u32_t div_p, u32_t system_source,u32_t div_ahb,u32_t div_a
-  32:Src/main.c    **** 	system_init( 8, 200, PLLP_DIV4 , SRC_PLL, AHB_DIV1 ,APB_DIV2  , APB_DIV1);
- 145              		.loc 1 32 0
- 146 0004 0023     		movs	r3, #0
- 147 0006 0293     		str	r3, [sp, #8]
- 148 0008 0422     		movs	r2, #4
- 149 000a 0192     		str	r2, [sp, #4]
- 150 000c 0093     		str	r3, [sp]
- 151 000e 0223     		movs	r3, #2
- 152 0010 0122     		movs	r2, #1
- 153 0012 C821     		movs	r1, #200
- 154 0014 0820     		movs	r0, #8
- 155 0016 FFF7FEFF 		bl	system_init
- 156              	.LVL5:
-  33:Src/main.c    **** 	rcc_enableclk();
- 157              		.loc 1 33 0
- 158 001a FFF7FEFF 		bl	rcc_enableclk
- 159              	.LVL6:
-  34:Src/main.c    **** 	config_pin();
- 160              		.loc 1 34 0
- 161 001e FFF7FEFF 		bl	config_pin
- 162              	.LVL7:
-  35:Src/main.c    **** 	//counter2_config();
-  36:Src/main.c    **** 	TIM_Base_Init();
- 163              		.loc 1 36 0
- 164 0022 FFF7FEFF 		bl	TIM_Base_Init
- 165              	.LVL8:
-  37:Src/main.c    **** 	input_capture_config();
- 166              		.loc 1 37 0
- 167 0026 FFF7FEFF 		bl	input_capture_config
- 168              	.LVL9:
-  38:Src/main.c    **** 	counter2_start();
- 169              		.loc 1 38 0
- 170 002a FFF7FEFF 		bl	counter2_start
- 171              	.LVL10:
- 172              	.L12:
- 173 002e FEE7     		b	.L12
- 174              		.cfi_endproc
- 175              	.LFE2:
- 177              		.global	times
- 178              		.section	.bss.times,"aw",%nobits
- 181              	times:
- 182 0000 00       		.space	1
- 183              		.text
- 184              	.Letext0:
- 185              		.file 2 "Inc/main.h"
- 186              		.file 3 "c:\\tools\\gcc7_2017-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
- 187              		.file 4 "c:\\tools\\gcc7_2017-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
- 188              		.file 5 "c:\\tools\\gcc7_2017-q4-major\\lib\\gcc\\arm-none-eabi\\7.2.1\\include\\stddef.h"
- 189              		.file 6 "c:\\tools\\gcc7_2017-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
- 190              		.file 7 "Inc/stm32f4xx_it.h"
- 191              		.file 8 "c:\\tools\\gcc7_2017-q4-major\\arm-none-eabi\\include\\stdlib.h"
- 192              		.file 9 "Inc/clock.h"
- 193              		.file 10 "Inc/tim2.h"
-ARM GAS  E:\msys32\tmp\ccG8GNOy.s 			page 5
+ 142 0014 0820     		movs	r0, #8
+ 143 0016 FFF7FEFF 		bl	system_init
+ 144              	.LVL2:
+  36:Src/main.c    **** 	rcc_enableclk();
+ 145              		.loc 1 36 0
+ 146 001a FFF7FEFF 		bl	rcc_enableclk
+ 147              	.LVL3:
+  37:Src/main.c    **** 	systick_init();
+ 148              		.loc 1 37 0
+ 149 001e FFF7FEFF 		bl	systick_init
+ 150              	.LVL4:
+  38:Src/main.c    **** 	config_pin();
+ 151              		.loc 1 38 0
+ 152 0022 FFF7FEFF 		bl	config_pin
+ 153              	.LVL5:
+  39:Src/main.c    **** 	tim4_pwm_config();
+ 154              		.loc 1 39 0
+ 155 0026 FFF7FEFF 		bl	tim4_pwm_config
+ 156              	.LVL6:
+  40:Src/main.c    **** 	write_reg(mTIM_PSC(mTIM4) , 20);
+ 157              		.loc 1 40 0
+ 158 002a 104B     		ldr	r3, .L13
+ 159 002c 1422     		movs	r2, #20
+ 160 002e 1A60     		str	r2, [r3]
+  41:Src/main.c    **** 	tim_start(mTIM4);
+ 161              		.loc 1 41 0
+ 162 0030 0F48     		ldr	r0, .L13+4
+ 163 0032 FFF7FEFF 		bl	tim_start
+ 164              	.LVL7:
+  32:Src/main.c    **** 	// use hse
+ 165              		.loc 1 32 0
+ 166 0036 C824     		movs	r4, #200
+ 167 0038 03E0     		b	.L11
+ 168              	.LVL8:
+ 169              	.L9:
+  42:Src/main.c    **** 	
+  43:Src/main.c    **** 	
+  44:Src/main.c    ****     while(1)
+  45:Src/main.c    ****     {
+  46:Src/main.c    **** 		set_duty_tim(mTIM4,duty4 , 4 );
+  47:Src/main.c    **** 		set_duty_tim(mTIM4,duty3 , 3 );
+  48:Src/main.c    **** 		duty4 += fade;
+  49:Src/main.c    **** 		duty3 = 400 - duty4;
+  50:Src/main.c    **** 		if(duty4  == 400  || duty4 == 0 )
+  51:Src/main.c    **** 			fade = -fade;
+ 170              		.loc 1 51 0
+ 171 003a 7642     		negs	r6, r6
+ 172              	.LVL9:
+ 173              	.L10:
+  52:Src/main.c    **** 		 delay_ms_systick(20);
+ 174              		.loc 1 52 0
+ 175 003c 1420     		movs	r0, #20
+ 176 003e FFF7FEFF 		bl	delay_ms_systick
+ 177              	.LVL10:
+ 178              	.L11:
+  46:Src/main.c    **** 		set_duty_tim(mTIM4,duty3 , 3 );
+ 179              		.loc 1 46 0
+ARM GAS  E:\msys32\tmp\ccMVFiPB.s 			page 5
 
 
- 194              		.file 11 "Inc/test.h"
- 195              		.file 12 "Inc/gpio.h"
-ARM GAS  E:\msys32\tmp\ccG8GNOy.s 			page 6
+ 180 0042 0B4D     		ldr	r5, .L13+4
+ 181 0044 0422     		movs	r2, #4
+ 182 0046 2146     		mov	r1, r4
+ 183 0048 2846     		mov	r0, r5
+ 184 004a FFF7FEFF 		bl	set_duty_tim
+ 185              	.LVL11:
+  47:Src/main.c    **** 		duty4 += fade;
+ 186              		.loc 1 47 0
+ 187 004e 0322     		movs	r2, #3
+ 188 0050 3946     		mov	r1, r7
+ 189 0052 2846     		mov	r0, r5
+ 190 0054 FFF7FEFF 		bl	set_duty_tim
+ 191              	.LVL12:
+  48:Src/main.c    **** 		duty3 = 400 - duty4;
+ 192              		.loc 1 48 0
+ 193 0058 3444     		add	r4, r4, r6
+ 194              	.LVL13:
+  49:Src/main.c    **** 		if(duty4  == 400  || duty4 == 0 )
+ 195              		.loc 1 49 0
+ 196 005a C4F5C877 		rsb	r7, r4, #400
+ 197              	.LVL14:
+  50:Src/main.c    **** 			fade = -fade;
+ 198              		.loc 1 50 0
+ 199 005e B4F5C87F 		cmp	r4, #400
+ 200 0062 EAD0     		beq	.L9
+  50:Src/main.c    **** 			fade = -fade;
+ 201              		.loc 1 50 0 is_stmt 0 discriminator 1
+ 202 0064 002C     		cmp	r4, #0
+ 203 0066 E9D1     		bne	.L10
+ 204 0068 E7E7     		b	.L9
+ 205              	.L14:
+ 206 006a 00BF     		.align	2
+ 207              	.L13:
+ 208 006c 28080040 		.word	1073743912
+ 209 0070 00080040 		.word	1073743872
+ 210              		.cfi_endproc
+ 211              	.LFE2:
+ 213              		.global	times
+ 214              		.section	.bss.times,"aw",%nobits
+ 217              	times:
+ 218 0000 00       		.space	1
+ 219              		.text
+ 220              	.Letext0:
+ 221              		.file 2 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h"
+ 222              		.file 3 "c:\\tools\\gcc7_2017-q4-major\\arm-none-eabi\\include\\sys\\lock.h"
+ 223              		.file 4 "c:\\tools\\gcc7_2017-q4-major\\arm-none-eabi\\include\\sys\\_types.h"
+ 224              		.file 5 "c:\\tools\\gcc7_2017-q4-major\\lib\\gcc\\arm-none-eabi\\7.2.1\\include\\stddef.h"
+ 225              		.file 6 "c:\\tools\\gcc7_2017-q4-major\\arm-none-eabi\\include\\sys\\reent.h"
+ 226              		.file 7 "Inc/stm32f4xx_it.h"
+ 227              		.file 8 "c:\\tools\\gcc7_2017-q4-major\\arm-none-eabi\\include\\stdlib.h"
+ 228              		.file 9 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/clock.h"
+ 229              		.file 10 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/systick.h"
+ 230              		.file 11 "Inc/test.h"
+ 231              		.file 12 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/tim.h"
+ 232              		.file 13 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/pwm.h"
+ 233              		.file 14 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/gpio.h"
+ARM GAS  E:\msys32\tmp\ccMVFiPB.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-E:\msys32\tmp\ccG8GNOy.s:18     .text.delay:00000000 $t
-E:\msys32\tmp\ccG8GNOy.s:25     .text.delay:00000000 delay
-E:\msys32\tmp\ccG8GNOy.s:71     .text.config_pin:00000000 $t
-E:\msys32\tmp\ccG8GNOy.s:78     .text.config_pin:00000000 config_pin
-E:\msys32\tmp\ccG8GNOy.s:119    .text.config_pin:00000028 $d
-E:\msys32\tmp\ccG8GNOy.s:124    .text.main:00000000 $t
-E:\msys32\tmp\ccG8GNOy.s:131    .text.main:00000000 main
-E:\msys32\tmp\ccG8GNOy.s:181    .bss.times:00000000 times
-E:\msys32\tmp\ccG8GNOy.s:182    .bss.times:00000000 $d
+E:\msys32\tmp\ccMVFiPB.s:18     .text.rcc_enableclk:00000000 $t
+E:\msys32\tmp\ccMVFiPB.s:25     .text.rcc_enableclk:00000000 rcc_enableclk
+E:\msys32\tmp\ccMVFiPB.s:49     .text.rcc_enableclk:00000018 $d
+E:\msys32\tmp\ccMVFiPB.s:54     .text.config_pin:00000000 $t
+E:\msys32\tmp\ccMVFiPB.s:61     .text.config_pin:00000000 config_pin
+E:\msys32\tmp\ccMVFiPB.s:103    .text.config_pin:00000028 $d
+E:\msys32\tmp\ccMVFiPB.s:108    .text.main:00000000 $t
+E:\msys32\tmp\ccMVFiPB.s:115    .text.main:00000000 main
+E:\msys32\tmp\ccMVFiPB.s:208    .text.main:0000006c $d
+E:\msys32\tmp\ccMVFiPB.s:217    .bss.times:00000000 times
+E:\msys32\tmp\ccMVFiPB.s:218    .bss.times:00000000 $d
 
 UNDEFINED SYMBOLS
 init_pin
 system_init
-rcc_enableclk
-TIM_Base_Init
-input_capture_config
-counter2_start
+systick_init
+tim4_pwm_config
+tim_start
+delay_ms_systick
+set_duty_tim

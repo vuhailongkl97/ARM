@@ -1,21 +1,28 @@
-build/clock.o: Src/clock.c Inc/project.h Inc/main.h Inc/clock.h \
- Inc/project.h Inc/stm32f4xx_it.h Inc/uart.h Inc/gpio.h Inc/tim2.h \
- Inc/test.h
+build/clock.o: E:/Users/VuHaiLong/Documents/stm/mylib/mSrc/clock.c \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/systick.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/clock.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/tim.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/pwm.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/gpio.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/function.h
 
-Inc/project.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h:
 
-Inc/main.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h:
 
-Inc/clock.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/systick.h:
 
-Inc/project.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/clock.h:
 
-Inc/stm32f4xx_it.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h:
 
-Inc/uart.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/tim.h:
 
-Inc/gpio.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/pwm.h:
 
-Inc/tim2.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/gpio.h:
 
-Inc/test.h:
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/function.h:

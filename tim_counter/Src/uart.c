@@ -14,45 +14,45 @@ void uart_init(u32_t  fclk ,unsigned  int oversampling ,u32_t baudrate ){
 	uart_pin_init();
 	
 	//ENABLE UART1
-	temp_reg = read_reg(USART_CR1, ~(1<<13));
+	temp_reg = read_reg(mUSART_CR1, ~(1<<13));
 	temp_reg |= (1<<13);
-    write_reg(USART_CR1, temp_reg);	
+    write_reg(mUSART_CR1, temp_reg);	
 
 		// data 8bit 	
-	temp_reg = read_reg(USART_CR1 ,~(1 <<12));
-	write_reg(USART_CR1 , temp_reg);
+	temp_reg = read_reg(mUSART_CR1 ,~(1 <<12));
+	write_reg(mUSART_CR1 , temp_reg);
 	
 	// 1 stop 
-	temp_reg = read_reg(USART_CR2 ,~(3 <<12));
+	temp_reg = read_reg(mUSART_CR2 ,~(3 <<12));
 	temp_reg |= (0 << 12);
-	write_reg(USART_CR2 , temp_reg);		
+	write_reg(mUSART_CR2 , temp_reg);		
 	
 	//no  parity 
-	temp_reg = read_reg(USART_CR1 ,~(1 <<10));
-	write_reg(USART_CR1 , temp_reg);
+	temp_reg = read_reg(mUSART_CR1 ,~(1 <<10));
+	write_reg(mUSART_CR1 , temp_reg);
 	
 	
 	/* Clear CTSE and RTSE bits */
-	temp_reg = read_reg(USART_CR1 ,~(3 <<8));
-	write_reg(USART_CR1 , temp_reg);	
+	temp_reg = read_reg(mUSART_CR1 ,~(3 <<8));
+	write_reg(mUSART_CR1 , temp_reg);	
 	 
 	//no  sampleing
-	temp_reg = read_reg(USART_CR1 ,~(1 <<15));
-	write_reg(USART_CR1 , temp_reg);
+	temp_reg = read_reg(mUSART_CR1 ,~(1 <<15));
+	write_reg(mUSART_CR1 , temp_reg);
 		
 	//setup baudrate
-	write_reg(USART_BRR , brr_baud);
+	write_reg(mUSART_BRR , brr_baud);
 		
 	
 	/* Tx Enable */
-    temp_reg = read_reg(USART_CR1, ~(1<<3));
+    temp_reg = read_reg(mUSART_CR1, ~(1<<3));
     temp_reg |= (1 << 3);
-    write_reg(USART_CR1, temp_reg);
+    write_reg(mUSART_CR1, temp_reg);
 
     /* Rx Enable */
-    temp_reg = read_reg(USART_CR1, ~(1<<2));
+    temp_reg = read_reg(mUSART_CR1, ~(1<<2));
     temp_reg |= (1<<2);
-    write_reg(USART_CR1, temp_reg);
+    write_reg(mUSART_CR1, temp_reg);
 	
 
 }
@@ -60,10 +60,10 @@ char usart_send_byte(unsigned char data){
 	
 	u32_t temp_reg ;
 	// kiem tra TDR san sang nhan du lieu moi hay chua
-	temp_reg = read_reg(USART_SR , (1 << 7));
+	temp_reg = read_reg(mUSART_SR , (1 << 7));
 	if( temp_reg != 0){
 		// bat dau truyen 
-		write_reg(USART_DR , (u32_t)data);
+		write_reg(mUSART_DR , (u32_t)data);
 		
 		return 1;
 	}
@@ -83,37 +83,37 @@ void uart_pin_init(){
 	u32_t temp_reg;
 	
 		//enable clock for uart
-	temp_reg = read_reg(RCC_APB2ENR, ~(1u << 4));
+	temp_reg = read_reg(mRCC_APB2ENR, ~(1u << 4));
     temp_reg |= (1 << 4);
-    write_reg(RCC_APB2ENR, temp_reg);
+    write_reg(mRCC_APB2ENR, temp_reg);
 	
 		// Pb7 -RX
-	temp_reg = read_reg(GPIO_MODER(GPIOB) , ~(3u << 14 ));
-	temp_reg  = temp_reg | (GPIO_MODER_ALT << 14);
-	write_reg(GPIO_MODER(GPIOB) , temp_reg );
+	temp_reg = read_reg(mGPIO_MODER(mGPIOB) , ~(3u << 14 ));
+	temp_reg  = temp_reg | (mGPIO_MODER_ALT << 14);
+	write_reg(mGPIO_MODER(mGPIOB) , temp_reg );
 	
-	temp_reg = read_reg(GPIO_PUPDR(GPIOB) , ~(3u << 14 ));
-	temp_reg  = temp_reg | (PULL_UP << 14);
-	write_reg(GPIO_PUPDR(GPIOB) , temp_reg );
+	temp_reg = read_reg(mGPIO_PUPDR(mGPIOB) , ~(3u << 14 ));
+	temp_reg  = temp_reg | (mPULL_UP << 14);
+	write_reg(mGPIO_PUPDR(mGPIOB) , temp_reg );
 	
 	
-	temp_reg = read_reg(GPIO_AFRL(GPIOB) , ~(0x0Fu << 28 ));
+	temp_reg = read_reg(mGPIO_AFRL(mGPIOB) , ~(0x0Fu << 28 ));
 	temp_reg  = temp_reg | (7u << 28);
-	write_reg(GPIO_AFRL(GPIOB) , temp_reg );
+	write_reg(mGPIO_AFRL(mGPIOB) , temp_reg );
 
 	//Pb6 - TX
 	
-	temp_reg = read_reg(GPIO_MODER(GPIOB) , ~(3u << 12 ));
-	temp_reg  = temp_reg | (GPIO_MODER_ALT << 12);
-	write_reg(GPIO_MODER(GPIOB) , temp_reg );
+	temp_reg = read_reg(mGPIO_MODER(mGPIOB) , ~(3u << 12 ));
+	temp_reg  = temp_reg | (mGPIO_MODER_ALT << 12);
+	write_reg(mGPIO_MODER(mGPIOB) , temp_reg );
 	
-	temp_reg = read_reg(GPIO_PUPDR(GPIOB) , ~(3u << 12 ));
-	temp_reg  = temp_reg | (PULL_UP << 12);
-	write_reg(GPIO_PUPDR(GPIOB) , temp_reg );
+	temp_reg = read_reg(mGPIO_PUPDR(mGPIOB) , ~(3u << 12 ));
+	temp_reg  = temp_reg | (mPULL_UP << 12);
+	write_reg(mGPIO_PUPDR(mGPIOB) , temp_reg );
 	
-	temp_reg = read_reg(GPIO_AFRL(GPIOB) , ~(0x0Fu << 24 ));
+	temp_reg = read_reg(mGPIO_AFRL(mGPIOB) , ~(0x0Fu << 24 ));
 	temp_reg  = temp_reg | (7u << 24);
-	write_reg(GPIO_AFRL(GPIOB) , temp_reg );
+	write_reg(mGPIO_AFRL(mGPIOB) , temp_reg );
 	
 }
 

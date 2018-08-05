@@ -6,42 +6,51 @@
 
 char times = 0;
 
-void delay( u32_t timeout){
-	
-	u32_t t1 , t2;
-	for( t1 = 0 ; t1 < timeout ; t1 ++)
-		for( t2 = 0 ; t2 < 0xFFF ; t2 ++)
-			asm(" nop");
-
+void rcc_enableclk(){
+	// enable port h
+	enable_rcc_gpioh();
+	//PORT D . for 4 led	
+	enable_rcc_gpiod();
+	// timer4
+	enable_rcc_tim4();
 }
-void config_pin(){
+void config_pin()
+{
 	mGPIO_TypeDef GPIO_Init;
-	GPIO_Init.mpin  =  GPIO_PIN(12)| GPIO_PIN(13) | GPIO_PIN(14) | GPIO_PIN(15);
-	GPIO_Init.moder = GPIO_MODER_OUTPUT;
-	GPIO_Init.type = PUSH_PULL;
-	GPIO_Init.pull  = NO_PULL;
-	GPIO_Init.speed = FAST_SPEED;
-	
-	init_pin(GPIOD , &GPIO_Init); 
+	GPIO_Init.mpin  =  mGPIO_PIN(15) | mGPIO_PIN(14);
+	GPIO_Init.moder = mGPIO_MODER_ALT;
+	GPIO_Init.type = mPUSH_PULL;
+	GPIO_Init.pull  = mNO_PULL;
+	GPIO_Init.speed = mFAST_SPEED;
+	GPIO_Init.alternate = 2; 
+	init_pin(mGPIOD , &GPIO_Init);
 }
+
 //clock config 100mhz 
 int main(void)
 {	
+	unsigned int duty4 = 200 ,duty3 = 0, fade = 4;
 	// use hse
 	//void system_init( div_m, u32_t mul_n, u32_t div_p, u32_t system_source,u32_t div_ahb,u32_t div_apb1 , u32_t div_apb2);
-	system_init( 8, 200, PLLP_DIV4 , SRC_PLL, AHB_DIV1 ,APB_DIV2  , APB_DIV1);
+	system_init( 8, 200, mPLLP_DIV4 , mSRC_PLL, mAHB_DIV1 ,mAPB_DIV2  , mAPB_DIV1);
 	rcc_enableclk();
+	systick_init();
 	config_pin();
-	//counter2_config();
-	TIM_Base_Init();
-	input_capture_config();
-	counter2_start();
+	tim4_pwm_config();
+	write_reg(mTIM_PSC(mTIM4) , 20);
+	tim_start(mTIM4);
 	
-
+	
     while(1)
     {
-			
-
+		set_duty_tim(mTIM4,duty4 , 4 );
+		set_duty_tim(mTIM4,duty3 , 3 );
+		duty4 += fade;
+		duty3 = 400 - duty4;
+		if(duty4  == 400  || duty4 == 0 )
+			fade = -fade;
+		 delay_ms_systick(20);
+		
     }
 
 }

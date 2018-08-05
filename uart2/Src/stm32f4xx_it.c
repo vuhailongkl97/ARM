@@ -10,7 +10,6 @@ void TIM2_IRQHandler(){
  	unsigned temp_reg;
 
 	GPIO_TongglePin(GPIOD , (GPIO_PIN(12) | GPIO_PIN(13)| GPIO_PIN(14) |GPIO_PIN(15) ) );
-
  // clear interrupt flag
 	temp_reg = read_reg(TIM_SR(mTIM2) , ~(0x1u<<0));
     write_reg(TIM_SR(mTIM2) , temp_reg);

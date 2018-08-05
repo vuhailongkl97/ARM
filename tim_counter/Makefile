@@ -6,15 +6,21 @@ OPT = -Og
 
 
 BUILD_DIR = build
+LIB_PATH  := E:/Users/VuHaiLong/Documents/stm/mylib
+LIB_PATH_SRC   := $(LIB_PATH)/mSrc
+LIB_PATH_INC   := $(LIB_PATH)/mInc
 
 C_SOURCES =  \
 Src/main.c \
 Src/stm32f4xx_it.c \
-Src/clock.c \
 Src/uart.c \
-Src/gpio.c \
 Src/tim2.c \
 Src/test.c \
+$(LIB_PATH_SRC)/gpio.c  \
+$(LIB_PATH_SRC)/clock.c  \
+$(LIB_PATH_SRC)/systick.c  \
+$(LIB_PATH_SRC)/pwm.c  \
+$(LIB_PATH_SRC)/tim.c  \
 
 
 # ASM sources
@@ -65,7 +71,8 @@ AS_INCLUDES =
 
 # C includes
 C_INCLUDES =  \
--IInc 
+-IInc \
+-I$(LIB_PATH_INC)  \
 
 
 # compile gcc flags
