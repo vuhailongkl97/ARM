@@ -23,7 +23,7 @@ void TIM_Base_Init(){
 	GPIO_Init.alternate = 1; 
 		
 	/* Peripheral clock enable tim 4*/
-	enable_rcc_tim4();
+	enable_rcc_tim2();
 	
 	init_pin(mGPIOA , &GPIO_Init);
 	mNVIC_SetPriority(TIM2_IRQn, 0);

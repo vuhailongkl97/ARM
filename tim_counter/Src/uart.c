@@ -14,45 +14,45 @@ void uart_init(u32_t  fclk ,unsigned  int oversampling ,u32_t baudrate ){
 	uart_pin_init();
 	
 	//ENABLE UART1
-	temp_reg = read_reg(mUSART_CR1, ~(1<<13));
+	temp_reg = read_reg(mUSART_CR1(mUSART1), ~(1<<13));
 	temp_reg |= (1<<13);
-    write_reg(mUSART_CR1, temp_reg);	
+    write_reg(mUSART_CR1(mUSART1), temp_reg);	
 
 		// data 8bit 	
-	temp_reg = read_reg(mUSART_CR1 ,~(1 <<12));
-	write_reg(mUSART_CR1 , temp_reg);
+	temp_reg = read_reg(mUSART_CR1(mUSART1) ,~(1 <<12));
+	write_reg(mUSART_CR1(mUSART1) , temp_reg);
 	
 	// 1 stop 
-	temp_reg = read_reg(mUSART_CR2 ,~(3 <<12));
+	temp_reg = read_reg(mUSART_CR2(mUSART1) ,~(3 <<12));
 	temp_reg |= (0 << 12);
-	write_reg(mUSART_CR2 , temp_reg);		
-	
+	write_reg(mUSART_CR2(mUSART1) , temp_reg);		
+
 	//no  parity 
-	temp_reg = read_reg(mUSART_CR1 ,~(1 <<10));
-	write_reg(mUSART_CR1 , temp_reg);
+	temp_reg = read_reg(mUSART_CR1(mUSART1) ,~(1 <<10));
+	write_reg(mUSART_CR1(mUSART1) , temp_reg);
 	
 	
 	/* Clear CTSE and RTSE bits */
-	temp_reg = read_reg(mUSART_CR1 ,~(3 <<8));
-	write_reg(mUSART_CR1 , temp_reg);	
+	temp_reg = read_reg(mUSART_CR1(mUSART1) ,~(3 <<8));
+	write_reg(mUSART_CR1(mUSART1) , temp_reg);	
 	 
 	//no  sampleing
-	temp_reg = read_reg(mUSART_CR1 ,~(1 <<15));
-	write_reg(mUSART_CR1 , temp_reg);
+	temp_reg = read_reg(mUSART_CR1(mUSART1) ,~(1 <<15));
+	write_reg(mUSART_CR1(mUSART1) , temp_reg);
 		
 	//setup baudrate
-	write_reg(mUSART_BRR , brr_baud);
+	write_reg(mUSART_BRR(mUSART1) , brr_baud);
 		
 	
 	/* Tx Enable */
-    temp_reg = read_reg(mUSART_CR1, ~(1<<3));
+    temp_reg = read_reg(mUSART_CR1(mUSART1), ~(1<<3));
     temp_reg |= (1 << 3);
-    write_reg(mUSART_CR1, temp_reg);
+    write_reg(mUSART_CR1(mUSART1), temp_reg);
 
     /* Rx Enable */
-    temp_reg = read_reg(mUSART_CR1, ~(1<<2));
+    temp_reg = read_reg(mUSART_CR1(mUSART1), ~(1<<2));
     temp_reg |= (1<<2);
-    write_reg(mUSART_CR1, temp_reg);
+    write_reg(mUSART_CR1(mUSART1), temp_reg);
 	
 
 }
@@ -60,10 +60,10 @@ char usart_send_byte(unsigned char data){
 	
 	u32_t temp_reg ;
 	// kiem tra TDR san sang nhan du lieu moi hay chua
-	temp_reg = read_reg(mUSART_SR , (1 << 7));
+	temp_reg = read_reg(mUSART_SR(mUSART1) , (1 << 7));
 	if( temp_reg != 0){
 		// bat dau truyen 
-		write_reg(mUSART_DR , (u32_t)data);
+		write_reg(mUSART_DR(mUSART1) , (u32_t)data);
 		
 		return 1;
 	}
@@ -115,6 +115,11 @@ void uart_pin_init(){
 	temp_reg  = temp_reg | (7u << 24);
 	write_reg(mGPIO_AFRL(mGPIOB) , temp_reg );
 	
+}
+void usart_dma_en(){
+	u32_t temp_reg = read_reg(mUSART_CR3(mUSART1) ,~(1 <<6));
+	temp_reg |= (1 << 6);
+	write_reg(mUSART_CR3(mUSART1) , temp_reg);		
 }
 
 

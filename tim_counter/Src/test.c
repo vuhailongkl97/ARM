@@ -43,6 +43,11 @@ void config_ext_clk1(){
 	temp_reg |= 1u;
 	write_reg(mTIM_EGR(mTIM2) , temp_reg);
 	
+		temp_reg = read_reg(mTIM_CR1(mTIM2) , ~(1u << 0));
+	temp_reg |=(1U<<0);
+	write_reg(mTIM_CR1(mTIM2) , temp_reg);
+
+	
 }
 void input_capture_config(){
 	u32_t temp_reg;
@@ -84,6 +89,10 @@ void input_capture_config(){
 	temp_reg = read_reg(mTIM_DIER(mTIM2) , ~(1u << 1));
 	temp_reg |=(1U<<1);
 	write_reg(mTIM_DIER(mTIM4) , temp_reg);
+	
+
+	
+	
 
 }
 

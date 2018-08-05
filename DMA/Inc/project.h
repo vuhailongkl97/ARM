@@ -4,9 +4,6 @@
 #include "main.h"
 #include "all_lib.h"
 #include "stm32f4xx_it.h"
-#include "uart.h"
-#include "dma.h"
-
 
 
 #endif

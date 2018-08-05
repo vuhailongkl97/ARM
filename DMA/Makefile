@@ -13,13 +13,13 @@ LIB_PATH_INC   := $(LIB_PATH)/mInc
 C_SOURCES =  \
 Src/main.c \
 Src/stm32f4xx_it.c \
-Src/uart.c \
-Src/dma.c	\
 $(LIB_PATH_SRC)/gpio.c  \
 $(LIB_PATH_SRC)/clock.c  \
 $(LIB_PATH_SRC)/systick.c  \
 $(LIB_PATH_SRC)/pwm.c  \
 $(LIB_PATH_SRC)/tim.c  \
+$(LIB_PATH_SRC)/uart.c  \
+$(LIB_PATH_SRC)/dma.c  \
 
 
 # ASM sources

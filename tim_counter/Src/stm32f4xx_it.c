@@ -17,7 +17,7 @@ void TIM2_IRQHandler(){
 		write_reg(mTIM_SR(mTIM2) , 0u);	
 	}
 	
- // clear interrupt flag
+    // clear interrupt flag
 	temp_reg = read_reg(mTIM_SR(mTIM2) , ~(0x1u<<0));
     write_reg(mTIM_SR(mTIM2) , temp_reg);
     write_reg(mNVIC_ICPR , (1 << 28) );
@@ -38,25 +38,28 @@ void EXTI0_IRQHandler(){
 	write_reg(mNVIC_ICPR , (1 << 6) );
 	
 }
+void DMA2_Stream2_IRQHandler(){
+	
+		usart_send_byte(rx_data);
+		//clear flag 
+		write_reg(mDMA_LIFCR(mDMA2) , (1U << 21));
+
+}
 void USART1_IRQHandler(void)
 {
     volatile unsigned int temp;
 	unsigned  int temp_reg;
     
-    temp = read_reg(mUSART_SR, 1 << 6);
+    temp = read_reg(mUSART_SR(mUSART1), 1 << 6);
     if (0 != temp) /* Tx - TC flag */
     {
 		// clear flag tc
-		temp_reg = read_reg(mUSART_SR , ~(1u << 6));
+		temp_reg = read_reg(mUSART_SR(mUSART1) , ~(1u << 6));
 		temp_reg |= (0u << 6);
-        write_reg(mUSART_SR, temp_reg);
+        write_reg(mUSART_SR(mUSART1), temp_reg);
 		
     }
-    temp = read_reg(mUSART_SR, 1 << 5);
-    if (0 != temp)  /* Rx - RXNE flag */
-    {
-        rx_data = read_reg(mUSART_DR , 0x000000FF);
-    }
+
 }
 
 void NMI_Handler(void)
@@ -163,19 +166,26 @@ void init_interrupt( ){
 	
 	mNVIC_EnableIRQ(EXTI0_IRQn);
 	mNVIC_EnableIRQ(EXTI1_IRQn);
+
+//  	NEW FOR DMA	
+	mNVIC_SetPriority(DMA2_Stream2_IRQn , 15);
+	
+	mNVIC_EnableIRQ(DMA2_Stream2_IRQn);	
+	
+	
 	
 	//////////////////////////////
 	/* usart1 */
 
     /* Tx interrupt */
-    temp_reg = read_reg(mUSART_CR1, ~(1 << 6));
+    temp_reg = read_reg(mUSART_CR1(mUSART1), ~(1 << 6));
     temp_reg |= (1 << 6);
-    write_reg(mUSART_CR1, temp_reg);
+    write_reg(mUSART_CR1(mUSART1), temp_reg);
 
     /* Rx interrupt - RXNEIE */
-    temp_reg = read_reg(mUSART_CR1, ~(1 << 5));
+    temp_reg = read_reg(mUSART_CR1(mUSART1), ~(1 << 5));
     temp_reg |= (1 << 5);
-    write_reg(mUSART_CR1, temp_reg);
+    write_reg(mUSART_CR1(mUSART1), temp_reg);
     
 	mNVIC_SetPriority(USART1_IRQn , 10);
 	mNVIC_EnableIRQ(USART1_IRQn);

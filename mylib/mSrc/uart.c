@@ -1,4 +1,4 @@
-#include "project.h"
+#include "all_lib.h"
 
 void uart_pin_init();
 

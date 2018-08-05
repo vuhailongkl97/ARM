@@ -1,4 +1,4 @@
-ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
+ARM GAS  E:\msys32\tmp\ccGojA5Y.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -26,13 +26,13 @@ ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
   23              		.fpu fpv4-sp-d16
   25              	config_dma:
   26              	.LFB0:
-  27              		.file 1 "Src/dma.c"
-   1:Src/dma.c     **** #include "project.h"
-   2:Src/dma.c     **** 
-   3:Src/dma.c     **** extern volatile unsigned char rx_data;
-   4:Src/dma.c     **** void config_dma(u32_t dma , u32_t stream ,u32_t channel , u32_t dir , u32_t circular  , u32_t pinc 
-   5:Src/dma.c     ****           , u32_t minc , u32_t psize , u32_t msize , u32_t pl   )
-   6:Src/dma.c     **** {
+  27              		.file 1 "E:/Users/VuHaiLong/Documents/stm/mylib/mSrc/dma.c"
+   1:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** #include "all_lib.h"
+   2:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 
+   3:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** extern volatile unsigned char rx_data;
+   4:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** void config_dma(u32_t dma , u32_t stream ,u32_t channel , u32_t dir , u32_t circular  , u32_t pinc 
+   5:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c ****           , u32_t minc , u32_t psize , u32_t msize , u32_t pl   )
+   6:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** {
   28              		.loc 1 6 0
   29              		.cfi_startproc
   30              		@ args = 24, pretend = 0, frame = 0
@@ -44,9 +44,9 @@ ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
   36              		.cfi_def_cfa_offset 4
   37              		.cfi_offset 4, -4
   38              	.LVL1:
-   7:Src/dma.c     **** 	
-   8:Src/dma.c     **** 	u32_t temp_reg , timeout = 0xFFF;
-   9:Src/dma.c     **** 	temp_reg = read_reg(mDMA_SxCR(dma , stream ), 1u);
+   7:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+   8:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	u32_t temp_reg , timeout = 0xFFF;
+   9:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	temp_reg = read_reg(mDMA_SxCR(dma , stream ), 1u);
   39              		.loc 1 9 0
   40 0002 01EB4101 		add	r1, r1, r1, lsl #1
   41              	.LVL2:
@@ -56,34 +56,34 @@ ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
   45 000a 0169     		ldr	r1, [r0, #16]
   46 000c 01F00101 		and	r1, r1, #1
   47              	.LVL4:
-  10:Src/dma.c     **** 	write_reg(mDMA_SxCR(dma , stream ) , temp_reg);
+  10:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	write_reg(mDMA_SxCR(dma , stream ) , temp_reg);
   48              		.loc 1 10 0
-ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 2
+ARM GAS  E:\msys32\tmp\ccGojA5Y.s 			page 2
 
 
   49 0010 0161     		str	r1, [r0, #16]
   50              	.LVL5:
   51              	.L2:
-  11:Src/dma.c     **** 	
-  12:Src/dma.c     **** 	//wait for disable
-  13:Src/dma.c     **** 	do{
-  14:Src/dma.c     **** 		timeout --;
-  15:Src/dma.c     **** 	}while(0!= (read_reg(mDMA_SxCR(dma , stream ) , 1u)));
+  11:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  12:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	//wait for disable
+  13:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	do{
+  14:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 		timeout --;
+  15:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	}while(0!= (read_reg(mDMA_SxCR(dma , stream ) , 1u)));
   52              		.loc 1 15 0 discriminator 1
   53 0012 0029     		cmp	r1, #0
   54 0014 FDD1     		bne	.L2
-  16:Src/dma.c     **** 	//1 byte receive
-  17:Src/dma.c     **** 	write_reg(mDMA_SxNDTR(dma , stream) , 1u );
+  16:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	//1 byte receive
+  17:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	write_reg(mDMA_SxNDTR(dma , stream) , 1u );
   55              		.loc 1 17 0
   56 0016 0121     		movs	r1, #1
   57              	.LVL6:
   58 0018 4161     		str	r1, [r0, #20]
-  18:Src/dma.c     **** 	temp_reg = read_reg(mDMA_SxCR(dma , stream) , ~0U);
+  18:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	temp_reg = read_reg(mDMA_SxCR(dma , stream) , ~0U);
   59              		.loc 1 18 0
   60 001a 0469     		ldr	r4, [r0, #16]
   61              	.LVL7:
-  19:Src/dma.c     **** 	
-  20:Src/dma.c     **** 	temp_reg |= ((dir << 6 ) | (circular << 8) | (pinc  << 9) | (minc << 10 ) |(psize << 11) \
+  19:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  20:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	temp_reg |= ((dir << 6 ) | (circular << 8) | (pinc  << 9) | (minc << 10 ) |(psize << 11) \
   62              		.loc 1 20 0
   63 001c 0199     		ldr	r1, [sp, #4]
   64 001e 0902     		lsls	r1, r1, #8
@@ -95,30 +95,30 @@ ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
   70 002c 43EA8123 		orr	r3, r3, r1, lsl #10
   71 0030 0499     		ldr	r1, [sp, #16]
   72 0032 43EAC123 		orr	r3, r3, r1, lsl #11
-  21:Src/dma.c     **** 	| (msize << 13)| (pl << 16 ) | (channel << 25 )| (0xFu << 1 ));
+  21:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	| (msize << 13)| (pl << 16 ) | (channel << 25 )| (0xFu << 1 ));
   73              		.loc 1 21 0
   74 0036 0599     		ldr	r1, [sp, #20]
   75 0038 43EA4133 		orr	r3, r3, r1, lsl #13
   76 003c 0699     		ldr	r1, [sp, #24]
   77 003e 43EA0143 		orr	r3, r3, r1, lsl #16
   78 0042 43EA4263 		orr	r3, r3, r2, lsl #25
-  20:Src/dma.c     **** 	| (msize << 13)| (pl << 16 ) | (channel << 25 )| (0xFu << 1 ));
+  20:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	| (msize << 13)| (pl << 16 ) | (channel << 25 )| (0xFu << 1 ));
   79              		.loc 1 20 0
   80 0046 2343     		orrs	r3, r3, r4
   81 0048 43F01E03 		orr	r3, r3, #30
   82              	.LVL9:
-  22:Src/dma.c     **** 	// 0xFu bat co bao loi 
-  23:Src/dma.c     **** 	
-  24:Src/dma.c     **** 	write_reg(mDMA_SxCR(dma , stream) , temp_reg );
+  22:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	// 0xFu bat co bao loi 
+  23:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  24:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	write_reg(mDMA_SxCR(dma , stream) , temp_reg );
   83              		.loc 1 24 0
   84 004c 0361     		str	r3, [r0, #16]
-  25:Src/dma.c     **** 	
-  26:Src/dma.c     **** }
+  25:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  26:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** }
   85              		.loc 1 26 0
   86 004e 5DF8044B 		ldr	r4, [sp], #4
   87              	.LCFI1:
   88              		.cfi_restore 4
-ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 3
+ARM GAS  E:\msys32\tmp\ccGojA5Y.s 			page 3
 
 
   89              		.cfi_def_cfa_offset 0
@@ -135,7 +135,7 @@ ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
  101              		.fpu fpv4-sp-d16
  103              	mDMA_start:
  104              	.LFB1:
-  27:Src/dma.c     **** void mDMA_start(u32_t dma , u32_t stream , u32_t adr_mem , u32_t adr_per){
+  27:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** void mDMA_start(u32_t dma , u32_t stream , u32_t adr_mem , u32_t adr_per){
  105              		.loc 1 27 0
  106              		.cfi_startproc
  107              		@ args = 0, pretend = 0, frame = 0
@@ -146,10 +146,10 @@ ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
  112              	.LCFI2:
  113              		.cfi_def_cfa_offset 4
  114              		.cfi_offset 4, -4
-  28:Src/dma.c     **** 	
-  29:Src/dma.c     **** 	u32_t temp_reg , timeout; 
-  30:Src/dma.c     **** 		//ADRRESS OF peripheral
-  31:Src/dma.c     **** 	write_reg(mDMA_SxPAR(dma , stream) ,  adr_per );
+  28:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  29:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	u32_t temp_reg , timeout; 
+  30:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 		//ADRRESS OF peripheral
+  31:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	write_reg(mDMA_SxPAR(dma , stream) ,  adr_per );
  115              		.loc 1 31 0
  116 0002 01EB4101 		add	r1, r1, r1, lsl #1
  117              	.LVL12:
@@ -157,35 +157,35 @@ ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
  119 0008 2044     		add	r0, r0, r4
  120              	.LVL13:
  121 000a 8361     		str	r3, [r0, #24]
-  32:Src/dma.c     **** 	
-  33:Src/dma.c     **** 	//adress memory
-  34:Src/dma.c     **** 	write_reg(mDMA_SxM0AR(dma , stream) ,adr_mem );
+  32:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  33:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	//adress memory
+  34:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	write_reg(mDMA_SxM0AR(dma , stream) ,adr_mem );
  122              		.loc 1 34 0
  123 000c C261     		str	r2, [r0, #28]
-  35:Src/dma.c     **** 	
-  36:Src/dma.c     **** 	//	ACTIVE DMA
-  37:Src/dma.c     **** 	temp_reg = read_reg(mDMA_SxCR(dma , stream) , ~1U);
+  35:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  36:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	//	ACTIVE DMA
+  37:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	temp_reg = read_reg(mDMA_SxCR(dma , stream) , ~1U);
  124              		.loc 1 37 0
  125 000e 0369     		ldr	r3, [r0, #16]
  126              	.LVL14:
-  38:Src/dma.c     **** 	temp_reg |= 1u;
+  38:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	temp_reg |= 1u;
  127              		.loc 1 38 0
  128 0010 43F00103 		orr	r3, r3, #1
  129              	.LVL15:
-  39:Src/dma.c     **** 	write_reg(mDMA_SxCR(dma , stream) , temp_reg);
+  39:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	write_reg(mDMA_SxCR(dma , stream) , temp_reg);
  130              		.loc 1 39 0
  131 0014 0361     		str	r3, [r0, #16]
  132              	.LVL16:
-  40:Src/dma.c     **** 	
-  41:Src/dma.c     **** 	timeout = 0xFFF;
-ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 4
+  40:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  41:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	timeout = 0xFFF;
+ARM GAS  E:\msys32\tmp\ccGojA5Y.s 			page 4
 
 
-  42:Src/dma.c     **** 	do{
-  43:Src/dma.c     **** 		timeout --;
-  44:Src/dma.c     **** 	}while(0 == (read_reg(mDMA_SxCR(dma , stream ) , 1u)));
-  45:Src/dma.c     **** 	
-  46:Src/dma.c     **** }...
+  42:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	do{
+  43:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 		timeout --;
+  44:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	}while(0 == (read_reg(mDMA_SxCR(dma , stream ) , 1u)));
+  45:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
+  46:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** }...
  133              		.loc 1 46 0
  134 0016 5DF8044B 		ldr	r4, [sp], #4
  135              	.LCFI3:
@@ -197,15 +197,14 @@ ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 1
  142              		.text
  143              	.Letext0:
  144              		.file 2 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h"
- 145              		.file 3 "Inc/stm32f4xx_it.h"
-ARM GAS  E:\msys32\tmp\ccdqZo8n.s 			page 5
+ARM GAS  E:\msys32\tmp\ccGojA5Y.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 dma.c
-E:\msys32\tmp\ccdqZo8n.s:18     .text.config_dma:00000000 $t
-E:\msys32\tmp\ccdqZo8n.s:25     .text.config_dma:00000000 config_dma
-E:\msys32\tmp\ccdqZo8n.s:96     .text.mDMA_start:00000000 $t
-E:\msys32\tmp\ccdqZo8n.s:103    .text.mDMA_start:00000000 mDMA_start
+E:\msys32\tmp\ccGojA5Y.s:18     .text.config_dma:00000000 $t
+E:\msys32\tmp\ccGojA5Y.s:25     .text.config_dma:00000000 config_dma
+E:\msys32\tmp\ccGojA5Y.s:96     .text.mDMA_start:00000000 $t
+E:\msys32\tmp\ccGojA5Y.s:103    .text.mDMA_start:00000000 mDMA_start
 
 NO UNDEFINED SYMBOLS

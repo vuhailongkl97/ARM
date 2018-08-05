@@ -1,4 +1,4 @@
-#include "project.h"
+#include "all_lib.h"
 
 extern volatile unsigned char rx_data;
 void config_dma(u32_t dma , u32_t stream ,u32_t channel , u32_t dir , u32_t circular  , u32_t pinc \

@@ -1,4 +1,4 @@
-build/dma.o: E:/Users/VuHaiLong/Documents/stm/mylib/mSrc/dma.c \
+build/pwm.o: E:/Users/VuHaiLong/Documents/stm/mylib/mSrc/pwm.c \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/systick.h \
@@ -7,9 +7,7 @@ build/dma.o: E:/Users/VuHaiLong/Documents/stm/mylib/mSrc/dma.c \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/tim.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/pwm.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/gpio.h \
- E:/Users/VuHaiLong/Documents/stm/mylib/mInc/function.h \
- E:/Users/VuHaiLong/Documents/stm/mylib/mInc/uart.h \
- E:/Users/VuHaiLong/Documents/stm/mylib/mInc/dma.h
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/function.h
 
 E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h:
 
@@ -28,7 +26,3 @@ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/pwm.h:
 E:/Users/VuHaiLong/Documents/stm/mylib/mInc/gpio.h:
 
 E:/Users/VuHaiLong/Documents/stm/mylib/mInc/function.h:
-
-E:/Users/VuHaiLong/Documents/stm/mylib/mInc/uart.h:
-
-E:/Users/VuHaiLong/Documents/stm/mylib/mInc/dma.h:

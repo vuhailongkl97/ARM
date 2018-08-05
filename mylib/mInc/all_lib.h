@@ -8,6 +8,8 @@
 #include "pwm.h"
 #include "gpio.h"
 #include "function.h"
+#include "uart.h"
+#include "dma.h"
 
 
 
