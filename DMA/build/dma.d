@@ -1,6 +1,9 @@
 build/dma.o: E:/Users/VuHaiLong/Documents/stm/mylib/mSrc/dma.c \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/const.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/register.h \
+ E:/Users/VuHaiLong/Documents/stm/mylib/mInc/state.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/systick.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/clock.h \
  E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h \
@@ -14,6 +17,12 @@ build/dma.o: E:/Users/VuHaiLong/Documents/stm/mylib/mSrc/dma.c \
 E:/Users/VuHaiLong/Documents/stm/mylib/mInc/all_lib.h:
 
 E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h:
+
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/const.h:
+
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/register.h:
+
+E:/Users/VuHaiLong/Documents/stm/mylib/mInc/state.h:
 
 E:/Users/VuHaiLong/Documents/stm/mylib/mInc/systick.h:
 
