@@ -1,4 +1,4 @@
-ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 1
+ARM GAS  E:\msys32\tmp\ccAwgPzt.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 1
   47              	.LVL4:
   10:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	write_reg(mDMA_SxCR(dma , stream ) , temp_reg);
   48              		.loc 1 10 0
-ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 2
+ARM GAS  E:\msys32\tmp\ccAwgPzt.s 			page 2
 
 
   49 0010 0161     		str	r1, [r0, #16]
@@ -118,7 +118,7 @@ ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 1
   86 004e 5DF8044B 		ldr	r4, [sp], #4
   87              	.LCFI1:
   88              		.cfi_restore 4
-ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 3
+ARM GAS  E:\msys32\tmp\ccAwgPzt.s 			page 3
 
 
   89              		.cfi_def_cfa_offset 0
@@ -178,7 +178,7 @@ ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 1
  132              	.LVL16:
   40:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	
   41:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	timeout = 0xFFF;
-ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 4
+ARM GAS  E:\msys32\tmp\ccAwgPzt.s 			page 4
 
 
   42:E:/Users/VuHaiLong/Documents/stm/mylib/mSrc\dma.c **** 	do{
@@ -197,14 +197,14 @@ ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 1
  142              		.text
  143              	.Letext0:
  144              		.file 2 "E:/Users/VuHaiLong/Documents/stm/mylib/mInc/mtype.h"
-ARM GAS  E:\msys32\tmp\ccLnqOHA.s 			page 5
+ARM GAS  E:\msys32\tmp\ccAwgPzt.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 dma.c
-E:\msys32\tmp\ccLnqOHA.s:18     .text.config_dma:00000000 $t
-E:\msys32\tmp\ccLnqOHA.s:25     .text.config_dma:00000000 config_dma
-E:\msys32\tmp\ccLnqOHA.s:96     .text.mDMA_start:00000000 $t
-E:\msys32\tmp\ccLnqOHA.s:103    .text.mDMA_start:00000000 mDMA_start
+E:\msys32\tmp\ccAwgPzt.s:18     .text.config_dma:00000000 $t
+E:\msys32\tmp\ccAwgPzt.s:25     .text.config_dma:00000000 config_dma
+E:\msys32\tmp\ccAwgPzt.s:96     .text.mDMA_start:00000000 $t
+E:\msys32\tmp\ccAwgPzt.s:103    .text.mDMA_start:00000000 mDMA_start
 
 NO UNDEFINED SYMBOLS

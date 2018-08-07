@@ -80,16 +80,22 @@ Discarded input sections
                 0x00000000       0x24 build/tim.o
  .text.tim_start
                 0x00000000        0xa build/tim.o
- .debug_info    0x00000000       0xbf build/tim.o
- .debug_abbrev  0x00000000       0x7e build/tim.o
- .debug_loc     0x00000000       0x7a build/tim.o
+ .text.TIM_SlaveConfigSynchronization
+                0x00000000       0x44 build/tim.o
+ .text.config_ext_clk2
+                0x00000000       0x50 build/tim.o
+ .text.input_capture_config
+                0x00000000       0x38 build/tim.o
+ .debug_info    0x00000000      0x155 build/tim.o
+ .debug_abbrev  0x00000000       0x96 build/tim.o
+ .debug_loc     0x00000000      0x222 build/tim.o
  .debug_aranges
-                0x00000000       0x28 build/tim.o
- .debug_ranges  0x00000000       0x18 build/tim.o
- .debug_line    0x00000000       0xb2 build/tim.o
- .debug_str     0x00000000      0x164 build/tim.o
+                0x00000000       0x40 build/tim.o
+ .debug_ranges  0x00000000       0x30 build/tim.o
+ .debug_line    0x00000000      0x10c build/tim.o
+ .debug_str     0x00000000      0x1b9 build/tim.o
  .comment       0x00000000       0x7f build/tim.o
- .debug_frame   0x00000000       0x30 build/tim.o
+ .debug_frame   0x00000000       0x60 build/tim.o
  .ARM.attributes
                 0x00000000       0x39 build/tim.o
  .text          0x00000000        0x0 build/uart.o
@@ -703,6 +709,7 @@ TIM2_IRQHandler                                   build/stm32f4xx_it.o
 TIM3_IRQHandler                                   build/startup_stm32f411xe.o
 TIM4_IRQHandler                                   build/startup_stm32f411xe.o
 TIM5_IRQHandler                                   build/startup_stm32f411xe.o
+TIM_SlaveConfigSynchronization                    build/tim.o
 USART1_IRQHandler                                 build/stm32f4xx_it.o
 USART2_IRQHandler                                 build/startup_stm32f411xe.o
 USART6_IRQHandler                                 build/startup_stm32f411xe.o
@@ -770,6 +777,7 @@ _start                                            c:/tools/gcc7_2017-q4-major/bi
 atexit                                            c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o
 config_dma                                        build/dma.o
                                                   build/main.o
+config_ext_clk2                                   build/tim.o
 config_pin                                        build/main.o
 delay_ms_systick                                  build/systick.o
 exit                                              c:/tools/gcc7_2017-q4-major/bin/../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard\libc_nano.a(lib_a-exit.o)
@@ -781,6 +789,7 @@ init_interrupt                                    build/stm32f4xx_it.o
                                                   build/main.o
 init_pin                                          build/gpio.o
                                                   build/main.o
+input_capture_config                              build/tim.o
 led_off                                           build/gpio.o
 led_on                                            build/gpio.o
 led_state                                         build/stm32f4xx_it.o
