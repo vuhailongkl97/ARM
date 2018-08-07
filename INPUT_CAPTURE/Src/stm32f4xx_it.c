@@ -1,12 +1,29 @@
 #include "project.h"
-
+u32_t t1 , t2, t;
 void TIM2_IRQHandler(){
-	u32_t temp_reg ; 
+	volatile u32_t temp_reg ; 
 	
 	GPIO_TongglePin(mGPIOD , (mGPIO_PIN(12)|mGPIO_PIN(13)|mGPIO_PIN(14) | mGPIO_PIN(15)) );
 
-	temp_reg = read_reg(mTIM_SR(mTIM2) , ~(0x1u<<0));
-    write_reg(mTIM_SR(mTIM2) , temp_reg);
+	// che do tan so CC1OF
+	temp_reg = read_reg((mTIM_SR(mTIM2)) , (1U << 9));
+
+	if(temp_reg == (1u << 9)){
+		t2 = read_reg(mTIM_CCR1(mTIM2),~0u );
+		if(t2 < t1 ){
+			t = (t2 - t1 ) + 0xFFFFFFFF ;
+		}
+		else {
+			t = t2 - t1;
+		}
+		temp_reg = read_reg(mTIM_SR(mTIM2) , ~(1u<< 9));
+		write_reg(mTIM_SR(mTIM2) , temp_reg);
+		t1 = t2  = 0 ;
+
+	}
+	else {
+		t1  = read_reg(mTIM_CCR1(mTIM2) , ~0u);
+	}
     write_reg(mNVIC_ICPR , (1 << 28) );
 	
 }
