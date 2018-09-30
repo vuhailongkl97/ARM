@@ -43,40 +43,38 @@ void config_ext_clk1(){
 	temp_reg |= 1u;
 	write_reg(mTIM_EGR(mTIM2) , temp_reg);
 	
-		temp_reg = read_reg(mTIM_CR1(mTIM2) , ~(1u << 0));
+	temp_reg = read_reg(mTIM_CR1(mTIM2) , ~(1u << 0));
 	temp_reg |=(1U<<0);
 	write_reg(mTIM_CR1(mTIM2) , temp_reg);
-
-	
 }
 void input_capture_config(){
 	u32_t temp_reg;
 	// Select the active input:01: CC1 channel is configured as input, IC1 is mapped on TI1.
-	temp_reg = read_reg(mTIM_CCMR1(mTIM2), ~3u);
+	temp_reg = read_reg(mTIM_CCMR1(mTIM4), ~3u);
 	//01: CC1 channel is configured as input, IC1 is mapped on TI1.
 	temp_reg |= 1u;
 	
 	// IC1F Input capture 1 filter
 	temp_reg |= (15u << 4);
-	write_reg(mTIM_CCMR1(mTIM2) , temp_reg);
+	write_reg(mTIM_CCMR1(mTIM4) , temp_reg);
 	
 	
 	// Select the edge of the active transition on the TI1 channel by writing the CC1P and
 	// CC1NP bits to 00 in the mTIM_CCER register (rising edge in this case).
-	temp_reg = read_reg(mTIM_CCER(mTIM2) , ~0xFU);
+	temp_reg = read_reg(mTIM_CCER(mTIM4) , ~0xFU);
 	write_reg(mTIM_CCER(mTIM4) , temp_reg);
 	
 	// Program the input prescaler. In our example, we wish the capture to be performed at
 	// each valid transition, so the prescaler is disabled (write IC1PS bits to 00 in the
 	// TIMx_CCMR1 register).
 	
-	temp_reg = read_reg(mTIM_CCMR1(mTIM2) , ~(3u << 2));
+	temp_reg = read_reg(mTIM_CCMR1(mTIM4) , ~(3u << 2));
 	write_reg(mTIM_CCMR1(mTIM4) , temp_reg);
 	
 	// Enable capture from the counter into the capture register by setting the CC1E bit in the
 	// mTIM_CCER register.
 	
-	temp_reg = read_reg(mTIM_CCER(mTIM2) , ~(3u << 2));
+	temp_reg = read_reg(mTIM_CCER(mTIM4) , ~(3u << 2));
 	temp_reg |=1U;
 	write_reg(mTIM_CCER(mTIM4) , temp_reg);
 	
@@ -86,13 +84,9 @@ void input_capture_config(){
 	// TIMx_DIER register
 	
 	// An interrupt is generated depending on the CC1IE bit.
-	temp_reg = read_reg(mTIM_DIER(mTIM2) , ~(1u << 1));
+	temp_reg = read_reg(mTIM_DIER(mTIM4) , ~(1u << 1));
 	temp_reg |=(1U<<1);
 	write_reg(mTIM_DIER(mTIM4) , temp_reg);
-	
-
-	
-	
 
 }
 
@@ -156,8 +150,6 @@ void tim4_pwm_config(){
 	
 // b) PWM center aligned mode: the counter mode must be center aligned counting
 // mode (CMS bits different from '00').
-
-		
 
 // 6. Enable the capture compare.
 	temp_reg = read_reg(mTIM_CCER(mTIM4) , ~(1u <<12));

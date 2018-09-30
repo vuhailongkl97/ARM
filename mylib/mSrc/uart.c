@@ -1,7 +1,5 @@
 #include "all_lib.h"
-
-void uart_pin_init();
-
+void 	uart_pin_init();
 void uart_init(u32_t  fclk ,unsigned  int oversampling ,u32_t baudrate ){
 	
 	u32_t temp_reg ,brr_baud;
@@ -59,7 +57,7 @@ void uart_init(u32_t  fclk ,unsigned  int oversampling ,u32_t baudrate ){
 char usart_send_byte(unsigned char data){
 	
 	u32_t temp_reg ;
-	// kiem tra TDR san sang nhan du lieu moi hay chua
+	//kiem tra TDR san sang nhan du lieu moi hay chua
 	temp_reg = read_reg(mUSART_SR(mUSART1) , (1 << 7));
 	if( temp_reg != 0){
 		// bat dau truyen 
@@ -68,7 +66,7 @@ char usart_send_byte(unsigned char data){
 		return 1;
 	}
 	return 0;
-	
+	write_reg(mUSART_DR(mUSART1) , (u32_t)data);
 }
 char usart_send_string( char *str){
 	

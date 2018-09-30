@@ -138,4 +138,33 @@
 #define mDMA_SxFCR(dma,stream)    (dma + 0x24 + 0x18*stream)
 
 
+// SCB 
+
+#define SCB_AIRCR    ( 0xE000ED0Cu )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif
